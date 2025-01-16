@@ -3,14 +3,6 @@
     margin: 0 auto;
     padding: 2rem;
     text-align: center;
-    background-color: #e0f7fa; /* Light blue-white background color */
-}
-
-html,
-body,
-#root {
-    height: 100%;
-    margin: 0;
 }
 
 .logo {
@@ -43,7 +35,6 @@ body,
 
 .card {
     padding: 2em;
-    background-color: #e0f7fa; /* Light blue-white background color */
 }
 
 .read-the-docs {

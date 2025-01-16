@@ -5,7 +5,7 @@
 
     color-scheme: light dark;
     color: rgba(255, 255, 255, 0.87);
-    background-color: #e0f7fa; /* Light blue-white background color */
+    background-color: #242424;
 
     font-synthesis: none;
     text-rendering: optimizeLegibility;
@@ -22,14 +22,94 @@ a:hover {
     color: #535bf2;
 }
 
-body {
+body,
+html {
     margin: 0;
-    display: flex;
-    place-items: center;
-    min-width: 320px;
+    padding: 0;
     min-height: 100vh;
-    background-color: #e0f7fa; /* Light blue-white background color */
-    padding-top: 64px; /* Adjust this value based on the height of your menu */
+}
+
+/* Light mode: a soft blue gradient */
+.light-mode {
+    background: linear-gradient(135deg, #aad1f2 0%, #e2ecf7 100%);
+    color: #000; /* Default font color in light mode */
+}
+
+/* Dark mode: a darker gradient */
+.dark-mode {
+    background: linear-gradient(135deg, #232526 0%, #0e0e0e 100%);
+    color: #fff; /* Default font color in dark mode */
+}
+
+/* Force the entire Layout/Container to inherit text color */
+.light-mode .ant-typography,
+.light-mode .ant-typography * {
+    color: #000 !important;
+}
+
+.dark-mode .ant-typography,
+.dark-mode .ant-typography * {
+    color: #fff !important;
+}
+
+body {
+    background: linear-gradient(135deg, #aad1f2 0%, #e2ecf7 100%);
+    /* Optional if you want a smoother or bigger gradient:
+  background: linear-gradient(135deg, #aad1f2 0%, #e2ecf7 50%, #ffffff 100%);
+  */
+}
+
+/* Glass container for both modes */
+.glass-container {
+    /* Slightly transparent background */
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+
+    /* Layout & spacing */
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 800px;
+}
+
+/* Optional shadow, helps the “pane” stand out */
+.glass-container {
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+* --- Make Header & Menu transparent --- */
+
+/* AntD Layout.Header default background is dark. Let's override: */
+.ant-layout-header {
+    background: transparent !important;
+}
+
+/* Override default menu colors for dark/light mode */
+.ant-menu {
+    background: transparent !important;
+}
+
+/* If you use the dark theme for the menu, by default it has a dark background.
+   Force it transparent as well: */
+.ant-menu-dark,
+.ant-menu-dark .ant-menu-sub {
+    background: transparent !important;
+}
+
+/* For selected/hovered items, we can give them a subtle highlight: */
+.ant-menu-dark .ant-menu-item-selected,
+.ant-menu-dark .ant-menu-item-active {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Similarly, in light mode, you can fine-tune item highlights: */
+.ant-menu-light .ant-menu-item-selected,
+.ant-menu-light .ant-menu-item-active {
+    background-color: rgba(0, 0, 0, 0.08) !important;
 }
 
 h1 {
@@ -59,7 +139,7 @@ button:focus-visible {
 @media (prefers-color-scheme: light) {
     :root {
         color: #213547;
-        background-color: #e0f7fa; /* Light blue-white background color */
+        background-color: #ffffff;
     }
     a:hover {
         color: #747bff;
