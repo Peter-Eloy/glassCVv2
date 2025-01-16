@@ -3,8 +3,11 @@ import { Box, Container, Typography, Link, IconButton } from '@mui/material'
 import GitHubIcon from '@mui/icons-material/GitHub'
 import LinkedInIcon from '@mui/icons-material/LinkedIn'
 import TwitterIcon from '@mui/icons-material/Twitter'
+import { useTheme } from '../ThemeContext'
 
 const Footer = () => {
+    const { isDarkMode } = useTheme()
+
     return (
         <Box
             component='footer'
@@ -16,8 +19,9 @@ const Footer = () => {
                 py: 2,
                 px: 2,
                 backgroundColor: 'transparent',
-                borderTop: '1px solid rgba(0, 0, 0, 0.12)',
-                zIndex: 1000, // Ensure footer stays above other content
+                borderTop: `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.12)' : 'rgba(0, 0, 0, 0.12)'}`,
+                zIndex: 1000,
+                color: isDarkMode ? '#fff' : '#213547',
             }}
         >
             <Container maxWidth='lg'>
@@ -31,7 +35,7 @@ const Footer = () => {
                     }}
                 >
                     <Box>
-                        <Typography variant='body2' color='text.secondary'>
+                        <Typography variant='body2' sx={{ color: 'inherit' }}>
                             © {new Date().getFullYear()} glassCV. All rights reserved.
                         </Typography>
                     </Box>
@@ -44,25 +48,25 @@ const Footer = () => {
                             justifyContent: 'center',
                         }}
                     >
-                        <Link href='#' color='text.secondary' underline='none'>
+                        <Link href='#' sx={{ color: 'inherit' }} underline='none'>
                             Privacy Policy
                         </Link>
-                        <Link href='#' color='text.secondary' underline='none'>
+                        <Link href='#' sx={{ color: 'inherit' }} underline='none'>
                             Terms of Service
                         </Link>
-                        <Link href='#' color='text.secondary' underline='none'>
+                        <Link href='#' sx={{ color: 'inherit' }} underline='none'>
                             Contact
                         </Link>
                     </Box>
 
                     <Box sx={{ display: 'flex', gap: 1 }}>
-                        <IconButton color='inherit' size='small'>
+                        <IconButton sx={{ color: 'inherit' }} size='small'>
                             <GitHubIcon />
                         </IconButton>
-                        <IconButton color='inherit' size='small'>
+                        <IconButton sx={{ color: 'inherit' }} size='small'>
                             <LinkedInIcon />
                         </IconButton>
-                        <IconButton color='inherit' size='small'>
+                        <IconButton sx={{ color: 'inherit' }} size='small'>
                             <TwitterIcon />
                         </IconButton>
                     </Box>
