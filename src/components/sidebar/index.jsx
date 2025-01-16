@@ -6,7 +6,8 @@ import ListItemText from '@mui/material/ListItemText'
 import { useTheme } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
 
-const APPBAR_HEIGHT = 64 // Standard Material-UI AppBar height
+const APPBAR_HEIGHT = 64
+const FOOTER_HEIGHT = 64
 
 const Sidebar = () => {
     const theme = useTheme()
@@ -24,7 +25,8 @@ const Sidebar = () => {
                     boxSizing: 'border-box',
                     background: 'transparent',
                     top: APPBAR_HEIGHT,
-                    height: `calc(100% - ${APPBAR_HEIGHT}px)`,
+                    height: `calc(100% - ${APPBAR_HEIGHT}px - ${FOOTER_HEIGHT}px)`,
+                    overflow: 'hidden',
                 },
             }}
         >

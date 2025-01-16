@@ -21,8 +21,9 @@ const FloatingButton = () => {
             ariaLabel='SpeedDial menu'
             sx={{
                 position: 'fixed',
-                bottom: 16,
+                bottom: 80, // Adjusted to be above footer
                 right: 16,
+                ml: '240px', // Account for sidebar
             }}
             icon={<SpeedDialIcon openIcon={<EditIcon />} />}
             onClose={() => setOpen(false)}
@@ -36,7 +37,6 @@ const FloatingButton = () => {
                     tooltipTitle={action.name}
                     onClick={() => {
                         setOpen(false)
-                        // Add your action handlers here
                         console.log(`Clicked ${action.name}`)
                     }}
                 />
