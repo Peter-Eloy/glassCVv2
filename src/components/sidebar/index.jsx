@@ -7,7 +7,7 @@ import { useTheme } from '../ThemeContext'
 import GlassContainer from '../GlassContainer'
 import { XOutlined, LinkedinOutlined, GithubOutlined, WhatsAppOutlined, MailOutlined } from '@ant-design/icons'
 import StackedGlassContainers from '../StackedGlassContainers'
-import { Box } from '@mui/material'
+import { Box, ListItem } from '@mui/material'
 
 /**
  * Constants for styling
@@ -71,7 +71,7 @@ const Sidebar = () => {
             variant={isDesktop ? 'permanent' : 'temporary'}
             anchor='left'
             sx={{
-                width: 240,
+                // width: 260,
                 flexShrink: 0,
                 '& .MuiDrawer-paper': {
                     width: 240,
@@ -137,8 +137,9 @@ const Sidebar = () => {
                         </a>
                     </div>
                 </GlassContainer>
-
                 <StackedGlassContainers containers={aptitudes} />
+                <StackedGlassContainers containers={languages} />
+                <StackedGlassContainers containers={languages} />
                 <StackedGlassContainers containers={languages} />
             </List>
         </Drawer>

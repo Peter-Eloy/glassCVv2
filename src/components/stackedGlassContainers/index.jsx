@@ -15,6 +15,7 @@ const GlassContainerStacked = ({ children, isActive, onClick, index }) => {
                 backdropFilter: 'blur(8px)',
                 border: '1px solid rgba(255, 255, 255, 0.3)',
                 boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                cursor: 'pointer',
                 '&:hover': {
                     transform: 'translateY(-2px)',
                     transition: 'transform 0.2s ease-in-out',
