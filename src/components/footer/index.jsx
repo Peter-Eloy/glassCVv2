@@ -1,8 +1,6 @@
 import React from 'react'
 import { Box, Container, Typography, Link, IconButton } from '@mui/material'
-import GitHubIcon from '@mui/icons-material/GitHub'
-import LinkedInIcon from '@mui/icons-material/LinkedIn'
-import TwitterIcon from '@mui/icons-material/Twitter'
+import { XOutlined, LinkedinOutlined, GithubOutlined } from '@ant-design/icons'
 import { useTheme } from '../ThemeContext'
 
 /**
@@ -66,13 +64,13 @@ const Footer = () => {
 
                     <Box sx={{ display: 'flex', gap: 1 }}>
                         <IconButton sx={{ color: 'inherit' }} size='small'>
-                            <GitHubIcon />
+                            <GithubOutlined />
                         </IconButton>
                         <IconButton sx={{ color: 'inherit' }} size='small'>
-                            <LinkedInIcon />
+                            <LinkedinOutlined />
                         </IconButton>
                         <IconButton sx={{ color: 'inherit' }} size='small'>
-                            <TwitterIcon />
+                            <XOutlined />
                         </IconButton>
                     </Box>
                 </Box>

@@ -8,24 +8,25 @@ const GlassContainerStacked = ({ children, isActive, onClick, index }) => {
             sx={{
                 position: 'absolute',
                 width: '95%',
+                margin: '20px 0',
                 padding: '20px',
                 borderRadius: '16px',
                 backgroundColor: 'rgba(255, 255, 255, 0.15)',
                 backdropFilter: 'blur(8px)',
                 border: '1px solid rgba(255, 255, 255, 0.3)',
                 boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-                cursor: 'pointer',
-                transition: 'all 0.3s ease-in-out',
-                transform: `translateY(${index * 5}px)`,
-                zIndex: isActive ? 100 : 10 - index,
-                opacity: isActive ? 1 : 0.7,
                 '&:hover': {
-                    opacity: 0.9,
+                    transform: 'translateY(-2px)',
+                    transition: 'transform 0.2s ease-in-out',
                 },
                 '.dark &': {
                     backgroundColor: 'rgba(0, 0, 0, 0.2)',
                     border: '1px solid rgba(255, 255, 255, 0.1)',
                 },
+                transition: 'all 0.3s ease-in-out',
+                transform: `translateY(${index * 5}px)`,
+                zIndex: isActive ? 100 : 10 - index,
+                opacity: isActive ? 1 : 0.7,
             }}
         >
             {children}
