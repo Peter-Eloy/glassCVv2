@@ -71,7 +71,6 @@ const Sidebar = () => {
             variant={isDesktop ? 'permanent' : 'temporary'}
             anchor='left'
             sx={{
-                // width: 260,
                 flexShrink: 0,
                 '& .MuiDrawer-paper': {
                     width: 240,
