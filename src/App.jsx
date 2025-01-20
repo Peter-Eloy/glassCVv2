@@ -6,9 +6,24 @@ import Footer from './components/footer'
 import { Box, ThemeProvider as MuiThemeProvider, createTheme } from '@mui/material'
 import { ThemeProvider } from './components/ThemeContext'
 
+/**
+ * Description placeholder
+ *
+ * @type {64}
+ */
 const APPBAR_HEIGHT = 64
+/**
+ * Description placeholder
+ *
+ * @type {64}
+ */
 const FOOTER_HEIGHT = 64
 
+/**
+ * Description placeholder
+ *
+ * @returns {*}
+ */
 function App() {
     return (
         <ThemeProvider>

@@ -5,6 +5,11 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn'
 import TwitterIcon from '@mui/icons-material/Twitter'
 import { useTheme } from '../ThemeContext'
 
+/**
+ * Description placeholder
+ *
+ * @returns {*}
+ */
 const Footer = () => {
     const { isDarkMode } = useTheme()
 

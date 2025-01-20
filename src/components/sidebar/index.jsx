@@ -7,9 +7,24 @@ import { useTheme as useMuiTheme } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { useTheme } from '../ThemeContext'
 
+/**
+ * Description placeholder
+ *
+ * @type {64}
+ */
 const APPBAR_HEIGHT = 64
+/**
+ * Description placeholder
+ *
+ * @type {64}
+ */
 const FOOTER_HEIGHT = 64
 
+/**
+ * Description placeholder
+ *
+ * @returns {*}
+ */
 const Sidebar = () => {
     const muiTheme = useMuiTheme()
     const isDesktop = useMediaQuery(muiTheme.breakpoints.up('sm'))

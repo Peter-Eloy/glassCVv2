@@ -4,6 +4,11 @@ import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import { useTheme } from '../ThemeContext'
 
+/**
+ * Description placeholder
+ *
+ * @returns {*}
+ */
 const AppMenu = () => {
     const { isDarkMode } = useTheme()
 

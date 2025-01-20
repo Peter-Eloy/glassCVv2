@@ -9,6 +9,11 @@ import DarkModeIcon from '@mui/icons-material/DarkMode'
 import LightModeIcon from '@mui/icons-material/LightMode'
 import { useTheme } from '../ThemeContext'
 
+/**
+ * Description placeholder
+ *
+ * @returns {*}
+ */
 const FloatingButton = () => {
     const [open, setOpen] = useState(false)
     const { isDarkMode, toggleTheme } = useTheme()

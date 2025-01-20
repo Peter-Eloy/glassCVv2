@@ -1,7 +1,19 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
 
+/**
+ * Description placeholder
+ *
+ * @type {*}
+ */
 const ThemeContext = createContext()
 
+/**
+ * Description placeholder
+ *
+ * @param {{ children: any; }} param0
+ * @param {*} param0.children
+ * @returns {*}
+ */
 export const ThemeProvider = ({ children }) => {
     const [isDarkMode, setIsDarkMode] = useState(false)
 
@@ -17,4 +29,9 @@ export const ThemeProvider = ({ children }) => {
     return <ThemeContext.Provider value={{ isDarkMode, toggleTheme }}>{children}</ThemeContext.Provider>
 }
 
+/**
+ * Description placeholder
+ *
+ * @returns {*}
+ */
 export const useTheme = () => useContext(ThemeContext)
