@@ -1,0 +1,25 @@
+[
+    {
+      "id": 1,
+      "title": "Personal Details",
+      "content": {
+        "name": "Peter Eloy",
+        "role": "Dev | HTML, CSS, JS (JavaScript, ReactJS)"
+      }
+    },
+    {
+      "id": 2,
+      "title": "Technologies & Skills",
+      "content": {
+        "technologies": "JS, CSS & HTML",
+        "frameworks": "React.js",
+        "cms": "WordPress, GoogleSite",
+        "ide": "VS Code",
+        "server": "Linux (CentOS) - WHC cPanel, Windows 2016 - Plesk",
+        "crm": "SalesForce, Zoho",
+        "programs": "MS Visio, MS Project, MS Excel, MS Outlook, MS Word, MS PowerPoint, PSCS6",
+        "degree": "Master in Economics"
+      }
+    }
+  ]
+  

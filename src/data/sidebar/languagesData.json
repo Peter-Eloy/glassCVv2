@@ -1,0 +1,22 @@
+[
+    {
+      "id": 1,
+      "label": "Languages"
+    },
+    {
+      "id": 2,
+      "label": "English",
+      "description": "Professional Working"
+    },
+    {
+      "id": 3,
+      "label": "German",
+      "description": "Native or Bilingual"
+    },
+    {
+        "id": 4,
+        "label": "Spanish",
+        "description": "Native or Bilingual"
+      }
+  ]
+  

@@ -1,0 +1,17 @@
+[
+    {
+      "id": 1,
+      "label": "Contact"
+    },
+    {
+      "id": 2,
+      "label": "Phone",
+      "description": "+34 678 381 811"
+    },
+    {
+      "id": 3,
+      "label": "X",
+      "description": "@petereloy"
+    }
+  ]
+  
