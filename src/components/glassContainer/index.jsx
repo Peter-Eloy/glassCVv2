@@ -1,22 +1,25 @@
 import React from 'react'
 import { Box } from '@mui/material'
 
-const GlassContainer = ({ children, className = '' }) => {
+const GlassContainer = ({ children }) => {
     return (
         <Box
-            className={`w-full h-full rounded-xl ${className}`}
             sx={{
-                background: 'rgba(255, 255, 255, 0.1)',
-                backdropFilter: 'blur(10px)',
-                WebkitBackdropFilter: 'blur(10px)',
-                border: '1px solid rgba(255, 255, 255, 0.18)',
-                boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
-                transition: 'all 0.3s ease-in-out',
-                overflow: 'auto',
-                '&.dark': {
-                    background: 'rgba(0, 0, 0, 0.1)',
-                    border: '1px solid rgba(255, 255, 255, 0.08)',
-                    boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.15)',
+                position: 'relative',
+                margin: '20px 0',
+                padding: '20px',
+                borderRadius: '16px',
+                backgroundColor: 'rgba(255, 255, 255, 0.15)',
+                backdropFilter: 'blur(8px)',
+                border: '1px solid rgba(255, 255, 255, 0.3)',
+                boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                '&:hover': {
+                    transform: 'translateY(-2px)',
+                    transition: 'transform 0.2s ease-in-out',
+                },
+                '.dark &': {
+                    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
                 },
             }}
         >
