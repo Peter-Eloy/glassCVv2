@@ -52,7 +52,7 @@ const StackedGlassContainers = ({ containers }) => {
                 position: 'relative',
                 minHeight: '200px',
                 marginTop: '20px',
-                paddingBottom: `${containers.length * 20}px`,
+                // paddingBottom: `${containers.length * 20}px`,
             }}
         >
             {containerOrder.map((content, index) => (

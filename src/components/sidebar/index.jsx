@@ -1,13 +1,13 @@
 import React from 'react'
 import Drawer from '@mui/material/Drawer'
 import List from '@mui/material/List'
-import ListItem from '@mui/material/ListItem'
 import { useTheme as useMuiTheme } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { useTheme } from '../ThemeContext'
 import GlassContainer from '../GlassContainer'
-import { XOutlined, LinkedinOutlined, GithubOutlined, InstagramOutlined, WhatsAppOutlined, MailOutlined } from '@ant-design/icons'
+import { XOutlined, LinkedinOutlined, GithubOutlined, WhatsAppOutlined, MailOutlined } from '@ant-design/icons'
 import StackedGlassContainers from '../StackedGlassContainers'
+import { Box } from '@mui/material'
 
 /**
  * Constants for styling
@@ -27,6 +27,30 @@ const aptitudes = [
     </div>,
     <div>
         <p>Golang</p>
+    </div>,
+]
+
+const languages = [
+    <div>
+        <h2>Languages</h2>
+    </div>,
+    <div>
+        <p>
+            <strong>English</strong>
+        </p>
+        <p>Professional Working</p>
+    </div>,
+    <div>
+        <p>
+            <strong>German</strong>
+        </p>
+        <p>Native or Bilingual</p>
+    </div>,
+    <div>
+        <p>
+            <strong>Spanish</strong>
+        </p>
+        <p>Native or Bilingual</p>
     </div>,
 ]
 
@@ -115,6 +139,7 @@ const Sidebar = () => {
                 </GlassContainer>
 
                 <StackedGlassContainers containers={aptitudes} />
+                <StackedGlassContainers containers={languages} />
             </List>
         </Drawer>
     )
