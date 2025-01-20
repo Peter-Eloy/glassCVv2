@@ -37,7 +37,7 @@ html {
 
 /* Dark mode: a darker gradient */
 .dark-mode {
-    background: linear-gradient(135deg, #232526 0%, #0e0e0e 100%);
+    background: linear-gradient(135deg, #000000 0%, #2f0b69 100%);
     color: #fff; /* Default font color in dark mode */
 }
 
