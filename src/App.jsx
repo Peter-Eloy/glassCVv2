@@ -6,7 +6,7 @@ import Footer from './components/footer'
 import { Box, ThemeProvider as MuiThemeProvider, createTheme } from '@mui/material'
 import { ThemeProvider } from './contexts/index'
 import GlassContainer from './components/GlassContainer'
-import StackedGlassContainers from './components/StackedGlassContainers'
+import StackedGlassContainers from './components/stackedGlassContainers'
 
 /**
  * Description placeholder

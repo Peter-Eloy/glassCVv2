@@ -1,7 +1,7 @@
-import React from 'react'
 import { Box } from '@mui/material'
 import { useTheme } from '../../contexts/index'
 import { glassStyles } from '../../styles/glassEffects'
+import PropTypes from 'prop-types'
 
 const GlassContainer = ({ children }) => {
     const { isDarkMode } = useTheme()
@@ -21,6 +21,10 @@ const GlassContainer = ({ children }) => {
             {children}
         </Box>
     )
+}
+
+GlassContainer.propTypes = {
+    children: PropTypes.node.isRequired,
 }
 
 export default GlassContainer

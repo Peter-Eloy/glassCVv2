@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 
 /**
  * Description placeholder
@@ -27,6 +28,10 @@ export const ThemeProvider = ({ children }) => {
     }
 
     return <ThemeContext.Provider value={{ isDarkMode, toggleTheme }}>{children}</ThemeContext.Provider>
+}
+
+ThemeProvider.propTypes = {
+    children: PropTypes.node.isRequired,
 }
 
 /**
