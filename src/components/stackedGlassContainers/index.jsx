@@ -1,7 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { Box } from '@mui/material'
+import { useTheme } from '../ThemeContext'
 
 const GlassContainerStacked = ({ children, isActive, onClick, index, height }) => {
+    const { isDarkMode } = useTheme()
+
     return (
         <Box
             onClick={onClick}
@@ -14,19 +17,19 @@ const GlassContainerStacked = ({ children, isActive, onClick, index, height }) =
                 height: height ? `${height}px` : 'auto',
                 padding: '0px',
                 borderRadius: '16px',
-                backgroundColor: 'rgba(255, 255, 255, 0.15)',
+                backgroundColor: isDarkMode ? 'rgba(0, 0, 0, 0.2)' : 'rgba(255, 255, 255, 0.15)',
                 backdropFilter: 'blur(12px)',
-                border: '1px solid rgba(255, 255, 255, 0.3)',
+                border: isDarkMode ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(255, 255, 255, 0.3)',
                 boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
                 cursor: 'pointer',
                 '&:hover': {
                     transform: `translateY(${index * 5}px) translateY(-2px)`,
                     transition: 'transform 0.2s ease-in-out',
                 },
-                '.dark &': {
-                    backgroundColor: 'rgba(0, 0, 0, 0.2)',
-                    border: '1px solid rgba(255, 255, 255, 0.1)',
-                },
+                // '.dark &': {
+                //     backgroundColor: 'rgba(0, 0, 0, 0.2)',
+                //     border: '1px solid rgba(255, 255, 255, 0.1)',
+                // },
                 transition: 'all 0.3s ease-in-out',
                 transform: `translateY(${index * 5}px)`,
                 zIndex: isActive ? 100 : 10 - index,
@@ -37,7 +40,7 @@ const GlassContainerStacked = ({ children, isActive, onClick, index, height }) =
                 justifyContent: 'center',
             }}
         >
-            <Box sx={{ padding: '20px', width: '100%', textAlign: 'center' }}>{children}</Box>
+            <Box sx={{ padding: '20px', width: '100%', textAlign: 'center', color: isDarkMode ? '#fff' : '#213547' }}>{children}</Box>
         </Box>
     )
 }
