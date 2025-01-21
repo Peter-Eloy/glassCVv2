@@ -54,6 +54,26 @@ const languages = [
     </div>,
 ]
 
+const education = [
+    <div>
+        <h2>Education</h2>
+    </div>,
+    <div>
+        <h3>Certifications</h3>
+        <p>Diploma in Early Talent Detection and Math Stimulation</p>
+        <p>Degree in Economic and Business Sciences</p>
+    </div>,
+    <div>
+        <h3>Honors & Awards</h3>
+        <p>Economic Thought</p>
+        <p>Concepts and Approaches in Economic Science</p>
+    </div>,
+    <div>
+        <h3>Publications</h3>
+        <p>Social science papers on my university site</p>
+    </div>,
+]
+
 /**
  * Sidebar Component
  */
@@ -138,8 +158,7 @@ const Sidebar = () => {
                 </GlassContainer>
                 <StackedGlassContainers containers={aptitudes} />
                 <StackedGlassContainers containers={languages} />
-                <StackedGlassContainers containers={aptitudes} />
-                <StackedGlassContainers containers={languages} />
+                <StackedGlassContainers containers={education} />
             </List>
         </Drawer>
     )
