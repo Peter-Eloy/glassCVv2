@@ -1,4 +1,3 @@
-import React from 'react'
 import Drawer from '@mui/material/Drawer'
 import List from '@mui/material/List'
 import { useTheme as useMuiTheme } from '@mui/material/styles'
@@ -7,7 +6,6 @@ import { useTheme } from '../ThemeContext'
 import GlassContainer from '../GlassContainer'
 import { XOutlined, LinkedinOutlined, GithubOutlined, WhatsAppOutlined, MailOutlined } from '@ant-design/icons'
 import StackedGlassContainers from '../StackedGlassContainers'
-import { Box, ListItem } from '@mui/material'
 
 /**
  * Constants for styling
@@ -20,13 +18,24 @@ const aptitudes = [
         <h2>Skill</h2>
     </div>,
     <div>
-        <p>ReactJS</p>
+        <h3>Frontend Dev</h3>
+        <p>ReactJS, MUI, Ant Design</p>
     </div>,
     <div>
-        <p>ViteJS</p>
+        <h3>Frontend Tech</h3>
+        <p>JavaScript, HTML, CSS</p>
     </div>,
     <div>
-        <p>Golang</p>
+        <h3>Backend Dev</h3>
+        <p>Go (Golang), MySQL</p>
+    </div>,
+    <div>
+        <h3>Dev Tools</h3>
+        <p>Postman, DBeaver, TomCat</p>
+    </div>,
+    <div>
+        <h3>Web Hosting</h3>
+        <p>WordPress, cPanel, Plesk</p>
     </div>,
 ]
 
@@ -60,7 +69,7 @@ const education = [
     </div>,
     <div>
         <h3>Certifications</h3>
-        <p>Diploma in Early Talent Detection and Math Stimulation</p>
+        <p>Isaac Newton Association Diploma for Mathematical Talent</p>
         <p>Degree in Economic and Business Sciences</p>
     </div>,
     <div>
@@ -71,6 +80,32 @@ const education = [
     <div>
         <h3>Publications</h3>
         <p>Social science papers on my university site</p>
+    </div>,
+]
+
+const education2 = [
+    <div>
+        <h2>Education & Achievements</h2>
+    </div>,
+    <div>
+        <h3>Certifications</h3>
+        <p>Isaac Newton Association Diploma for Mathematical Talent</p>
+        <p>Licenciatura in Economic and Business Sciences (Equivalent to Bachelor + Master)</p>
+    </div>,
+    <div>
+        <h3>Honors & Awards</h3>
+        <p>Economic Thought</p>
+        <p>Concepts and Approaches in Economic Science</p>
+    </div>,
+    <div>
+        <h3>Publications</h3>
+        <p>Social science articles on my university site</p>
+    </div>,
+    <div>
+        <h3>Languages</h3>
+        <p>English (Professional Working)</p>
+        <p>German (Native or Bilingual)</p>
+        <p>Spanish (Native or Bilingual)</p>
     </div>,
 ]
 
@@ -99,7 +134,7 @@ const Sidebar = () => {
                     top: APPBAR_HEIGHT,
                     height: `calc(100% - ${APPBAR_HEIGHT}px - ${FOOTER_HEIGHT}px)`,
                     overflow: 'hidden',
-                    borderRight: `1px solid ${borderColor}`,
+                    borderRight: `0px solid ${borderColor}`,
                 },
             }}
         >
@@ -157,8 +192,9 @@ const Sidebar = () => {
                     </div>
                 </GlassContainer>
                 <StackedGlassContainers containers={aptitudes} />
-                <StackedGlassContainers containers={languages} />
-                <StackedGlassContainers containers={education} />
+                {/* <StackedGlassContainers containers={languages} />
+                <StackedGlassContainers containers={education} /> */}
+                <StackedGlassContainers containers={education2} />
             </List>
         </Drawer>
     )
