@@ -49,7 +49,7 @@ const Sidebar = () => {
                     <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
                         {/* WhatsApp Link */}
                         <a
-                            href={`https://wa.me/34number?text=Hi%20Peter,%20I%20am%20_____ from%20_____%20saw%20your%20GlassCV%20and%20would%20like%20to%20have%20an%20appointment.`}
+                            href={`https://wa.me/34678381811?text=Hi%20Peter,%20I%20am%20_____ from%20_____%20saw%20your%20GlassCV%20and%20would%20like%20to%20have%20an%20appointment.`}
                             style={{
                                 textDecoration: 'none',
                                 color: textColor,

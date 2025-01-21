@@ -92,16 +92,7 @@ function App() {
                             >
                                 <Box sx={{ overflow: 'hidden' }}>
                                     <GlassContainer>
-                                        <div
-                                            style={
-                                                {
-                                                    // padding: '1rem',
-                                                    // borderRadius: '8px',
-                                                    // // background: 'rgba(0, 0, 0, 0.05)',
-                                                    // boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-                                                }
-                                            }
-                                        >
+                                        <div>
                                             <h2 style={{ marginBottom: '8px' }}>Dev @ NARTEX SOFTWARE, S.L.</h2>
                                             <p style={{ fontSize: '0.9rem', margin: '4px 0' }}>
                                                 <strong>Duration:</strong> Feb 2024 - Present
