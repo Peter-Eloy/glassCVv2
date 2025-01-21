@@ -138,7 +138,7 @@ const Sidebar = () => {
                 </GlassContainer>
                 <StackedGlassContainers containers={aptitudes} />
                 <StackedGlassContainers containers={languages} />
-                <StackedGlassContainers containers={languages} />
+                <StackedGlassContainers containers={aptitudes} />
                 <StackedGlassContainers containers={languages} />
             </List>
         </Drawer>

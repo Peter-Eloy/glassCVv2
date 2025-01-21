@@ -6,8 +6,8 @@ const GlassContainer = ({ children }) => {
         <Box
             sx={{
                 position: 'relative',
-                margin: '20px 0',
-                padding: '20px',
+                margin: '20px 20px',
+                padding: '15px',
                 borderRadius: '16px',
                 backgroundColor: 'rgba(255, 255, 255, 0.15)',
                 backdropFilter: 'blur(8px)',
