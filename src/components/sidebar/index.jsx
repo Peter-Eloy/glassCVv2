@@ -88,9 +88,9 @@ const education2 = [
         <h2>Education & Achievements</h2>
     </div>,
     <div>
-        <h3>Certifications</h3>
+        <h3>Education</h3>
         <p>Isaac Newton Association Diploma for Mathematical Talent</p>
-        <p>Licenciatura in Economic and Business Sciences (Equivalent to Bachelor + Master)</p>
+        <p>Degree in Economics and Business Sciences</p>
     </div>,
     <div>
         <h3>Honors & Awards</h3>
@@ -103,9 +103,9 @@ const education2 = [
     </div>,
     <div>
         <h3>Languages</h3>
-        <p>English (Professional Working)</p>
-        <p>German (Native or Bilingual)</p>
-        <p>Spanish (Native or Bilingual)</p>
+        <p>English - Professional Working</p>
+        <p>German - Native or Bilingual</p>
+        <p>Spanish - Native or Bilingual</p>
     </div>,
 ]
 

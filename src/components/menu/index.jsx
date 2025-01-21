@@ -28,9 +28,7 @@ const AppMenu = () => {
                     sx={{
                         color: isDarkMode ? '#fff' : '#213547',
                     }}
-                >
-                    glassCV
-                </Typography>
+                ></Typography>
             </Toolbar>
         </AppBar>
     )
