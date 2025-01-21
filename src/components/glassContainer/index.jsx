@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box } from '@mui/material'
-import { useTheme } from '../ThemeContext/index'
+import { useTheme } from '../../contexts/index'
 import { glassStyles } from '../../styles/glassEffects'
 
 const GlassContainer = ({ children }) => {

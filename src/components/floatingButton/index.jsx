@@ -7,7 +7,7 @@ import ShareIcon from '@mui/icons-material/Share'
 import EditIcon from '@mui/icons-material/Edit'
 import DarkModeIcon from '@mui/icons-material/DarkMode'
 import LightModeIcon from '@mui/icons-material/LightMode'
-import { useTheme } from '../ThemeContext'
+import { useTheme } from '../../contexts/index'
 
 /**
  * Description placeholder

@@ -1,7 +1,6 @@
-import React from 'react'
 import { Box, Container, Typography, Link, IconButton } from '@mui/material'
 import { XOutlined, LinkedinOutlined, GithubOutlined } from '@ant-design/icons'
-import { useTheme } from '../ThemeContext'
+import { useTheme } from '../../contexts/index'
 
 /**
  * Description placeholder

@@ -4,7 +4,7 @@ import Sidebar from './components/sidebar'
 import FloatingButton from './components/floatingButton'
 import Footer from './components/footer'
 import { Box, ThemeProvider as MuiThemeProvider, createTheme } from '@mui/material'
-import { ThemeProvider } from './components/ThemeContext'
+import { ThemeProvider } from './contexts/index'
 import GlassContainer from './components/GlassContainer'
 import StackedGlassContainers from './components/StackedGlassContainers'
 

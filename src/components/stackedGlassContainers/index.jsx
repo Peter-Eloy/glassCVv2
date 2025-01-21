@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { Box } from '@mui/material'
 import PropTypes from 'prop-types'
-import { useTheme } from '../ThemeContext/index'
+import { useTheme } from '../../contexts/index'
 import { glassStyles } from '../../styles/glassEffects'
 
 const GlassContainerStacked = ({ children, isActive, onClick, index, height }) => {
