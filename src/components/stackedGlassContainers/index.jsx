@@ -1,5 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Box } from '@mui/material'
+import PropTypes from 'prop-types'
 import { useTheme } from '../ThemeContext/index'
 import { glassStyles } from '../../styles/glassEffects'
 
@@ -47,6 +48,14 @@ const GlassContainerStacked = ({ children, isActive, onClick, index, height }) =
     )
 }
 
+GlassContainerStacked.propTypes = {
+    children: PropTypes.node.isRequired,
+    isActive: PropTypes.bool.isRequired,
+    onClick: PropTypes.func.isRequired,
+    index: PropTypes.number.isRequired,
+    height: PropTypes.number,
+}
+
 const StackedGlassContainers = ({ containers }) => {
     const [containerOrder, setContainerOrder] = useState(containers)
     const [maxHeight, setMaxHeight] = useState(0)
@@ -67,7 +76,7 @@ const StackedGlassContainers = ({ containers }) => {
 
         window.addEventListener('resize', calculateMaxHeight)
         return () => window.removeEventListener('resize', calculateMaxHeight)
-    }, [containers, containerOrder])
+    }, [containers, containerOrder, maxHeight])
 
     const handleContainerClick = () => {
         setContainerOrder((prevOrder) => {
@@ -107,6 +116,10 @@ const StackedGlassContainers = ({ containers }) => {
             ))}
         </Box>
     )
+}
+
+StackedGlassContainers.propTypes = {
+    containers: PropTypes.arrayOf(PropTypes.node).isRequired,
 }
 
 export default StackedGlassContainers
