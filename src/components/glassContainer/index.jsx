@@ -1,26 +1,21 @@
 import React from 'react'
 import { Box } from '@mui/material'
+import { useTheme } from '../ThemeContext/index'
+import { glassStyles } from '../../styles/glassEffects'
 
 const GlassContainer = ({ children }) => {
+    const { isDarkMode } = useTheme()
+    const themeStyles = isDarkMode ? glassStyles.dark : glassStyles.light
+
     return (
         <Box
             sx={{
                 position: 'relative',
                 margin: '20px 20px',
                 padding: '15px',
-                borderRadius: '16px',
-                backgroundColor: 'rgba(255, 255, 255, 0.15)',
-                backdropFilter: 'blur(8px)',
-                border: '1px solid rgba(255, 255, 255, 0.3)',
-                boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-                '&:hover': {
-                    transform: 'translateY(-2px)',
-                    transition: 'transform 0.2s ease-in-out',
-                },
-                '.dark &': {
-                    backgroundColor: 'rgba(0, 0, 0, 0.2)',
-                    border: '1px solid rgba(255, 255, 255, 0.1)',
-                },
+                ...glassStyles.shared,
+                ...themeStyles,
+                '&:hover': glassStyles.hover,
             }}
         >
             {children}
