@@ -81,7 +81,7 @@ body {
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
 
-* --- Make Header & Menu transparent --- */
+/* --- Make Header & Menu transparent --- */
 
 /* AntD Layout.Header default background is dark. Let's override: */
 .ant-layout-header {
