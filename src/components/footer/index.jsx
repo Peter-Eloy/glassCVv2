@@ -1,6 +1,8 @@
 import { Box, Container, Typography, Link, IconButton } from '@mui/material'
 import { XOutlined, LinkedinOutlined, GithubOutlined } from '@ant-design/icons'
 import { useTheme } from '../../contexts/index'
+import { PrivacyPolicyDialog, ContactDialog } from '../dialogs'
+import { useState } from 'react'
 
 /**
  * Description placeholder
@@ -9,6 +11,8 @@ import { useTheme } from '../../contexts/index'
  */
 const Footer = () => {
     const { isDarkMode } = useTheme()
+    const [isPrivacyOpen, setIsPrivacyOpen] = useState(false)
+    const [isContactOpen, setIsContactOpen] = useState(false)
 
     return (
         <Box
@@ -50,13 +54,37 @@ const Footer = () => {
                             justifyContent: 'center',
                         }}
                     >
-                        <Link href='#' sx={{ color: 'inherit' }} underline='none'>
+                        <Link
+                            component='button'
+                            variant='body2'
+                            onClick={() => setIsPrivacyOpen(true)}
+                            sx={{
+                                color: 'inherit',
+                                textDecoration: 'none',
+                                '&:hover': {
+                                    cursor: 'pointer',
+                                    textDecoration: 'none',
+                                },
+                            }}
+                        >
                             Privacy Policy
                         </Link>
-                        <Link href='#' sx={{ color: 'inherit' }} underline='none'>
+                        <Link href='https://github.com/Peter-Eloy/glassCVv2/blob/main/README.md' sx={{ color: 'inherit' }} underline='none'>
                             Terms of Service
                         </Link>
-                        <Link href='#' sx={{ color: 'inherit' }} underline='none'>
+                        <Link
+                            component='button'
+                            variant='body2'
+                            onClick={() => setIsContactOpen(true)}
+                            sx={{
+                                color: 'inherit',
+                                textDecoration: 'none',
+                                '&:hover': {
+                                    cursor: 'pointer',
+                                    textDecoration: 'none',
+                                },
+                            }}
+                        >
                             Contact
                         </Link>
                     </Box>
