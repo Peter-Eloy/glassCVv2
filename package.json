@@ -1,6 +1,6 @@
 {
-  "name": "glasscvv2",
   "homepage": "https://peter-eloy.github.io/glassCVv2",
+  "name": "glasscvv2",
   "private": true,
   "version": "0.0.0",
   "type": "module",
