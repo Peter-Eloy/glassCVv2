@@ -1,7 +1,6 @@
 import { Box, Container, Typography, Link, IconButton } from '@mui/material'
 import { XOutlined, LinkedinOutlined, GithubOutlined } from '@ant-design/icons'
 import { useTheme } from '../../contexts/index'
-import { PrivacyPolicyDialog, ContactDialog } from '../dialogs'
 import { useState } from 'react'
 
 /**
@@ -11,8 +10,6 @@ import { useState } from 'react'
  */
 const Footer = () => {
     const { isDarkMode } = useTheme()
-    const [isPrivacyOpen, setIsPrivacyOpen] = useState(false)
-    const [isContactOpen, setIsContactOpen] = useState(false)
 
     return (
         <Box
