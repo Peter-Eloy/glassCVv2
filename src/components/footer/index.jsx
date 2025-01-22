@@ -62,13 +62,19 @@ const Footer = () => {
                     </Box>
 
                     <Box sx={{ display: 'flex', gap: 1 }}>
-                        <IconButton sx={{ color: 'inherit' }} size='small'>
+                        <IconButton sx={{ color: 'inherit' }} size='small' href='https://github.com/Peter-Eloy' target='_blank' rel='noopener noreferrer'>
                             <GithubOutlined />
                         </IconButton>
-                        <IconButton sx={{ color: 'inherit' }} size='small'>
+                        <IconButton
+                            sx={{ color: 'inherit' }}
+                            size='small'
+                            href='https://www.linkedin.com/in/petereloy/'
+                            target='_blank'
+                            rel='noopener noreferrer'
+                        >
                             <LinkedinOutlined />
                         </IconButton>
-                        <IconButton sx={{ color: 'inherit' }} size='small'>
+                        <IconButton sx={{ color: 'inherit' }} size='small' href='https://x.com/petereloy' target='_blank' rel='noopener noreferrer'>
                             <XOutlined />
                         </IconButton>
                     </Box>
