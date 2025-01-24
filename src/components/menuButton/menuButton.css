@@ -1,0 +1,89 @@
+.menu-button {
+    position: absolute; /* Position the button relative to the viewport */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.menu-button:hover {
+    transform: scale(1.1);
+}
+
+.triangle {
+    position: relative;
+    width: 0;
+    height: 0;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    border-bottom: 50px solid #0ff; /* Neon blue */
+    filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.8));
+    transition: transform 0.5s ease, filter 0.3s ease;
+}
+
+.menu-button.open .triangle {
+    transform: rotate(180deg);
+    filter: drop-shadow(0 0 15px rgba(0, 255, 255, 1));
+}
+
+.menu-options {
+    position: absolute;
+    top: 50%; /* Align with the button */
+    left: 50%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px; /* Space between options */
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+}
+
+.menu-button.open .menu-options {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1.1); /* Slight zoom effect */
+}
+
+.option {
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    border: 1px solid #0ff; /* Neon blue border */
+    border-radius: 5px;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.option:hover {
+    background: rgba(0, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+/* Positioning options symmetrically */
+.option:first-child {
+    transform: translateX(-100px);
+    transition: transform 0.3s ease-in-out;
+}
+
+.option:last-child {
+    transform: translateX(100px);
+    transition: transform 0.3s ease-in-out;
+}
+
+.menu-button.open .option:first-child {
+    transform: translateX(-200px); /* Move further left */
+}
+
+.menu-button.open .option:last-child {
+    transform: translateX(200px); /* Move further right */
+}

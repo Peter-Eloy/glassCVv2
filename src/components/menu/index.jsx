@@ -2,6 +2,7 @@ import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import { useTheme } from '../../contexts/index'
+import MenuButton from '../menuButton'
 
 /**
  * Description placeholder
@@ -10,6 +11,10 @@ import { useTheme } from '../../contexts/index'
  */
 const AppMenu = () => {
     const { isDarkMode } = useTheme()
+
+    const handleMenuToggle = (isOpen) => {
+        console.log('Menu is', isOpen ? 'open' : 'closed')
+    }
 
     return (
         <AppBar
@@ -20,6 +25,7 @@ const AppMenu = () => {
                 borderBottom: `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.12)' : 'rgba(0, 0, 0, 0.12)'}`,
             }}
         >
+            <MenuButton onClick={handleMenuToggle} />
             <Toolbar>
                 <Typography
                     variant='h6'
