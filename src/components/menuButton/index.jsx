@@ -26,14 +26,18 @@ const Triangle = styled.div`
   height: 0;
   border-left: 30px solid transparent;
   border-right: 30px solid transparent;
-  border-bottom: 50px solid rgba(112, 180, 235, 0.2);
+  border-bottom: 50px solid rgba(0, 191, 255, 0.8); // Neon blue color with transparency
   transition: all 0.3s ease-in-out;
   transform: ${(props) => (props.isOpen ? "rotate(180deg)" : "rotate(0deg)")};
-  backdrop-filter: blur(10px);
-  filter: drop-shadow(0 4px 6px rgba(148, 11, 11, 0.1));
+  filter: drop-shadow(0 0 10px rgba(0, 191, 255, 0.8)) // Neon glow effect
+    drop-shadow(0 0 20px rgba(0, 191, 255, 0.6))
+    drop-shadow(0 0 30px rgba(0, 191, 255, 0.4));
 
   &:hover {
-    border-bottom-color: rgba(255, 255, 255, 0.3);
+    border-bottom-color: rgba(0, 191, 255, 1); // Brighter neon blue on hover
+    filter: drop-shadow(0 0 15px rgba(0, 191, 255, 1)) // Enhanced glow on hover
+      drop-shadow(0 0 30px rgba(0, 191, 255, 0.8))
+      drop-shadow(0 0 45px rgba(0, 191, 255, 0.6));
   }
 `;
 
