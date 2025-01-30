@@ -1,7 +1,8 @@
-import AppBar from '@mui/material/AppBar'
-import Toolbar from '@mui/material/Toolbar'
-import Typography from '@mui/material/Typography'
-import { useTheme } from '../../contexts/index'
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import { useTheme } from "../../contexts/index";
+import MenuButton from "../menuButton";
 
 /**
  * Description placeholder
@@ -9,28 +10,33 @@ import { useTheme } from '../../contexts/index'
  * @returns {*}
  */
 const AppMenu = () => {
-    const { isDarkMode } = useTheme()
+  const { isDarkMode } = useTheme();
 
-    return (
-        <AppBar
-            position='fixed'
+  return (
+    <>
+      <MenuButton />
+      <AppBar
+        position="fixed"
+        sx={{
+          width: "100%",
+          background: "transparent",
+          borderBottom: `1px solid ${
+            isDarkMode ? "rgba(255, 255, 255, 0.12)" : "rgba(0, 0, 0, 0.12)"
+          }`,
+        }}
+      >
+        <Toolbar>
+          <Typography
+            variant="h6"
+            component="div"
             sx={{
-                width: '100%',
-                background: 'transparent',
-                borderBottom: `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.12)' : 'rgba(0, 0, 0, 0.12)'}`,
+              color: isDarkMode ? "#fff" : "#213547",
             }}
-        >
-            <Toolbar>
-                <Typography
-                    variant='h6'
-                    component='div'
-                    sx={{
-                        color: isDarkMode ? '#fff' : '#213547',
-                    }}
-                ></Typography>
-            </Toolbar>
-        </AppBar>
-    )
-}
+          ></Typography>
+        </Toolbar>
+      </AppBar>
+    </>
+  );
+};
 
-export default AppMenu
+export default AppMenu;
