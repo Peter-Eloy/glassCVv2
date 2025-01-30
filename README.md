@@ -65,7 +65,7 @@ SRC
 
 3. **Run the project**:  
    ```bash  
-   npm start  
+   npm run dev  
    ```  
 
 4. **Open in your browser**:  
