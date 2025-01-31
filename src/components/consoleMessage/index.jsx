@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { isMobile } from "react-device-detect";
 
 const ConsoleMessage = () => {
