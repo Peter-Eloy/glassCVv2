@@ -5,14 +5,21 @@ import {
   SpeedDialIcon,
   Snackbar,
 } from "@mui/material";
-import FileCopyIcon from "@mui/icons-material/FileCopyOutlined";
 import SaveIcon from "@mui/icons-material/Save";
 import PrintIcon from "@mui/icons-material/Print";
 import ShareIcon from "@mui/icons-material/Share";
 import EditIcon from "@mui/icons-material/Edit";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
+import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import { useTheme } from "../../contexts/index";
+import {
+  isMacOs,
+  isWindows,
+  isLinux,
+  isIOS,
+  isAndroid,
+} from "react-device-detect";
 
 /**
  * Description placeholder
@@ -45,15 +52,43 @@ check out the CV of Peter - Eloy H., a full-stack dev:
       });
   };
 
+  const bookmarkPage = () => {
+    if (window.sidebar && window.sidebar.addPanel) {
+      // Firefox <= 22
+      window.sidebar.addPanel(document.title, window.location.href, "");
+    } else if (window.external && "AddFavorite" in window.external) {
+      // IE
+      window.external.AddFavorite(window.location.href, document.title);
+    } else {
+      // Personalized alerts based on device
+      let bookmarkInstructions =
+        "Use your browser's bookmark feature to save this page.";
+
+      if (isIOS) {
+        bookmarkInstructions =
+          "Tap the Share button and select 'Add to Home Screen' to bookmark this page.";
+      } else if (isAndroid) {
+        bookmarkInstructions =
+          "Tap the menu button (three dots) and select 'Add to Home Screen'.";
+      } else if (isMacOs) {
+        bookmarkInstructions = "Press Cmd + D to bookmark this page.";
+      } else if (isWindows || isLinux) {
+        bookmarkInstructions = "Press Ctrl + D to bookmark this page.";
+      }
+
+      alert(bookmarkInstructions);
+    }
+  };
+
   const actions = [
     {
       icon: isDarkMode ? <LightModeIcon /> : <DarkModeIcon />,
       name: isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode",
       action: toggleTheme,
     },
-    { icon: <FileCopyIcon />, name: "Copy" },
-    { icon: <SaveIcon />, name: "Save" },
+    { icon: <SaveIcon />, name: "Save", action: bookmarkPage },
     { icon: <PrintIcon />, name: "Print" },
+    { icon: <PictureAsPdfIcon />, name: "Export as PDF" },
     { icon: <ShareIcon />, name: "Share", action: copyToClipboard },
   ];
 
