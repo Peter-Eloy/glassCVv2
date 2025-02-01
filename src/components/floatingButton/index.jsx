@@ -8,18 +8,21 @@ import {
 import SaveIcon from "@mui/icons-material/Save";
 import PrintIcon from "@mui/icons-material/Print";
 import ShareIcon from "@mui/icons-material/Share";
-import EditIcon from "@mui/icons-material/Edit";
+import CloseIcon from "@mui/icons-material/Close";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
+import ChatIcon from "@mui/icons-material/Chat";
 import { useTheme } from "../../contexts/index";
 import {
+  isMobile,
   isMacOs,
   isWindows,
   isLinux,
   isIOS,
   isAndroid,
 } from "react-device-detect";
+import ChatComponent from "../chatComponent";
 
 /**
  * Description placeholder
@@ -29,6 +32,7 @@ import {
 const FloatingButton = () => {
   const [open, setOpen] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [chatOpen, setChatOpen] = useState(false);
   const { isDarkMode, toggleTheme } = useTheme();
 
   const emailParts = ["p", "eter", "elo", "y", "@", "gmail", ".com"];
@@ -66,7 +70,7 @@ check out the CV of Peter - Eloy H., a full-stack dev:
 
       if (isIOS) {
         bookmarkInstructions =
-          "Tap the Share button and select 'Add to Home Screen' to bookmark this page.";
+          "Tap your browser's Share button, then 'Add to Home Screen' to bookmark this page.";
       } else if (isAndroid) {
         bookmarkInstructions =
           "Tap the menu button (three dots) and select 'Add to Home Screen'.";
@@ -86,6 +90,15 @@ check out the CV of Peter - Eloy H., a full-stack dev:
       name: isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode",
       action: toggleTheme,
     },
+    ...(isMobile
+      ? []
+      : [
+          {
+            icon: <ChatIcon />,
+            name: "Chat",
+            action: () => setChatOpen(!chatOpen),
+          },
+        ]),
     { icon: <SaveIcon />, name: "Save", action: bookmarkPage },
     { icon: <PrintIcon />, name: "Print" },
     { icon: <PictureAsPdfIcon />, name: "Export as PDF" },
@@ -123,7 +136,7 @@ check out the CV of Peter - Eloy H., a full-stack dev:
             },
           },
         }}
-        icon={<SpeedDialIcon openIcon={<EditIcon />} />}
+        icon={<SpeedDialIcon openIcon={<CloseIcon />} />}
         onClose={() => setOpen(false)}
         onOpen={() => setOpen(true)}
         open={open}
@@ -144,6 +157,8 @@ check out the CV of Peter - Eloy H., a full-stack dev:
           />
         ))}
       </SpeedDial>
+
+      <ChatComponent open={chatOpen} onClose={() => setChatOpen(false)} />
       {/* Snackbar to show feedback */}
       <Snackbar
         open={snackbarOpen}
