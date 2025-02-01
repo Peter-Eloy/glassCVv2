@@ -12,6 +12,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
+import ChatIcon from "@mui/icons-material/Chat";
 import { useTheme } from "../../contexts/index";
 import {
   isMacOs,
@@ -20,6 +21,7 @@ import {
   isIOS,
   isAndroid,
 } from "react-device-detect";
+import ChatComponent from "../chatComponent";
 
 /**
  * Description placeholder
@@ -29,6 +31,7 @@ import {
 const FloatingButton = () => {
   const [open, setOpen] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [chatOpen, setChatOpen] = useState(false);
   const { isDarkMode, toggleTheme } = useTheme();
 
   const emailParts = ["p", "eter", "elo", "y", "@", "gmail", ".com"];
@@ -85,6 +88,11 @@ check out the CV of Peter - Eloy H., a full-stack dev:
       icon: isDarkMode ? <LightModeIcon /> : <DarkModeIcon />,
       name: isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode",
       action: toggleTheme,
+    },
+    {
+      icon: <ChatIcon />,
+      name: "Chat",
+      action: () => setChatOpen(!chatOpen), // Toggle chat visibility
     },
     { icon: <SaveIcon />, name: "Save", action: bookmarkPage },
     { icon: <PrintIcon />, name: "Print" },
@@ -144,6 +152,8 @@ check out the CV of Peter - Eloy H., a full-stack dev:
           />
         ))}
       </SpeedDial>
+
+      <ChatComponent open={chatOpen} onClose={() => setChatOpen(false)} />
       {/* Snackbar to show feedback */}
       <Snackbar
         open={snackbarOpen}
