@@ -8,7 +8,7 @@ import {
 import SaveIcon from "@mui/icons-material/Save";
 import PrintIcon from "@mui/icons-material/Print";
 import ShareIcon from "@mui/icons-material/Share";
-import EditIcon from "@mui/icons-material/Edit";
+import CloseIcon from "@mui/icons-material/Close";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
@@ -136,7 +136,7 @@ check out the CV of Peter - Eloy H., a full-stack dev:
             },
           },
         }}
-        icon={<SpeedDialIcon openIcon={<EditIcon />} />}
+        icon={<SpeedDialIcon openIcon={<CloseIcon />} />}
         onClose={() => setOpen(false)}
         onOpen={() => setOpen(true)}
         open={open}
