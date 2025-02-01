@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import {
   Box,
   Paper,
@@ -103,7 +103,7 @@ const ChatComponent = ({ open, onClose }) => {
           <Paper
             elevation={0}
             sx={{
-              height: "calc(100% - 70px)",
+              height: "calc(100% - 90px)",
               overflow: "auto",
               mb: 2,
               p: 2,
@@ -136,7 +136,9 @@ const ChatComponent = ({ open, onClose }) => {
                     <CardContent>
                       <Typography variant="body1">{message.text}</Typography>
                       <Typography variant="caption" color="textSecondary">
-                        {new Date(message.timestamp).toLocaleTimeString()}
+                        {/* {new Date(message.timestamp).toLocaleTimeString()} */}
+                        "I'm currently working on the backend and it will be
+                        finished soon!"
                       </Typography>
                     </CardContent>
                   </Card>
@@ -146,11 +148,11 @@ const ChatComponent = ({ open, onClose }) => {
             </List>
           </Paper>
 
-          <Box sx={{ display: "flex", gap: 1 }}>
+          <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
             <TextField
               fullWidth
               variant="outlined"
-              placeholder="Type your message..."
+              placeholder="Wokring on the backend..."
               value={inputMessage}
               onChange={(e) => setInputMessage(e.target.value)}
               onKeyPress={handleKeyPress}
