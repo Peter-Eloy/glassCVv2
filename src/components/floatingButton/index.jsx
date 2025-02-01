@@ -15,6 +15,7 @@ import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import ChatIcon from "@mui/icons-material/Chat";
 import { useTheme } from "../../contexts/index";
 import {
+  isMobile,
   isMacOs,
   isWindows,
   isLinux,
@@ -69,7 +70,7 @@ check out the CV of Peter - Eloy H., a full-stack dev:
 
       if (isIOS) {
         bookmarkInstructions =
-          "Tap the Share button and select 'Add to Home Screen' to bookmark this page.";
+          "Tap your browser's Share button, then 'Add to Home Screen' to bookmark this page.";
       } else if (isAndroid) {
         bookmarkInstructions =
           "Tap the menu button (three dots) and select 'Add to Home Screen'.";
@@ -89,11 +90,15 @@ check out the CV of Peter - Eloy H., a full-stack dev:
       name: isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode",
       action: toggleTheme,
     },
-    {
-      icon: <ChatIcon />,
-      name: "Chat",
-      action: () => setChatOpen(!chatOpen), // Toggle chat visibility
-    },
+    ...(isMobile
+      ? []
+      : [
+          {
+            icon: <ChatIcon />,
+            name: "Chat",
+            action: () => setChatOpen(!chatOpen),
+          },
+        ]),
     { icon: <SaveIcon />, name: "Save", action: bookmarkPage },
     { icon: <PrintIcon />, name: "Print" },
     { icon: <PictureAsPdfIcon />, name: "Export as PDF" },
