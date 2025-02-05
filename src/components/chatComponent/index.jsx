@@ -14,6 +14,8 @@ import {
   Modal,
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
+import CloseIcon from "@mui/icons-material/Close";
+import { sendMessage } from "../../services/api/chat";
 
 const ChatComponent = ({ open, onClose }) => {
   const [messages, setMessages] = useState([]);
@@ -64,15 +66,22 @@ const ChatComponent = ({ open, onClose }) => {
     setIsLoading(true);
 
     try {
-      // Simulated AI response
+      const responseText = await sendMessage(inputMessage);
       const aiResponse = {
-        text: "This is a simulated AI response. Replace this with actual API integration.",
+        text: responseText,
         sender: "ai",
         timestamp: new Date().toISOString(),
       };
       setMessages((prev) => [...prev, aiResponse]);
     } catch (error) {
       console.error("Error:", error);
+      const errorMessage = {
+        text:
+          error.message || "Sorry, there was an error processing your message.",
+        sender: "ai",
+        timestamp: new Date().toISOString(),
+      };
+      setMessages((prev) => [...prev, errorMessage]);
     } finally {
       setIsLoading(false);
     }
@@ -100,6 +109,17 @@ const ChatComponent = ({ open, onClose }) => {
     >
       <Fade in={open}>
         <Box sx={style.modalContent}>
+          <IconButton
+            onClick={onClose}
+            sx={{
+              position: "absolute",
+              right: 8,
+              top: 8,
+              color: "grey.500",
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
           <Paper
             elevation={0}
             sx={{
@@ -136,9 +156,7 @@ const ChatComponent = ({ open, onClose }) => {
                     <CardContent>
                       <Typography variant="body1">{message.text}</Typography>
                       <Typography variant="caption" color="textSecondary">
-                        {/* {new Date(message.timestamp).toLocaleTimeString()} */}
-                        "I'm currently working on the backend and it will be
-                        finished soon!"
+                        {new Date(message.timestamp).toLocaleTimeString()}
                       </Typography>
                     </CardContent>
                   </Card>
@@ -152,12 +170,13 @@ const ChatComponent = ({ open, onClose }) => {
             <TextField
               fullWidth
               variant="outlined"
-              placeholder="Wokring on the backend..."
+              placeholder="Type your message..."
               value={inputMessage}
               onChange={(e) => setInputMessage(e.target.value)}
               onKeyPress={handleKeyPress}
               multiline
               maxRows={4}
+              disabled={isLoading}
               sx={{
                 backgroundColor: "#ffffff",
                 "& .MuiOutlinedInput-root": {
