@@ -1,36 +1,56 @@
-// components/welcomeExperience/splashScreen/index.jsx
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTheme } from "../../../contexts";
 import { glassStyles } from "../../../styles/glassEffects";
+import { TOUR_CONFIG } from "../welcomeConfig";
 import "./styles.css";
 
-const FADE_IN_DELAY = 500; // Delay before showing Hello
-const DISPLAY_TIME = 2000; // How long to show the splash screen
-const FADE_OUT_TIME = 500; // How long the fade out animation takes
+const {
+  splashScreen: {
+    fadeInDelay,
+    displayTime,
+    fadeOutTime,
+    text: helloText,
+    letterAppearDuration,
+    letterShineDelay,
+  },
+} = TOUR_CONFIG;
 
 const SplashScreen = ({ onComplete }) => {
   const { isDarkMode } = useTheme();
-  const [isVisible, setIsVisible] = useState(true);
-  const [showHello, setShowHello] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const [currentStage, setCurrentStage] = useState("appearing");
+  const [visibleLetters, setVisibleLetters] = useState(0);
+  const [shineVisible, setShineVisible] = useState(false);
 
   useEffect(() => {
-    // Show the Hello text after a brief delay
-    const helloTimer = setTimeout(() => {
-      setShowHello(true);
-    }, FADE_IN_DELAY);
+    let lettersTimer;
+    setIsVisible(true);
 
-    // Start the fade out sequence after display time
-    const fadeTimer = setTimeout(() => {
+    if (currentStage === "appearing") {
+      lettersTimer = setInterval(() => {
+        setVisibleLetters((prev) => {
+          if (prev < helloText.length) {
+            return prev + 1;
+          }
+          clearInterval(lettersTimer);
+          setTimeout(() => {
+            setShineVisible(true);
+            setTimeout(() => {
+              setCurrentStage("disappearing");
+            }, displayTime);
+          }, letterShineDelay);
+          return prev;
+        });
+      }, letterAppearDuration);
+    } else if (currentStage === "disappearing") {
       setIsVisible(false);
-      // Wait for fade out animation to complete before calling onComplete
-      setTimeout(onComplete, FADE_OUT_TIME);
-    }, DISPLAY_TIME);
+      setTimeout(onComplete, fadeOutTime);
+    }
 
     return () => {
-      clearTimeout(helloTimer);
-      clearTimeout(fadeTimer);
+      clearInterval(lettersTimer);
     };
-  }, [onComplete]);
+  }, [currentStage, onComplete]);
 
   const baseStyles = {
     ...glassStyles.shared,
@@ -45,14 +65,34 @@ const SplashScreen = ({ onComplete }) => {
     alignItems: "center",
     zIndex: 1000,
     opacity: isVisible ? 1 : 0,
-    transition: `opacity ${FADE_OUT_TIME}ms ease-in-out`,
+    transition: `opacity ${fadeOutTime}ms ease-in-out`,
+  };
+
+  const renderLetters = () => {
+    return (
+      <div className="hello-text" data-text={helloText}>
+        {helloText.split("").map((letter, index) => {
+          const isVisible = index < visibleLetters;
+          return (
+            <span
+              key={index}
+              className={`letter ${isVisible ? "visible" : ""}`}
+              style={{
+                transitionDelay: `${index * letterAppearDuration}ms`,
+              }}
+            >
+              {letter}
+            </span>
+          );
+        })}
+      </div>
+    );
   };
 
   return (
     <div style={baseStyles} className="splash-screen">
-      <div className={`hello-text ${showHello ? "visible" : ""}`}>
-        <span className="shine-text">Hello</span>
-      </div>
+      <div className="hello-text">{renderLetters()}</div>
+      {shineVisible && <div className="shine-effect"></div>}
     </div>
   );
 };

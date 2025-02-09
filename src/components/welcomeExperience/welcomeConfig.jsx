@@ -1,9 +1,11 @@
-// src/components/welcomeExperience/welcomeConfig.js
 export const TOUR_CONFIG = {
   splashScreen: {
     fadeInDelay: 500, // Delay before showing Hello
     displayTime: 2000, // How long to show the splash screen
     fadeOutTime: 500, // How long the fade out animation takes
+    text: "Hello", // The text to display
+    letterAppearDuration: 200, // Duration for each letter to appear/disappear
+    letterShineDelay: 100, // Delay for shine effect relative to letter appearance
   },
   guidedText: {
     fadeInDuration: 800,
