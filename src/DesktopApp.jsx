@@ -1,5 +1,5 @@
 // src/DesktopApp.jsx
-import React from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import AppMenu from "./components/menu";
 import Sidebar from "./components/sidebar";
@@ -15,35 +15,66 @@ import StackedGlassContainers from "./components/stackedGlassContainers";
 import careerData from "./data/carrerData/carrerData";
 import proSnapshot from "./data/proSnapshot/proSnapshot";
 
-/**
- * Description placeholder
- *
- * @type {64}
- */
 const APPBAR_HEIGHT = 40;
-/**
- * Description placeholder
- *
- * @type {64}
- */
 const FOOTER_HEIGHT = 64;
 const SIDEBAR_WIDTH = 240;
 
-/**
- * Description placeholder
- *
- * @returns {*}
- */
-function DesktopApp() {
+function DesktopApp({ onLoad }) {
+  const [componentsLoaded, setComponentsLoaded] = useState({
+    career: false,
+    snapshot: false,
+    menu: false,
+    sidebar: false,
+  });
+
+  // Handle individual component loads
+  const handleComponentLoad = (componentName) => {
+    setComponentsLoaded((prev) => {
+      const newState = { ...prev, [componentName]: true };
+      // Check if all components are loaded
+      if (Object.values(newState).every((loaded) => loaded)) {
+        onLoad?.(); // Notify parent when everything is ready
+      }
+      return newState;
+    });
+  };
+
+  // Simulate or handle actual data loading
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        // Simulate loading career data
+        await new Promise((resolve) => setTimeout(resolve, 500));
+        handleComponentLoad("career");
+
+        // Simulate loading snapshot data
+        await new Promise((resolve) => setTimeout(resolve, 300));
+        handleComponentLoad("snapshot");
+
+        // Menu and sidebar can load immediately
+        handleComponentLoad("menu");
+        handleComponentLoad("sidebar");
+      } catch (error) {
+        console.error("Error loading data:", error);
+        // Still mark components as loaded even if there's an error
+        Object.keys(componentsLoaded).forEach((key) =>
+          handleComponentLoad(key)
+        );
+      }
+    };
+
+    loadData();
+  }, []); // Empty dependency array since we only want to load once
+
   return (
     <Box
       sx={{
         display: "flex",
         flexDirection: "column",
         height: "100vh",
-        overflow: "hidden", // Ensure no scrolling at root
-        position: "fixed", // Add fixed position
-        width: "100%", // Ensure full width
+        overflow: "hidden",
+        position: "fixed",
+        width: "100%",
         top: 8,
         left: 0,
       }}
@@ -62,32 +93,30 @@ function DesktopApp() {
           component="main"
           sx={{
             flexGrow: 3,
-            overflow: "hidden", // Ensure no scrolling in main content
-            position: "relative", // Add relative positioning
-            p: 3, // Add padding back
-            ml: `${SIDEBAR_WIDTH}px`, // Add margin to account for sidebar
+            overflow: "hidden",
+            position: "relative",
+            p: 3,
+            ml: `${SIDEBAR_WIDTH}px`,
             width: `calc(100% - ${SIDEBAR_WIDTH}px)`,
           }}
         >
-          {/* Your main content will go here */}
           <GlassContainer>
             <p>
               <strong>Dev |</strong> HTML, CSS, JS (JavaScript, ReactJS) & Go
             </p>
           </GlassContainer>
-          {/* Wrapper for StackedGlassContainers */}
+
           <Box
             sx={{
               display: "grid",
-              // Change this to 1 for vertical stack, 2 for side by side
               gridTemplateColumns: {
-                xs: "1fr", // Stack on mobile
-                md: "1fr 1fr", // Side by side on medium screens and up
+                xs: "1fr",
+                md: "1fr 1fr",
               },
               gap: 3,
               mt: 3,
-              overflow: "hidden", // Ensure no scrolling in grid
-              maxHeight: `calc(100vh - ${APPBAR_HEIGHT}px - ${FOOTER_HEIGHT}px - 120px)`, // Adjust for padding and margins
+              overflow: "hidden",
+              maxHeight: `calc(100vh - ${APPBAR_HEIGHT}px - ${FOOTER_HEIGHT}px - 120px)`,
             }}
           >
             <Box sx={{ overflow: "hidden" }}>
