@@ -1,5 +1,5 @@
 // src/DesktopApp.jsx
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import "./App.css";
 import AppMenu from "./components/menu";
 import Sidebar from "./components/sidebar";
@@ -19,52 +19,22 @@ const APPBAR_HEIGHT = 40;
 const FOOTER_HEIGHT = 64;
 const SIDEBAR_WIDTH = 240;
 
-function DesktopApp({ onLoad }) {
-  const [componentsLoaded, setComponentsLoaded] = useState({
-    career: false,
-    snapshot: false,
-    menu: false,
-    sidebar: false,
-  });
+function DesktopApp({ tourRefs }) {
+  // Create refs for the elements we want to highlight
+  const menuRef = useRef(null);
+  const firstGlassContainerRef = useRef(null);
+  const stackedGlassRef = useRef(null);
 
-  // Handle individual component loads
-  const handleComponentLoad = (componentName) => {
-    setComponentsLoaded((prev) => {
-      const newState = { ...prev, [componentName]: true };
-      // Check if all components are loaded
-      if (Object.values(newState).every((loaded) => loaded)) {
-        onLoad?.(); // Notify parent when everything is ready
-      }
-      return newState;
-    });
-  };
-
-  // Simulate or handle actual data loading
+  // Update the refs in the parent component
   useEffect(() => {
-    const loadData = async () => {
-      try {
-        // Simulate loading career data
-        await new Promise((resolve) => setTimeout(resolve, 500));
-        handleComponentLoad("career");
-
-        // Simulate loading snapshot data
-        await new Promise((resolve) => setTimeout(resolve, 300));
-        handleComponentLoad("snapshot");
-
-        // Menu and sidebar can load immediately
-        handleComponentLoad("menu");
-        handleComponentLoad("sidebar");
-      } catch (error) {
-        console.error("Error loading data:", error);
-        // Still mark components as loaded even if there's an error
-        Object.keys(componentsLoaded).forEach((key) =>
-          handleComponentLoad(key)
-        );
-      }
-    };
-
-    loadData();
-  }, []); // Empty dependency array since we only want to load once
+    if (tourRefs) {
+      tourRefs.current = {
+        menuRef,
+        firstGlassContainerRef,
+        stackedGlassRef,
+      };
+    }
+  }, [tourRefs]);
 
   return (
     <Box
@@ -79,7 +49,7 @@ function DesktopApp({ onLoad }) {
         left: 0,
       }}
     >
-      <AppMenu />
+      <AppMenu ref={menuRef} />
       <Box
         sx={{
           display: "flex",
@@ -100,7 +70,7 @@ function DesktopApp({ onLoad }) {
             width: `calc(100% - ${SIDEBAR_WIDTH}px)`,
           }}
         >
-          <GlassContainer>
+          <GlassContainer ref={firstGlassContainerRef}>
             <p>
               <strong>Dev |</strong> HTML, CSS, JS (JavaScript, ReactJS) & Go
             </p>
@@ -134,7 +104,10 @@ function DesktopApp({ onLoad }) {
                   </p>
                 </div>
               </GlassContainer>
-              <StackedGlassContainers containers={careerData} />
+              <StackedGlassContainers
+                ref={stackedGlassRef}
+                containers={careerData}
+              />
             </Box>
             <Box sx={{ overflow: "hidden" }}>
               <StackedGlassContainers containers={proSnapshot} />
