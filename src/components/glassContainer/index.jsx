@@ -21,7 +21,7 @@ const ShineContainer = styled(Box)`
         transparent
       );
       transform: rotate(-45deg);
-      animation: stackedShine 4s 1; // Run only once!
+      animation: stackedShine 4s 1;
       z-index: 1;
     }
 
@@ -59,33 +59,37 @@ const RevealText = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 1.2em;
-  font-weight: bold;
+  font-weight: 300;
   color: ${(props) => props.textColor};
   white-space: nowrap;
   opacity: 0;
   z-index: 2;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-  filter: blur(0.5px);
-  animation: revealStackedText 4s 1; // Run only once!
+  background: rgba(255, 255, 255, 0.1);
+  padding: 8px 16px;
+  border-radius: 8px;
+  backdrop-filter: blur(4px);
+  letter-spacing: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: revealStackedText 4s 1;
 
   @keyframes revealStackedText {
     0%,
     15% {
       opacity: 0;
-      filter: blur(3px);
-      transform: translate(-50%, -50%) scale(0.8);
+      backdrop-filter: blur(0px);
+      transform: translate(-50%, -50%) scale(0.95);
     }
     25%,
     35% {
       opacity: 1;
-      filter: blur(0.5px);
+      backdrop-filter: blur(4px);
       transform: translate(-50%, -50%) scale(1);
     }
     40%,
     100% {
       opacity: 0;
-      filter: blur(3px);
-      transform: translate(-50%, -50%) scale(0.8);
+      backdrop-filter: blur(0px);
+      transform: translate(-50%, -50%) scale(1.05);
     }
   }
 `;
