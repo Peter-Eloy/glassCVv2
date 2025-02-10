@@ -1,5 +1,5 @@
 // src/DesktopApp.jsx
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import AppMenu from "./components/menu";
 import Sidebar from "./components/sidebar";
@@ -14,6 +14,8 @@ import GlassContainer from "./components/glassContainer";
 import StackedGlassContainers from "./components/stackedGlassContainers";
 import careerData from "./data/carrerData/carrerData";
 import proSnapshot from "./data/proSnapshot/proSnapshot";
+import PropTypes from "prop-types";
+import { WELCOME_STAGES } from "./components/welcomeExperience/stages";
 
 /**
  * Description placeholder
@@ -34,7 +36,12 @@ const SIDEBAR_WIDTH = 240;
  *
  * @returns {*}
  */
-function DesktopApp() {
+function DesktopApp({ onLoad, welcomeStage }) {
+  useEffect(() => {
+    // Notify parent when component is mounted and ready
+    onLoad?.();
+  }, [onLoad]);
+
   return (
     <Box
       sx={{
@@ -48,7 +55,7 @@ function DesktopApp() {
         left: 0,
       }}
     >
-      <AppMenu />
+      <AppMenu forceMenuOpen={welcomeStage === WELCOME_STAGES.MENU} />
       <Box
         sx={{
           display: "flex",
@@ -57,7 +64,10 @@ function DesktopApp() {
           overflow: "hidden",
         }}
       >
-        <Sidebar />
+        <Sidebar
+          showContactShine={welcomeStage === WELCOME_STAGES.CONTACTS}
+          showStackedShine={welcomeStage === WELCOME_STAGES.STACKED}
+        />
         <Box
           component="main"
           sx={{
@@ -118,5 +128,10 @@ function DesktopApp() {
     </Box>
   );
 }
+
+DesktopApp.propTypes = {
+  onLoad: PropTypes.func,
+  welcomeStage: PropTypes.oneOf(Object.values(WELCOME_STAGES)),
+};
 
 export default DesktopApp;

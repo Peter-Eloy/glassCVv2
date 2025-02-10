@@ -1,7 +1,8 @@
 // MenuButton.jsx
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import ChatComponent from "../chatComponent";
+import PropTypes from "prop-types";
 
 const MenuButtonContainer = styled.div`
   position: fixed;
@@ -97,9 +98,15 @@ const Option = styled.button`
   }
 `;
 
-const MenuButton = () => {
+const MenuButton = ({ forceOpen }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [chatOpen, setChatOpen] = useState(false);
+
+  useEffect(() => {
+    if (forceOpen) {
+      setIsOpen(true);
+    }
+  }, [forceOpen]);
 
   const handleAIChatClick = (e) => {
     e.stopPropagation(); // Prevent menu from closing when clicking the AI Chat button
@@ -135,6 +142,14 @@ const MenuButton = () => {
       <ChatComponent open={chatOpen} onClose={() => setChatOpen(false)} />
     </>
   );
+};
+
+MenuButton.propTypes = {
+  forceOpen: PropTypes.bool,
+};
+
+MenuButton.defaultProps = {
+  forceOpen: false,
 };
 
 export default MenuButton;

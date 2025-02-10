@@ -3,18 +3,19 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { useTheme } from "../../contexts/index";
 import MenuButton from "../menuButton";
+import PropTypes from "prop-types";
 
 /**
  * Description placeholder
  *
  * @returns {*}
  */
-const AppMenu = () => {
+const AppMenu = ({ forceMenuOpen }) => {
   const { isDarkMode } = useTheme();
 
   return (
     <>
-      <MenuButton />
+      <MenuButton forceOpen={forceMenuOpen} />
       <AppBar
         position="fixed"
         sx={{
@@ -37,6 +38,14 @@ const AppMenu = () => {
       </AppBar>
     </>
   );
+};
+
+AppMenu.propTypes = {
+  forceMenuOpen: PropTypes.bool,
+};
+
+AppMenu.defaultProps = {
+  forceMenuOpen: false,
 };
 
 export default AppMenu;
