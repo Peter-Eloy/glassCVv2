@@ -119,24 +119,24 @@ const MenuButton = ({ forceOpen }) => {
       <MenuButtonContainer isOpen={isOpen} onClick={() => setIsOpen(!isOpen)}>
         <Triangle isOpen={isOpen} />
         <MenuOptions isOpen={isOpen}>
-          <Option isOpen={isOpen} position="left">
+          {/* <Option isOpen={isOpen} position="left">
             Option 1
-          </Option>
+          </Option> */}
           <Option isOpen={isOpen} position="left" onClick={handleAIChatClick}>
             AI Chat
           </Option>
           <Option isOpen={isOpen} position="left">
-            Option 3
+            (working)
           </Option>
           <Option isOpen={isOpen} position="right">
-            Option 4
+            comming...
           </Option>
           <Option isOpen={isOpen} position="right">
-            Option 5
+            ...soon
           </Option>
-          <Option isOpen={isOpen} position="right">
+          {/* <Option isOpen={isOpen} position="right">
             Option 6
-          </Option>
+          </Option>  */}
         </MenuOptions>
       </MenuButtonContainer>
       <ChatComponent open={chatOpen} onClose={() => setChatOpen(false)} />

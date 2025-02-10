@@ -23,6 +23,7 @@ function App() {
     welcomeStage: WELCOME_STAGES.LOADING,
     hasSeenWelcome: false,
     loadingComplete: false,
+    isTransitioning: false, // Add this to prevent multiple transitions
   });
 
   useEffect(() => {
@@ -40,7 +41,7 @@ function App() {
   }, []);
 
   const handleDesktopLoaded = () => {
-    console.log("Desktop loaded called");
+    console.log("Desktop loaded");
     setState((prev) => ({
       ...prev,
       desktopLoaded: true,
@@ -52,41 +53,49 @@ function App() {
     if (
       state.desktopLoaded &&
       state.loadingComplete &&
-      state.welcomeStage === WELCOME_STAGES.LOADING
+      state.welcomeStage === WELCOME_STAGES.LOADING &&
+      !state.isTransitioning
     ) {
-      console.log("Both conditions met, transitioning from loading stage");
-      handleStageComplete();
+      setState((prev) => ({ ...prev, isTransitioning: true }));
+      setTimeout(() => {
+        handleStageComplete();
+      }, 200);
     }
-  }, [state.desktopLoaded, state.loadingComplete, state.welcomeStage]);
+  }, [
+    state.desktopLoaded,
+    state.loadingComplete,
+    state.welcomeStage,
+    state.isTransitioning,
+  ]);
 
   const handleStageComplete = () => {
+    if (state.isTransitioning) return;
+
+    setState((prev) => ({ ...prev, isTransitioning: true }));
     console.log("Stage complete called for stage:", state.welcomeStage);
 
-    // Don't immediately update the state, set a timeout for the next stage
     const stages = Object.values(WELCOME_STAGES);
     const currentIndex = stages.indexOf(state.welcomeStage);
     const nextStage = stages[currentIndex + 1];
 
-    console.log("Setting up transition to next stage:", nextStage);
+    setTimeout(
+      () => {
+        setState((prev) => ({
+          ...prev,
+          welcomeStage: nextStage,
+          isTransitioning: false,
+        }));
 
-    // For non-loading stages, use the defined duration
-    const duration = STAGE_DURATION[state.welcomeStage] || 2000;
-
-    setTimeout(() => {
-      setState((prev) => {
         if (nextStage === WELCOME_STAGES.COMPLETE) {
           const date = new Date();
           date.setTime(date.getTime() + 30 * 24 * 60 * 60 * 1000);
           document.cookie = `hasSeenWelcome=true; expires=${date.toUTCString()}; path=/`;
         }
-
-        console.log("Actually transitioning to:", nextStage);
-        return {
-          ...prev,
-          welcomeStage: nextStage,
-        };
-      });
-    }, duration);
+      },
+      state.welcomeStage === WELCOME_STAGES.LOADING
+        ? 0
+        : STAGE_DURATION[state.welcomeStage]
+    );
   };
 
   return (
@@ -109,12 +118,15 @@ function App() {
               <>
                 {state.welcomeStage === WELCOME_STAGES.LOADING && (
                   <LoadingStage
+                    minLoadTime={2000}
                     onComplete={() => {
-                      console.log("LoadingStage timer completed");
-                      setState((prev) => ({
-                        ...prev,
-                        loadingComplete: true,
-                      }));
+                      if (!state.loadingComplete) {
+                        console.log("LoadingStage timer completed");
+                        setState((prev) => ({
+                          ...prev,
+                          loadingComplete: true,
+                        }));
+                      }
                     }}
                   />
                 )}
@@ -130,5 +142,4 @@ function App() {
     </ThemeProvider>
   );
 }
-
 export default App;

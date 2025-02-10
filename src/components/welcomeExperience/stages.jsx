@@ -7,7 +7,7 @@ export const WELCOME_STAGES = {
 };
 
 export const STAGE_DURATION = {
-  [WELCOME_STAGES.LOADING]: 3000, // "Hello" display time
+  [WELCOME_STAGES.LOADING]: 2000, // "Hello" display time
   [WELCOME_STAGES.CONTACTS]: 2000, // Contacts highlight duration
   [WELCOME_STAGES.STACKED]: 2000, // Stacked components highlight duration
   [WELCOME_STAGES.MENU]: 2000, // Menu interaction duration

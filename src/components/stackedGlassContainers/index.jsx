@@ -10,37 +10,80 @@ const ShineContainer = styled(Box)`
     &::before {
       content: "";
       position: absolute;
-      top: 0;
-      left: -100%;
-      width: 50%;
-      height: 100%;
+      top: -150%;
+      left: -150%;
+      width: 200%;
+      height: 200%;
       background: linear-gradient(
-        90deg,
+        -45deg,
         transparent,
-        rgba(255, 255, 255, 0.4),
+        rgba(255, 255, 255, 0.6),
         transparent
       );
-      animation: shine 2s infinite;
+      transform: rotate(-45deg);
+      animation: stackedShine 4s infinite;
+      z-index: 1;
     }
 
-    @keyframes shine {
-      0% {
-        left: -100%;
+    @keyframes stackedShine {
+      0%,
+      5% {
+        top: -150%;
+        left: -150%;
         opacity: 0;
       }
-      20% {
-        opacity: 0.5;
-      }
-      50% {
+      20%,
+      30% {
         opacity: 1;
+        top: 0%;
+        left: 0%;
       }
-      80% {
-        opacity: 0.5;
-      }
-      100% {
+      45%,
+      50% {
+        top: 150%;
         left: 150%;
         opacity: 0;
       }
+      100% {
+        top: 150%;
+        left: 150%;
+        opacity: 0;
+      }
+    }
+  }
+`;
+
+const RevealText = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.2em;
+  font-weight: bold;
+  color: ${(props) => props.textColor};
+  white-space: nowrap;
+  opacity: 0;
+  z-index: 2;
+
+  &.stackedReveal {
+    animation: revealStackedText 4s infinite;
+  }
+
+  @keyframes revealStackedText {
+    0%,
+    15% {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.8) rotate(-5deg);
+    }
+    25%,
+    35% {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    }
+    40%,
+    100% {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.8) rotate(5deg);
     }
   }
 `;
@@ -55,6 +98,7 @@ const GlassContainerStacked = ({
 }) => {
   const { isDarkMode } = useTheme();
   const themeStyles = isDarkMode ? glassStyles.dark : glassStyles.light;
+  const textColor = isDarkMode ? "#fff" : "#213547";
 
   return (
     <ShineContainer
@@ -94,6 +138,13 @@ const GlassContainerStacked = ({
       >
         {children}
       </Box>
+      {/* <>
+        {showShine && isActive && (
+          <RevealText className="stackedReveal" textColor={textColor}>
+            Click to explore
+          </RevealText>
+        )}
+      </> */}
     </ShineContainer>
   );
 };
