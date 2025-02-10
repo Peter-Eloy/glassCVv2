@@ -24,7 +24,6 @@ const ShineContainer = styled(Box)`
     animation: fullScreenShine 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
     z-index: 1;
     background-size: 200% 200%;
-    filter: blur(0px);
   }
 
   @keyframes fullScreenShine {
@@ -63,10 +62,8 @@ const WelcomeText = styled.div`
   color: transparent;
   background: linear-gradient(
     135deg,
-    ${(props) =>
-      props.isDarkMode
-        ? "#FFFFFF 0%, #A0A0A0 100%"
-        : "#2C3E50 0%, #3498DB 100%"}
+    ${({ theme }) =>
+      theme.isDark ? "#FFFFFF 0%, #A0A0A0 100%" : "#2C3E50 0%, #3498DB 100%"}
   );
   -webkit-background-clip: text;
   background-clip: text;
@@ -114,23 +111,23 @@ const WelcomeText = styled.div`
   }
 `;
 
-const RevealOverlay = styled(Box)`
+const StyledOverlay = styled(Box)`
   position: fixed;
   inset: 0;
-  background: ${(props) =>
-    props.isDarkMode
+  background: ${({ theme }) =>
+    theme.isDark
       ? "linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(33,33,33,0.95) 100%)"
       : "linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(240,240,240,0.95) 100%)"};
   transition: opacity 0.5s ease-in-out;
-  opacity: ${(props) => (props.isRevealing ? 0 : 1)};
-  backdrop-filter: blur(${(props) => (props.isRevealing ? "0px" : "10px")});
+  opacity: ${({ revealing }) => (revealing ? 0 : 1)};
+  backdrop-filter: blur(${({ revealing }) => (revealing ? "0px" : "10px")});
 `;
 
 const LoadingStage = ({ onComplete, minLoadTime = 2000 }) => {
   const { isDarkMode } = useTheme();
-  const themeStyles = isDarkMode ? glassStyles.dark : glassStyles.light;
   const [startTime] = useState(Date.now());
   const [isRevealing, setIsRevealing] = useState(false);
+  const theme = { isDark: isDarkMode };
 
   useEffect(() => {
     const currentTime = Date.now();
@@ -141,14 +138,14 @@ const LoadingStage = ({ onComplete, minLoadTime = 2000 }) => {
       setIsRevealing(true);
       setTimeout(() => {
         onComplete();
-      }, 500); // Give time for the reveal animation
+      }, 500);
     }, remainingTime);
 
     return () => clearTimeout(timer);
   }, [onComplete, startTime, minLoadTime]);
 
   return (
-    <RevealOverlay isDarkMode={isDarkMode} isRevealing={isRevealing}>
+    <StyledOverlay theme={theme} revealing={isRevealing ? 1 : 0}>
       <ShineContainer
         sx={{
           position: "fixed",
@@ -160,7 +157,7 @@ const LoadingStage = ({ onComplete, minLoadTime = 2000 }) => {
           alignItems: "center",
           justifyContent: "center",
           ...glassStyles.shared,
-          ...themeStyles,
+          ...(isDarkMode ? glassStyles.dark : glassStyles.light),
           zIndex: 9999,
           overflow: "hidden",
         }}
@@ -172,10 +169,10 @@ const LoadingStage = ({ onComplete, minLoadTime = 2000 }) => {
             textAlign: "center",
           }}
         >
-          <WelcomeText isDarkMode={isDarkMode}>Hello</WelcomeText>
+          <WelcomeText theme={theme}>Hello</WelcomeText>
         </Box>
       </ShineContainer>
-    </RevealOverlay>
+    </StyledOverlay>
   );
 };
 
