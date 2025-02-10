@@ -9,7 +9,10 @@ import { ThemeProvider } from "./contexts/index";
 import { ThemeProvider as MuiThemeProvider, createTheme } from "@mui/material";
 import LoadingStage from "./components/welcomeExperience/LoadingStage";
 import WelcomeGuide from "./components/welcomeExperience/WelcomeGuide";
-import { WELCOME_STAGES } from "./components/welcomeExperience/stages";
+import {
+  WELCOME_STAGES,
+  STAGE_DURATION,
+} from "./components/welcomeExperience/stages";
 
 // Lazy load DesktopApp
 const DesktopApp = lazy(() => import("./DesktopApp"));
@@ -37,14 +40,11 @@ function App() {
   }, []);
 
   const handleDesktopLoaded = () => {
-    console.log("Desktop loaded called"); // Debug log
-    setState((prev) => {
-      console.log("Setting desktopLoaded to true"); // Debug log
-      return {
-        ...prev,
-        desktopLoaded: true,
-      };
-    });
+    console.log("Desktop loaded called");
+    setState((prev) => ({
+      ...prev,
+      desktopLoaded: true,
+    }));
   };
 
   // Effect to handle stage transition when both conditions are met
@@ -54,41 +54,40 @@ function App() {
       state.loadingComplete &&
       state.welcomeStage === WELCOME_STAGES.LOADING
     ) {
+      console.log("Both conditions met, transitioning from loading stage");
       handleStageComplete();
     }
   }, [state.desktopLoaded, state.loadingComplete, state.welcomeStage]);
 
   const handleStageComplete = () => {
     console.log("Stage complete called for stage:", state.welcomeStage);
-    setState((prev) => {
-      const stages = Object.values(WELCOME_STAGES);
-      const currentIndex = stages.indexOf(prev.welcomeStage);
-      const nextStage = stages[currentIndex + 1];
 
-      console.log("Moving to next stage:", nextStage); // Debug log
+    // Don't immediately update the state, set a timeout for the next stage
+    const stages = Object.values(WELCOME_STAGES);
+    const currentIndex = stages.indexOf(state.welcomeStage);
+    const nextStage = stages[currentIndex + 1];
 
-      if (nextStage === WELCOME_STAGES.COMPLETE) {
-        // Set cookie for 30 days
-        const date = new Date();
-        date.setTime(date.getTime() + 30 * 24 * 60 * 60 * 1000);
-        document.cookie = `hasSeenWelcome=true; expires=${date.toUTCString()}; path=/`;
-      }
+    console.log("Setting up transition to next stage:", nextStage);
 
-      return {
-        ...prev,
-        welcomeStage: nextStage,
-      };
-    });
+    // For non-loading stages, use the defined duration
+    const duration = STAGE_DURATION[state.welcomeStage] || 2000;
+
+    setTimeout(() => {
+      setState((prev) => {
+        if (nextStage === WELCOME_STAGES.COMPLETE) {
+          const date = new Date();
+          date.setTime(date.getTime() + 30 * 24 * 60 * 60 * 1000);
+          document.cookie = `hasSeenWelcome=true; expires=${date.toUTCString()}; path=/`;
+        }
+
+        console.log("Actually transitioning to:", nextStage);
+        return {
+          ...prev,
+          welcomeStage: nextStage,
+        };
+      });
+    }, duration);
   };
-
-  // Debug useEffect to track state changes
-  useEffect(() => {
-    console.log("Current state:", {
-      desktopLoaded: state.desktopLoaded,
-      welcomeStage: state.welcomeStage,
-      hasSeenWelcome: state.hasSeenWelcome,
-    });
-  }, [state]);
 
   return (
     <ThemeProvider>
@@ -111,13 +110,11 @@ function App() {
                 {state.welcomeStage === WELCOME_STAGES.LOADING && (
                   <LoadingStage
                     onComplete={() => {
-                      console.log(
-                        "LoadingStage onComplete called, desktopLoaded:",
-                        state.desktopLoaded
-                      ); // Debug log
-                      if (state.desktopLoaded) {
-                        handleStageComplete();
-                      }
+                      console.log("LoadingStage timer completed");
+                      setState((prev) => ({
+                        ...prev,
+                        loadingComplete: true,
+                      }));
                     }}
                   />
                 )}
