@@ -36,6 +36,8 @@ const Sidebar = ({ showContactShine, showStackedShine }) => {
     ? "rgba(255, 255, 255, 0.12)"
     : "rgba(0, 0, 0, 0.12)";
 
+  console.log("Sidebar shine props:", { showContactShine, showStackedShine }); // Debug log
+
   return (
     <Drawer
       variant={isDesktop ? "permanent" : "temporary"}

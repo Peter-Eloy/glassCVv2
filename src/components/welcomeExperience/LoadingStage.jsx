@@ -1,5 +1,5 @@
 // src/components/welcomeExperience/LoadingStage.jsx
-import React from "react";
+import { useEffect } from "react";
 import { Box } from "@mui/material";
 import { TypeAnimation } from "react-type-animation";
 import { useTheme } from "../../contexts";
@@ -11,7 +11,7 @@ const LoadingStage = ({ onComplete }) => {
   const { isDarkMode } = useTheme();
   const themeStyles = isDarkMode ? glassStyles.dark : glassStyles.light;
 
-  React.useEffect(() => {
+  useEffect(() => {
     const timer = setTimeout(() => {
       onComplete();
     }, STAGE_DURATION[WELCOME_STAGES.LOADING]);

@@ -49,6 +49,8 @@ const GlassContainer = ({ children, showShine }) => {
   const { isDarkMode } = useTheme();
   const themeStyles = isDarkMode ? glassStyles.dark : glassStyles.light;
 
+  console.log("GlassContainer showShine:", showShine); // Debug log
+
   return (
     <ShineContainer
       className={showShine ? "shine" : ""}

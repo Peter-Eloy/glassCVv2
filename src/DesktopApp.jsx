@@ -38,9 +38,10 @@ const SIDEBAR_WIDTH = 240;
  */
 function DesktopApp({ onLoad, welcomeStage }) {
   useEffect(() => {
-    // Notify parent when component is mounted and ready
+    console.log("DesktopApp mounted");
     onLoad?.();
-  }, [onLoad]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Only run once on mount
 
   return (
     <Box

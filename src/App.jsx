@@ -19,6 +19,7 @@ function App() {
     desktopLoaded: false,
     welcomeStage: WELCOME_STAGES.LOADING,
     hasSeenWelcome: false,
+    loadingComplete: false,
   });
 
   useEffect(() => {
@@ -36,20 +37,35 @@ function App() {
   }, []);
 
   const handleDesktopLoaded = () => {
-    if (!state.hasSeenWelcome) {
-      // Keep in LOADING stage until desktop is ready
-      setState((prev) => ({
+    console.log("Desktop loaded called"); // Debug log
+    setState((prev) => {
+      console.log("Setting desktopLoaded to true"); // Debug log
+      return {
         ...prev,
         desktopLoaded: true,
-      }));
-    }
+      };
+    });
   };
 
+  // Effect to handle stage transition when both conditions are met
+  useEffect(() => {
+    if (
+      state.desktopLoaded &&
+      state.loadingComplete &&
+      state.welcomeStage === WELCOME_STAGES.LOADING
+    ) {
+      handleStageComplete();
+    }
+  }, [state.desktopLoaded, state.loadingComplete, state.welcomeStage]);
+
   const handleStageComplete = () => {
+    console.log("Stage complete called for stage:", state.welcomeStage);
     setState((prev) => {
       const stages = Object.values(WELCOME_STAGES);
       const currentIndex = stages.indexOf(prev.welcomeStage);
       const nextStage = stages[currentIndex + 1];
+
+      console.log("Moving to next stage:", nextStage); // Debug log
 
       if (nextStage === WELCOME_STAGES.COMPLETE) {
         // Set cookie for 30 days
@@ -64,6 +80,15 @@ function App() {
       };
     });
   };
+
+  // Debug useEffect to track state changes
+  useEffect(() => {
+    console.log("Current state:", {
+      desktopLoaded: state.desktopLoaded,
+      welcomeStage: state.welcomeStage,
+      hasSeenWelcome: state.hasSeenWelcome,
+    });
+  }, [state]);
 
   return (
     <ThemeProvider>
@@ -86,6 +111,10 @@ function App() {
                 {state.welcomeStage === WELCOME_STAGES.LOADING && (
                   <LoadingStage
                     onComplete={() => {
+                      console.log(
+                        "LoadingStage onComplete called, desktopLoaded:",
+                        state.desktopLoaded
+                      ); // Debug log
                       if (state.desktopLoaded) {
                         handleStageComplete();
                       }
