@@ -1,7 +1,8 @@
 // MenuButton.jsx
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import ChatComponent from "../chatComponent";
+import PropTypes from "prop-types";
 
 const MenuButtonContainer = styled.div`
   position: fixed;
@@ -97,9 +98,15 @@ const Option = styled.button`
   }
 `;
 
-const MenuButton = () => {
+const MenuButton = ({ forceOpen = false }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [chatOpen, setChatOpen] = useState(false);
+
+  useEffect(() => {
+    if (forceOpen) {
+      setIsOpen(true);
+    }
+  }, [forceOpen]);
 
   const handleAIChatClick = (e) => {
     e.stopPropagation(); // Prevent menu from closing when clicking the AI Chat button
@@ -112,29 +119,33 @@ const MenuButton = () => {
       <MenuButtonContainer isOpen={isOpen} onClick={() => setIsOpen(!isOpen)}>
         <Triangle isOpen={isOpen} />
         <MenuOptions isOpen={isOpen}>
-          <Option isOpen={isOpen} position="left">
+          {/* <Option isOpen={isOpen} position="left">
             Option 1
-          </Option>
+          </Option> */}
           <Option isOpen={isOpen} position="left" onClick={handleAIChatClick}>
             AI Chat
           </Option>
           <Option isOpen={isOpen} position="left">
-            Option 3
+            (working)
           </Option>
           <Option isOpen={isOpen} position="right">
-            Option 4
+            comming...
           </Option>
           <Option isOpen={isOpen} position="right">
-            Option 5
+            ...soon
           </Option>
-          <Option isOpen={isOpen} position="right">
+          {/* <Option isOpen={isOpen} position="right">
             Option 6
-          </Option>
+          </Option>  */}
         </MenuOptions>
       </MenuButtonContainer>
       <ChatComponent open={chatOpen} onClose={() => setChatOpen(false)} />
     </>
   );
+};
+
+MenuButton.propTypes = {
+  forceOpen: PropTypes.bool,
 };
 
 export default MenuButton;

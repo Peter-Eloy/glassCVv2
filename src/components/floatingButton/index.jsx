@@ -49,7 +49,6 @@ check out the CV of Peter - Eloy H., a full-stack dev:
       .writeText(contentToCopy)
       .then(() => {
         setSnackbarOpen(true);
-        console.log("Content copied to clipboard");
       })
       .catch((err) => {
         console.error("Failed to copy: ", err);
