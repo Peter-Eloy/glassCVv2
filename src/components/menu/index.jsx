@@ -66,7 +66,7 @@ const AppMenu = ({ forceMenuOpen = false }) => {
 
   return (
     <>
-      <MenuButton forceOpen={forceMenuOpen} />
+      <MenuButton forceOpen={location.pathname === "/" && forceMenuOpen} />
       <AppBar
         position="fixed"
         sx={{
