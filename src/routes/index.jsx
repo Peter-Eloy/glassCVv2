@@ -3,6 +3,13 @@ import { createBrowserRouter } from "react-router-dom";
 import RootLayout from "../components/layout/RootLayout";
 import DesktopApp from "../DesktopApp";
 import BlogPage from "../pages/blog";
+import { WelcomeProvider } from "../contexts/welcomeContext";
+
+const WrappedDesktopApp = () => (
+  <WelcomeProvider>
+    <DesktopApp />
+  </WelcomeProvider>
+);
 
 export const router = createBrowserRouter([
   {
@@ -11,7 +18,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <DesktopApp />,
+        element: <WrappedDesktopApp />,
       },
       {
         path: "blog",

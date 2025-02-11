@@ -5,9 +5,10 @@ import Sidebar from "../../components/sidebar";
 import LoadingStage from "../../components/welcomeExperience/LoadingStage";
 import WelcomeGuide from "../../components/welcomeExperience/WelcomeGuide";
 import { WELCOME_STAGES } from "../../components/welcomeExperience/stages";
+import { useWelcome } from "../../contexts/welcomeContext";
 
 const MainContent = () => {
-  const [welcomeStage, setWelcomeStage] = useState(WELCOME_STAGES.LOADING);
+  const { welcomeStage, handleStageComplete } = useWelcome();
 
   const handleStageComplete = () => {
     setWelcomeStage((prevStage) => {
