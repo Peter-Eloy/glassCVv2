@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import ChatComponent from "../chatComponent";
 import PropTypes from "prop-types";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const MenuButtonContainer = styled.div`
   position: fixed;
@@ -101,6 +102,8 @@ const Option = styled.button`
 const MenuButton = ({ forceOpen = false }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [chatOpen, setChatOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     if (forceOpen) {
@@ -114,29 +117,41 @@ const MenuButton = ({ forceOpen = false }) => {
     setIsOpen(false); // Close the menu when opening chat
   };
 
+  const handleBlogClick = (e) => {
+    e.stopPropagation();
+    navigate("/blog");
+    setIsOpen(false);
+  };
+
+  const handleHomeClick = (e) => {
+    e.stopPropagation();
+    navigate("/");
+    setIsOpen(false);
+  };
+
   return (
     <>
       <MenuButtonContainer isOpen={isOpen} onClick={() => setIsOpen(!isOpen)}>
         <Triangle isOpen={isOpen} />
         <MenuOptions isOpen={isOpen}>
-          {/* <Option isOpen={isOpen} position="left">
-            Option 1
-          </Option> */}
           <Option isOpen={isOpen} position="left" onClick={handleAIChatClick}>
             AI Chat
           </Option>
+          <Option isOpen={isOpen} position="left" onClick={handleBlogClick}>
+            Blog
+          </Option>
           <Option isOpen={isOpen} position="left">
-            (working)
+            Option 3
           </Option>
           <Option isOpen={isOpen} position="right">
-            comming...
+            Option 4
           </Option>
           <Option isOpen={isOpen} position="right">
-            ...soon
+            Option 5
           </Option>
-          {/* <Option isOpen={isOpen} position="right">
+          <Option isOpen={isOpen} position="right">
             Option 6
-          </Option>  */}
+          </Option>
         </MenuOptions>
       </MenuButtonContainer>
       <ChatComponent open={chatOpen} onClose={() => setChatOpen(false)} />

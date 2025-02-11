@@ -1,9 +1,12 @@
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
 import { useTheme } from "../../contexts/index";
 import MenuButton from "../menuButton";
 import PropTypes from "prop-types";
+import { useLocation, useNavigate } from "react-router-dom";
+import { HomeOutlined } from "@ant-design/icons";
 
 /**
  * Description placeholder
@@ -12,6 +15,8 @@ import PropTypes from "prop-types";
  */
 const AppMenu = ({ forceMenuOpen = false }) => {
   const { isDarkMode } = useTheme();
+  const location = useLocation();
+  const navigate = useNavigate();
 
   return (
     <>
@@ -27,6 +32,23 @@ const AppMenu = ({ forceMenuOpen = false }) => {
         }}
       >
         <Toolbar>
+          {location.pathname !== "/" && (
+            <IconButton
+              edge="start"
+              onClick={() => navigate("/")}
+              sx={{
+                color: isDarkMode ? "#fff" : "#213547",
+                mr: 2,
+                "&:hover": {
+                  background: isDarkMode
+                    ? "rgba(255, 255, 255, 0.08)"
+                    : "rgba(0, 0, 0, 0.04)",
+                },
+              }}
+            >
+              <HomeOutlined />
+            </IconButton>
+          )}
           <Typography
             variant="h6"
             component="div"
