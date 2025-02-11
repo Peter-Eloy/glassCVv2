@@ -25,7 +25,7 @@ const FOOTER_HEIGHT = 64;
 /**
  * Sidebar Component
  */
-const Sidebar = ({ showContactShine, showStackedShine }) => {
+const Sidebar = ({ showContactShine = false, showStackedShine = false }) => {
   const muiTheme = useMuiTheme();
   const isDesktop = useMediaQuery(muiTheme.breakpoints.up("sm"));
   const { isDarkMode } = useTheme();
@@ -35,8 +35,6 @@ const Sidebar = ({ showContactShine, showStackedShine }) => {
   const borderColor = isDarkMode
     ? "rgba(255, 255, 255, 0.12)"
     : "rgba(0, 0, 0, 0.12)";
-
-  console.log("Sidebar shine props:", { showContactShine, showStackedShine }); // Debug log
 
   return (
     <Drawer
@@ -151,11 +149,6 @@ const Sidebar = ({ showContactShine, showStackedShine }) => {
 Sidebar.propTypes = {
   showContactShine: PropTypes.bool,
   showStackedShine: PropTypes.bool,
-};
-
-Sidebar.defaultProps = {
-  showContactShine: false,
-  showStackedShine: false,
 };
 
 export default Sidebar;

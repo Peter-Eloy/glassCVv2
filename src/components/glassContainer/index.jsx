@@ -94,7 +94,7 @@ const RevealText = styled.div`
   }
 `;
 
-const GlassContainer = ({ children, showShine }) => {
+const GlassContainer = ({ children, showShine = false }) => {
   const { isDarkMode } = useTheme();
   const themeStyles = isDarkMode ? glassStyles.dark : glassStyles.light;
   const textColor = isDarkMode ? "#fff" : "#213547";
@@ -134,10 +134,6 @@ const GlassContainer = ({ children, showShine }) => {
 GlassContainer.propTypes = {
   children: PropTypes.node.isRequired,
   showShine: PropTypes.bool,
-};
-
-GlassContainer.defaultProps = {
-  showShine: false,
 };
 
 export default GlassContainer;

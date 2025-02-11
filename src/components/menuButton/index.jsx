@@ -98,7 +98,7 @@ const Option = styled.button`
   }
 `;
 
-const MenuButton = ({ forceOpen }) => {
+const MenuButton = ({ forceOpen = false }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [chatOpen, setChatOpen] = useState(false);
 
@@ -146,10 +146,6 @@ const MenuButton = ({ forceOpen }) => {
 
 MenuButton.propTypes = {
   forceOpen: PropTypes.bool,
-};
-
-MenuButton.defaultProps = {
-  forceOpen: false,
 };
 
 export default MenuButton;

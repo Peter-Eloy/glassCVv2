@@ -41,7 +41,6 @@ function App() {
   }, []);
 
   const handleDesktopLoaded = () => {
-    console.log("Desktop loaded");
     setState((prev) => ({
       ...prev,
       desktopLoaded: true,
@@ -72,7 +71,6 @@ function App() {
     if (state.isTransitioning) return;
 
     setState((prev) => ({ ...prev, isTransitioning: true }));
-    console.log("Stage complete called for stage:", state.welcomeStage);
 
     const stages = Object.values(WELCOME_STAGES);
     const currentIndex = stages.indexOf(state.welcomeStage);
@@ -121,7 +119,6 @@ function App() {
                     minLoadTime={2000}
                     onComplete={() => {
                       if (!state.loadingComplete) {
-                        console.log("LoadingStage timer completed");
                         setState((prev) => ({
                           ...prev,
                           loadingComplete: true,

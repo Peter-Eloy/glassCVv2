@@ -10,7 +10,7 @@ import PropTypes from "prop-types";
  *
  * @returns {*}
  */
-const AppMenu = ({ forceMenuOpen }) => {
+const AppMenu = ({ forceMenuOpen = false }) => {
   const { isDarkMode } = useTheme();
 
   return (
@@ -42,10 +42,6 @@ const AppMenu = ({ forceMenuOpen }) => {
 
 AppMenu.propTypes = {
   forceMenuOpen: PropTypes.bool,
-};
-
-AppMenu.defaultProps = {
-  forceMenuOpen: false,
 };
 
 export default AppMenu;
