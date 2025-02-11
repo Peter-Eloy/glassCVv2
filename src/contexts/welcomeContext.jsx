@@ -1,26 +1,37 @@
 // src/contexts/welcomeContext.jsx
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import { WELCOME_STAGES } from "../components/welcomeExperience/stages";
 
 const WelcomeContext = createContext();
 
 export const WelcomeProvider = ({ children }) => {
-  const [welcomeStage, setWelcomeStage] = useState(WELCOME_STAGES.LOADING);
+  // Initialize state from localStorage
+  const [welcomeStage, setWelcomeStage] = useState(() => {
+    const hasSeenWelcome = localStorage.getItem("hasSeenWelcome");
+    return hasSeenWelcome ? WELCOME_STAGES.COMPLETE : WELCOME_STAGES.LOADING;
+  });
 
+  // Handle stage progression
   const handleStageComplete = () => {
     setWelcomeStage((prevStage) => {
-      switch (prevStage) {
-        case WELCOME_STAGES.LOADING:
-          return WELCOME_STAGES.CONTACTS;
-        case WELCOME_STAGES.CONTACTS:
-          return WELCOME_STAGES.STACKED;
-        case WELCOME_STAGES.STACKED:
-          return WELCOME_STAGES.MENU;
-        case WELCOME_STAGES.MENU:
-          return WELCOME_STAGES.COMPLETE;
-        default:
-          return WELCOME_STAGES.COMPLETE;
-      }
+      const nextStage = (() => {
+        switch (prevStage) {
+          case WELCOME_STAGES.LOADING:
+            return WELCOME_STAGES.CONTACTS;
+          case WELCOME_STAGES.CONTACTS:
+            return WELCOME_STAGES.STACKED;
+          case WELCOME_STAGES.STACKED:
+            return WELCOME_STAGES.MENU;
+          case WELCOME_STAGES.MENU:
+            // Save to localStorage when completing the welcome experience
+            localStorage.setItem("hasSeenWelcome", "true");
+            return WELCOME_STAGES.COMPLETE;
+          default:
+            return WELCOME_STAGES.COMPLETE;
+        }
+      })();
+
+      return nextStage;
     });
   };
 

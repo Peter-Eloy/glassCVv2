@@ -1,14 +1,21 @@
 // src/components/layout/RootLayout.jsx
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { Box } from "@mui/material";
-import AppMenu from "../menu";
 import Footer from "../footer";
 import FloatingButton from "../floatingButton";
+import AppMenu from "../menu/index";
+import { useWelcome } from "../../contexts/welcomeContext";
+import { WELCOME_STAGES } from "../../components/welcomeExperience/stages";
 
 const RootLayout = () => {
+  const { welcomeStage } = useWelcome();
+  const location = useLocation();
+
+  const isHome = location.pathname === "/";
+
   return (
     <Box sx={{ display: "flex", minHeight: "100vh" }}>
-      <AppMenu />
+      <AppMenu forceMenuOpen={isHome && welcomeStage === WELCOME_STAGES.MENU} />
       <Box
         component="main"
         sx={{

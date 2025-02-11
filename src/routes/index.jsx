@@ -5,7 +5,7 @@ import DesktopApp from "../DesktopApp";
 import BlogPage from "../pages/blog";
 import { WelcomeProvider } from "../contexts/welcomeContext";
 
-const WrappedDesktopApp = () => (
+const HomeRoute = () => (
   <WelcomeProvider>
     <DesktopApp />
   </WelcomeProvider>
@@ -18,7 +18,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <WrappedDesktopApp />,
+        element: <HomeRoute />,
       },
       {
         path: "blog",
