@@ -1,12 +1,12 @@
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
 import { useTheme } from "../../contexts/index";
+import { useWelcome } from "../../contexts/welcomeContext";
 import MenuButton from "../menuButton";
 import PropTypes from "prop-types";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
+import { WELCOME_STAGES } from "../../components/welcomeExperience/stages";
 
 const StyledArrowButton = styled.button`
   background: none;
@@ -63,10 +63,15 @@ const AppMenu = ({ forceMenuOpen = false }) => {
   const { isDarkMode } = useTheme();
   const location = useLocation();
   const navigate = useNavigate();
+  const { welcomeStage } = useWelcome();
+
+  const shouldForceMenuOpen =
+    location.pathname === "/" &&
+    (forceMenuOpen || welcomeStage === WELCOME_STAGES.MENU);
 
   return (
     <>
-      <MenuButton forceOpen={location.pathname === "/" && forceMenuOpen} />
+      <MenuButton forceOpen={shouldForceMenuOpen} />
       <AppBar
         position="fixed"
         sx={{

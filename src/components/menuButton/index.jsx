@@ -3,7 +3,9 @@ import { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import ChatComponent from "../chatComponent";
 import PropTypes from "prop-types";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useWelcome } from "../../contexts/welcomeContext";
+import { WELCOME_STAGES } from "../../components/welcomeExperience/stages";
 
 const MenuButtonContainer = styled.div`
   position: fixed;
@@ -103,13 +105,22 @@ const MenuButton = ({ forceOpen = false }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [chatOpen, setChatOpen] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation();
+  const { welcomeStage } = useWelcome();
 
+  // Force the menu open during MENU stage
   useEffect(() => {
-    if (forceOpen) {
+    if (welcomeStage === WELCOME_STAGES.MENU || forceOpen) {
       setIsOpen(true);
     }
-  }, [forceOpen]);
+  }, [welcomeStage, forceOpen]);
+
+  // Prevent closing during MENU stage
+  const handleToggle = () => {
+    if (welcomeStage === WELCOME_STAGES.MENU) {
+      return; // Don't allow closing during MENU stage
+    }
+    setIsOpen(!isOpen);
+  };
 
   const handleAIChatClick = (e) => {
     e.stopPropagation(); // Prevent menu from closing when clicking the AI Chat button
@@ -131,7 +142,11 @@ const MenuButton = ({ forceOpen = false }) => {
 
   return (
     <>
-      <MenuButtonContainer isOpen={isOpen} onClick={() => setIsOpen(!isOpen)}>
+      <MenuButtonContainer
+        onClick={handleToggle}
+        data-testid="menu-button"
+        data-stage={welcomeStage}
+      >
         <Triangle isOpen={isOpen} />
         <MenuOptions isOpen={isOpen}>
           <Option isOpen={isOpen} position="left" onClick={handleAIChatClick}>

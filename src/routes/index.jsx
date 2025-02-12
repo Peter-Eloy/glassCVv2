@@ -4,21 +4,25 @@ import RootLayout from "../components/layout/RootLayout";
 import DesktopApp from "../DesktopApp";
 import BlogPage from "../pages/blog";
 import { WelcomeProvider } from "../contexts/welcomeContext";
+import FaviconChanger from "../utils/FaviconChanger";
+import ConsoleMessage from "../components/consoleMessage";
 
-const HomeRoute = () => (
+const AppWithProviders = () => (
   <WelcomeProvider>
-    <DesktopApp />
+    <FaviconChanger />
+    <ConsoleMessage />
+    <RootLayout />
   </WelcomeProvider>
 );
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <RootLayout />,
+    element: <AppWithProviders />,
     children: [
       {
         index: true,
-        element: <HomeRoute />,
+        element: <DesktopApp />,
       },
       {
         path: "blog",

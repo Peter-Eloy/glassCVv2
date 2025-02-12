@@ -1,36 +1,35 @@
+// src/utils/FaviconChanger.jsx
 import { useEffect } from "react";
 
 const FaviconChanger = () => {
   useEffect(() => {
-    // Function to update the favicon
     const updateFavicon = (emoji) => {
-      const link = document.querySelector("link[rel~='icon']");
-      if (!link) {
-        const newLink = document.createElement("link");
-        newLink.rel = "icon";
-        document.getElementsByTagName("head")[0].appendChild(newLink);
+      // Remove existing favicon
+      const existingFavicon = document.querySelector("link[rel='icon']");
+      if (existingFavicon) {
+        existingFavicon.remove();
       }
-      link.href = `data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>${encodeURIComponent(
-        emoji
-      )}</text></svg>`;
+
+      // Create new favicon
+      const favicon = document.createElement("link");
+      favicon.rel = "icon";
+      favicon.href = `data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="80" font-size="80">${emoji}</text></svg>`;
+      document.head.appendChild(favicon);
     };
 
-    // Function to update the document title
     const updateTitle = (title) => {
       document.title = title;
     };
-    // Set the initial favicon
+
+    // Set initial state
     updateFavicon("👨‍💻");
     updateTitle("Hey there!");
 
-    // Event listener for when the tab visibility changes
     const handleVisibilityChange = () => {
       if (document.hidden) {
-        // Change favicon when the tab is hidden
         updateFavicon("😢");
-        updateTitle("Miss you already");
+        updateTitle("Miss you already!");
       } else {
-        // Change favicon back when the tab is visible
         updateFavicon("😊");
         updateTitle("Welcome back!");
       }
@@ -39,13 +38,13 @@ const FaviconChanger = () => {
     // Add event listener
     document.addEventListener("visibilitychange", handleVisibilityChange);
 
-    // Clean up the event listener on component unmount
+    // Cleanup
     return () => {
       document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
   }, []);
 
-  return null; // This component doesn't render anything
+  return null;
 };
 
 export default FaviconChanger;
