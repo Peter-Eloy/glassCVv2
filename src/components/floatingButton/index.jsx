@@ -148,8 +148,6 @@ check out the CV of Peter - Eloy H., a full-stack dev:
             onClick={() => {
               if (action.action) {
                 action.action();
-              } else {
-                console.log(`Clicked ${action.name}`);
               }
               setOpen(false);
             }}

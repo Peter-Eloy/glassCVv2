@@ -1,137 +1,145 @@
 // src/DesktopApp.jsx
-import React, { useEffect } from "react";
+import React from "react";
 import "./App.css";
-import AppMenu from "./components/menu";
 import Sidebar from "./components/sidebar";
-import FloatingButton from "./components/floatingButton";
-import Footer from "./components/footer";
-import {
-  Box,
-  ThemeProvider as MuiThemeProvider,
-  createTheme,
-} from "@mui/material";
+import { Box } from "@mui/material";
 import GlassContainer from "./components/glassContainer";
 import StackedGlassContainers from "./components/stackedGlassContainers";
 import careerData from "./data/carrerData/carrerData";
 import proSnapshot from "./data/proSnapshot/proSnapshot";
-import PropTypes from "prop-types";
+import LoadingStage from "./components/welcomeExperience/LoadingStage";
+import WelcomeGuide from "./components/welcomeExperience/WelcomeGuide";
+import { useWelcome } from "./contexts/welcomeContext";
 import { WELCOME_STAGES } from "./components/welcomeExperience/stages";
 
-/**
- * Description placeholder
- *
- * @type {64}
- */
 const APPBAR_HEIGHT = 40;
-/**
- * Description placeholder
- *
- * @type {64}
- */
 const FOOTER_HEIGHT = 64;
 const SIDEBAR_WIDTH = 240;
 
-/**
- * Description placeholder
- *
- * @returns {*}
- */
-function DesktopApp({ onLoad, welcomeStage }) {
-  useEffect(() => {
-    onLoad?.();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // Only run once on mount
+function DesktopApp() {
+  const { welcomeStage, handleStageComplete } = useWelcome();
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        height: "100vh",
-        overflow: "hidden", // Ensure no scrolling at root
-        position: "fixed", // Add fixed position
-        width: "100%", // Ensure full width
-        top: 8,
-        left: 0,
-      }}
-    >
-      <AppMenu forceMenuOpen={welcomeStage === WELCOME_STAGES.MENU} />
+    <>
+      {/* Welcome Experience Components */}
+      {welcomeStage === WELCOME_STAGES.LOADING && (
+        <Box
+          sx={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: 9999,
+          }}
+        >
+          <LoadingStage onComplete={handleStageComplete} />
+        </Box>
+      )}
+
+      {welcomeStage !== WELCOME_STAGES.LOADING &&
+        welcomeStage !== WELCOME_STAGES.COMPLETE && (
+          <Box
+            sx={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              zIndex: 9998,
+            }}
+          >
+            <WelcomeGuide
+              stage={welcomeStage}
+              onStageComplete={handleStageComplete}
+            />
+          </Box>
+        )}
+
+      {/* Main App Content */}
       <Box
         sx={{
           display: "flex",
-          marginTop: `${APPBAR_HEIGHT}px`,
-          height: `calc(100vh - ${APPBAR_HEIGHT}px - ${FOOTER_HEIGHT}px)`,
+          flexDirection: "column",
+          height: "100vh",
           overflow: "hidden",
+          position: "fixed",
+          width: "100%",
+          top: 8,
+          left: 0,
+          opacity: welcomeStage === WELCOME_STAGES.LOADING ? 0 : 1,
+          transition: "opacity 0.5s ease-in-out",
         }}
       >
-        <Sidebar
-          showContactShine={welcomeStage === WELCOME_STAGES.CONTACTS}
-          showStackedShine={welcomeStage === WELCOME_STAGES.STACKED}
-        />
         <Box
-          component="main"
           sx={{
-            flexGrow: 3,
-            overflow: "hidden", // Ensure no scrolling in main content
-            position: "relative", // Add relative positioning
-            p: 3, // Add padding back
-            ml: `${SIDEBAR_WIDTH}px`, // Add margin to account for sidebar
-            width: `calc(100% - ${SIDEBAR_WIDTH}px)`,
+            display: "flex",
+            marginTop: `${APPBAR_HEIGHT}px`,
+            height: `calc(100vh - ${APPBAR_HEIGHT}px - ${FOOTER_HEIGHT}px)`,
+            overflow: "hidden",
           }}
         >
-          {/* Your main content will go here */}
-          <GlassContainer>
-            <p>
-              <strong>Dev |</strong> HTML, CSS, JS (JavaScript, ReactJS) & Go
-            </p>
-          </GlassContainer>
-          {/* Wrapper for StackedGlassContainers */}
+          <Sidebar
+            showContactShine={welcomeStage === WELCOME_STAGES.CONTACTS}
+            showStackedShine={welcomeStage === WELCOME_STAGES.STACKED}
+          />
+
           <Box
+            component="main"
             sx={{
-              display: "grid",
-              // Change this to 1 for vertical stack, 2 for side by side
-              gridTemplateColumns: {
-                xs: "1fr", // Stack on mobile
-                md: "1fr 1fr", // Side by side on medium screens and up
-              },
-              gap: 3,
-              mt: 3,
-              overflow: "hidden", // Ensure no scrolling in grid
-              maxHeight: `calc(100vh - ${APPBAR_HEIGHT}px - ${FOOTER_HEIGHT}px - 120px)`, // Adjust for padding and margins
+              flexGrow: 3,
+              overflow: "hidden",
+              position: "relative",
+              p: 3,
+              ml: `${SIDEBAR_WIDTH}px`,
+              width: `calc(100% - ${SIDEBAR_WIDTH}px)`,
             }}
           >
-            <Box sx={{ overflow: "hidden" }}>
-              <GlassContainer>
-                <div>
-                  <h2 style={{ marginBottom: "8px" }}>
-                    Dev @ NARTEX SOFTWARE, S.L.
-                  </h2>
-                  <p style={{ fontSize: "0.9rem", margin: "4px 0" }}>
-                    <strong>Duration:</strong> Feb 2024 - Present
-                  </p>
-                  <p style={{ fontSize: "0.9rem", margin: "4px 0" }}>
-                    <strong>Technologies:</strong> React.js, Vite.js, Node.js,
-                    Go
-                  </p>
-                </div>
-              </GlassContainer>
-              <StackedGlassContainers containers={careerData} />
-            </Box>
-            <Box sx={{ overflow: "hidden" }}>
-              <StackedGlassContainers containers={proSnapshot} />
+            <GlassContainer>
+              <p>
+                <strong>Dev |</strong> HTML, CSS, JS (JavaScript, ReactJS) & Go
+              </p>
+            </GlassContainer>
+
+            <Box
+              sx={{
+                display: "grid",
+                gridTemplateColumns: {
+                  xs: "1fr",
+                  md: "1fr 1fr",
+                },
+                gap: 3,
+                mt: 3,
+                overflow: "hidden",
+                maxHeight: `calc(100vh - ${APPBAR_HEIGHT}px - ${FOOTER_HEIGHT}px - 120px)`,
+              }}
+            >
+              <Box sx={{ overflow: "hidden" }}>
+                <GlassContainer>
+                  <div>
+                    <h2 style={{ marginBottom: "8px" }}>
+                      Dev @ NARTEX SOFTWARE, S.L.
+                    </h2>
+                    <p style={{ fontSize: "0.9rem", margin: "4px 0" }}>
+                      <strong>Duration:</strong> Feb 2024 - Present
+                    </p>
+                    <p style={{ fontSize: "0.9rem", margin: "4px 0" }}>
+                      <strong>Technologies:</strong> React.js, Vite.js, Node.js,
+                      Go
+                    </p>
+                  </div>
+                </GlassContainer>
+                <StackedGlassContainers containers={careerData} />
+              </Box>
+              <Box sx={{ overflow: "hidden" }}>
+                <StackedGlassContainers containers={proSnapshot} />
+              </Box>
             </Box>
           </Box>
         </Box>
       </Box>
-      <Footer />
-      <FloatingButton />
-    </Box>
+    </>
   );
 }
-
-DesktopApp.propTypes = {
-  onLoad: PropTypes.func,
-  welcomeStage: PropTypes.oneOf(Object.values(WELCOME_STAGES)),
-};
 
 export default DesktopApp;
