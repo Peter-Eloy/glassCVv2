@@ -20,9 +20,9 @@ const RootLayout = () => {
         component="main"
         sx={{
           flexGrow: 1,
-          marginTop: "64px", // Height of the AppBar
+          marginTop: "110px", // Height of the AppBar
           marginBottom: "64px", // Height of the Footer
-          overflow: "auto",
+          overflow: "hidden", // Changed from 'auto' to 'hidden'
         }}
       >
         <Outlet />

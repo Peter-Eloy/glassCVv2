@@ -8,8 +8,9 @@ import { tumblrService } from "../../services/tumblr";
 import styled from "@emotion/styled";
 
 const FilterButton = styled.button`
-  padding: 8px 16px;
+  padding: 6px 22px;
   margin: 0 8px;
+  margin-left: 24px; /* Added this line to push buttons to the right */
   background: ${(props) =>
     props.active
       ? props.isDarkMode
@@ -81,7 +82,7 @@ const BlogPage = () => {
     const tag = activeFilter === "all" ? null : activeFilter;
     const { posts } = await tumblrService.getPosts(tag, POSTS_PER_PAGE);
     setPosts(posts);
-    setTotalPosts(posts.length); // In a real API this would come from the response
+    setTotalPosts(posts.length);
     setLoading(false);
   };
 
@@ -96,15 +97,23 @@ const BlogPage = () => {
   };
 
   return (
-    <Box sx={{ p: 4 }}>
+    <Box
+      sx={{
+        p: 3,
+        // height: "calc(100vh - 64px)",
+        overflow: "hidden", // Prevent scrolling
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
       {/* Filters */}
-      <Box sx={{ mb: 4 }}>
+      <Box sx={{ mb: 2 }}>
         <Box
           sx={{
             display: "flex",
             justifyContent: "center",
             flexWrap: "wrap",
-            gap: "8px",
+            gap: "2px",
           }}
         >
           {FILTERS.map((filter) => (
@@ -121,7 +130,7 @@ const BlogPage = () => {
       </Box>
 
       {/* Posts Grid */}
-      <Grid container spacing={3} sx={{ mb: 4 }}>
+      <Grid container spacing={2} sx={{ mb: 4 }}>
         {loading
           ? Array.from(new Array(POSTS_PER_PAGE)).map((_, index) => (
               <Grid item xs={12} sm={6} md={4} key={`skeleton-${index}`}>
@@ -129,15 +138,15 @@ const BlogPage = () => {
                   <Box
                     sx={{
                       p: 3,
-                      height: "300px",
+                      height: "120px",
                       display: "flex",
                       flexDirection: "column",
                     }}
                   >
-                    <Skeleton variant="text" height={32} width="80%" />
-                    <Skeleton variant="text" height={20} />
-                    <Skeleton variant="text" height={20} />
-                    <Skeleton variant="text" height={20} width="60%" />
+                    <Skeleton variant="text" height={22} width="80%" />
+                    <Skeleton variant="text" height={10} />
+                    <Skeleton variant="text" height={10} />
+                    <Skeleton variant="text" height={10} width="60%" />
                   </Box>
                 </BlogCard>
               </Grid>
@@ -148,7 +157,7 @@ const BlogPage = () => {
                   <Box
                     sx={{
                       p: 3,
-                      height: "300px",
+                      height: "180px",
                       display: "flex",
                       flexDirection: "column",
                     }}
@@ -156,7 +165,7 @@ const BlogPage = () => {
                     <Typography
                       variant="h6"
                       sx={{
-                        mb: 2,
+                        mb: 1,
                         fontSize: "1.1rem",
                         fontWeight: 600,
                         color: isDarkMode ? "#fff" : "#213547",
