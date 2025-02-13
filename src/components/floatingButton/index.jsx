@@ -23,6 +23,7 @@ import {
   isAndroid,
 } from "react-device-detect";
 import ChatComponent from "../chatComponent";
+import { getLatestCVDownloadUrls } from "../../services/github/cv";
 
 /**
  * Description placeholder
@@ -32,8 +33,24 @@ import ChatComponent from "../chatComponent";
 const FloatingButton = () => {
   const [open, setOpen] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
   const [chatOpen, setChatOpen] = useState(false);
+  const [downloadUrls, setDownloadUrls] = useState({});
+  const [loadingCV, setLoadingCV] = useState(false);
   const { isDarkMode, toggleTheme } = useTheme();
+
+  useEffect(() => {
+    fetchDownloadUrls();
+  }, []);
+
+  const fetchDownloadUrls = async () => {
+    try {
+      const urls = await getLatestCVDownloadUrls();
+      setDownloadUrls(urls);
+    } catch (error) {
+      console.error("Error fetching download URLs:", error);
+    }
+  };
 
   const emailParts = ["p", "eter", "elo", "y", "@", "gmail", ".com"];
   const phoneParts = ["+34", "678", "38", "1", "811"];
@@ -53,6 +70,43 @@ check out the CV of Peter - Eloy H., a full-stack dev:
       .catch((err) => {
         console.error("Failed to copy: ", err);
       });
+  };
+
+  const handleCVDownload = async (language) => {
+    setLoadingCV(true);
+    const url = downloadUrls[language];
+
+    if (!url) {
+      setSnackbarMessage(`CV in ${language} is not available at the moment.`);
+      setSnackbarOpen(true);
+      setLoadingCV(false);
+      return;
+    }
+
+    try {
+      const response = await fetch(url);
+      if (!response.ok) throw new Error("Download failed");
+
+      const blob = await response.blob();
+      const downloadUrl = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = downloadUrl;
+      a.download = `Peter_Eloy_CV_${language}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(downloadUrl);
+
+      setSnackbarMessage(`CV downloaded successfully in ${language}`);
+      setSnackbarOpen(true);
+    } catch (error) {
+      console.error("Error downloading CV:", error);
+      setSnackbarMessage("Error downloading the CV. Please try again.");
+      setSnackbarOpen(true);
+    } finally {
+      setLoadingCV(false);
+      setOpen(false);
+    }
   };
 
   const bookmarkPage = () => {
@@ -83,6 +137,24 @@ check out the CV of Peter - Eloy H., a full-stack dev:
     }
   };
 
+  const cvDownloadActions = [
+    {
+      icon: "🇬🇧",
+      name: "Download CV (English)",
+      action: () => handleCVDownload("EN"),
+    },
+    {
+      icon: "🇪🇸",
+      name: "Download CV (Spanish)",
+      action: () => handleCVDownload("ES"),
+    },
+    {
+      icon: "🇩🇪",
+      name: "Download CV (German)",
+      action: () => handleCVDownload("DE"),
+    },
+  ];
+
   const actions = [
     {
       icon: isDarkMode ? <LightModeIcon /> : <DarkModeIcon />,
@@ -99,7 +171,7 @@ check out the CV of Peter - Eloy H., a full-stack dev:
           },
         ]),
     { icon: <SaveIcon />, name: "Save", action: bookmarkPage },
-    { icon: <PrintIcon />, name: "Print" },
+    ...cvDownloadActions,
     { icon: <PictureAsPdfIcon />, name: "Export as PDF" },
     { icon: <ShareIcon />, name: "Share", action: copyToClipboard },
   ];
