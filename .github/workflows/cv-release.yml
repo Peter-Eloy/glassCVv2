@@ -3,25 +3,41 @@ name: CV Release
 on:
   push:
     paths:
-      - "cv" # Folder containing your CV files
+      - "cv/**"
     branches:
       - main
+  # Allow manual trigger
+  workflow_dispatch:
 
 jobs:
   release:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      packages: write
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Get current date
         id: date
         run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
 
+      - name: List CV files
+        run: |
+          ls -la cv/
+          echo "Current directory: $(pwd)"
+          echo "Files to be released:"
+          find cv/ -type f -name "*.pdf"
+
       - name: Create Release
         id: create_release
         uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: cv-${{ steps.date.outputs.date }}
           name: CV Update ${{ steps.date.outputs.date }}
@@ -36,5 +52,10 @@ jobs:
             - English 🇬🇧
             - Spanish 🇪🇸
             - German 🇩🇪
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          draft: false
+          prerelease: false
+
+      - name: Check Release Status
+        run: |
+          echo "Release ID: ${{ steps.create_release.outputs.id }}"
+          echo "Release URL: ${{ steps.create_release.outputs.url }}"
