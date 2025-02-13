@@ -10,7 +10,7 @@ import styled from "@emotion/styled";
 const FilterButton = styled.button`
   padding: 6px 22px;
   margin: 0 8px;
-  margin-left: 24px; /* Added this line to push buttons to the right */
+  margin-left: 30px;
   background: ${(props) =>
     props.active
       ? props.isDarkMode
@@ -56,10 +56,10 @@ const BlogCard = styled(GlassContainer)`
 
 const FILTERS = [
   { id: "all", label: "All Posts" },
-  { id: "tech", label: "Tech" },
-  { id: "coding", label: "Coding" },
-  { id: "finance", label: "Finance" },
-  { id: "lifestyle", label: "Lifestyle" },
+  { id: "tech", label: "Tech Bits" },
+  { id: "coding", label: "Code Wins" },
+  { id: "finance", label: "Trade Talk" },
+  { id: "lifestyle", label: "Life Hacks" },
 ];
 
 const POSTS_PER_PAGE = 6;
