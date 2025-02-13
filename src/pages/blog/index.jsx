@@ -58,7 +58,7 @@ const FILTERS = [
   { id: "all", label: "All Posts" },
   { id: "tech", label: "Tech" },
   { id: "coding", label: "Coding" },
-  { id: "design", label: "Design" },
+  { id: "finance", label: "Finance" },
   { id: "lifestyle", label: "Lifestyle" },
 ];
 
