@@ -4,15 +4,15 @@ import {
   SpeedDialAction,
   SpeedDialIcon,
   Snackbar,
+  CircularProgress,
 } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
-import PrintIcon from "@mui/icons-material/Print";
 import ShareIcon from "@mui/icons-material/Share";
 import CloseIcon from "@mui/icons-material/Close";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
-import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import ChatIcon from "@mui/icons-material/Chat";
+import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import { useTheme } from "../../contexts/index";
 import {
   isMobile,
@@ -23,41 +23,35 @@ import {
   isAndroid,
 } from "react-device-detect";
 import ChatComponent from "../chatComponent";
-import { getLatestCVDownloadUrls } from "../../services/github/cv";
 
-/**
- * Description placeholder
- *
- * @returns {*}
- */
 const FloatingButton = () => {
   const [open, setOpen] = useState(false);
+  const [downloadMenuOpen, setDownloadMenuOpen] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [chatOpen, setChatOpen] = useState(false);
   const [downloadUrls, setDownloadUrls] = useState({});
-  const [loadingCV, setLoadingCV] = useState(false);
+  const [loadingCV, setLoadingCV] = useState(true);
   const { isDarkMode, toggleTheme } = useTheme();
 
   useEffect(() => {
-    fetchDownloadUrls();
+    // Initialize download URLs
+    const baseURL =
+      "https://github.com/Peter-Eloy/glassCVv2/releases/download/cv-2025-02-15";
+    setDownloadUrls({
+      EN: `${baseURL}/Peter_Eloy_CV_EN.pdf`,
+      ES: `${baseURL}/Peter_Eloy_CV_ES.pdf`,
+      DE: `${baseURL}/Peter_Eloy_CV_DE.pdf`,
+    });
+    setLoadingCV(false);
   }, []);
-
-  const fetchDownloadUrls = async () => {
-    try {
-      const urls = await getLatestCVDownloadUrls();
-      setDownloadUrls(urls);
-    } catch (error) {
-      console.error("Error fetching download URLs:", error);
-    }
-  };
 
   const emailParts = ["p", "eter", "elo", "y", "@", "gmail", ".com"];
   const phoneParts = ["+34", "678", "38", "1", "811"];
 
   const contentToCopy = `Hey there,
 check out the CV of Peter - Eloy H., a full-stack dev:
-  CV: https://peter-eloy.github.io/glassCVv2 
+  CV: https://peter-eloy.dev 
   Phone: ${phoneParts.join("")}
   Email: ${emailParts.join("")}`;
 
@@ -65,6 +59,7 @@ check out the CV of Peter - Eloy H., a full-stack dev:
     navigator.clipboard
       .writeText(contentToCopy)
       .then(() => {
+        setSnackbarMessage("Content copied! Now you can share it easily!");
         setSnackbarOpen(true);
       })
       .catch((err) => {
@@ -73,29 +68,21 @@ check out the CV of Peter - Eloy H., a full-stack dev:
   };
 
   const handleCVDownload = async (language) => {
-    setLoadingCV(true);
     const url = downloadUrls[language];
-
     if (!url) {
       setSnackbarMessage(`CV in ${language} is not available at the moment.`);
       setSnackbarOpen(true);
-      setLoadingCV(false);
       return;
     }
 
     try {
-      const response = await fetch(url);
-      if (!response.ok) throw new Error("Download failed");
-
-      const blob = await response.blob();
-      const downloadUrl = window.URL.createObjectURL(blob);
       const a = document.createElement("a");
-      a.href = downloadUrl;
+      a.style.display = "none";
+      a.href = url;
       a.download = `Peter_Eloy_CV_${language}.pdf`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
-      window.URL.revokeObjectURL(downloadUrl);
 
       setSnackbarMessage(`CV downloaded successfully in ${language}`);
       setSnackbarOpen(true);
@@ -103,21 +90,17 @@ check out the CV of Peter - Eloy H., a full-stack dev:
       console.error("Error downloading CV:", error);
       setSnackbarMessage("Error downloading the CV. Please try again.");
       setSnackbarOpen(true);
-    } finally {
-      setLoadingCV(false);
-      setOpen(false);
     }
+
+    setDownloadMenuOpen(false);
   };
 
   const bookmarkPage = () => {
     if (window.sidebar && window.sidebar.addPanel) {
-      // Firefox <= 22
       window.sidebar.addPanel(document.title, window.location.href, "");
     } else if (window.external && "AddFavorite" in window.external) {
-      // IE
       window.external.AddFavorite(window.location.href, document.title);
     } else {
-      // Personalized alerts based on device
       let bookmarkInstructions =
         "Use your browser's bookmark feature to save this page.";
 
@@ -137,24 +120,7 @@ check out the CV of Peter - Eloy H., a full-stack dev:
     }
   };
 
-  const cvDownloadActions = [
-    {
-      icon: "🇬🇧",
-      name: "Download CV (English)",
-      action: () => handleCVDownload("EN"),
-    },
-    {
-      icon: "🇪🇸",
-      name: "Download CV (Spanish)",
-      action: () => handleCVDownload("ES"),
-    },
-    {
-      icon: "🇩🇪",
-      name: "Download CV (German)",
-      action: () => handleCVDownload("DE"),
-    },
-  ];
-
+  // Main menu actions
   const actions = [
     {
       icon: isDarkMode ? <LightModeIcon /> : <DarkModeIcon />,
@@ -171,13 +137,24 @@ check out the CV of Peter - Eloy H., a full-stack dev:
           },
         ]),
     { icon: <SaveIcon />, name: "Save", action: bookmarkPage },
-    ...cvDownloadActions,
-    { icon: <PictureAsPdfIcon />, name: "Export as PDF" },
+    {
+      icon: loadingCV ? <CircularProgress size={20} /> : <FileDownloadIcon />,
+      name: "Download CV",
+      action: () => setDownloadMenuOpen(true),
+    },
     { icon: <ShareIcon />, name: "Share", action: copyToClipboard },
+  ];
+
+  // Download menu actions
+  const downloadActions = [
+    { icon: "🇬🇧", name: "English CV", action: () => handleCVDownload("EN") },
+    { icon: "🇪🇸", name: "Spanish CV", action: () => handleCVDownload("ES") },
+    { icon: "🇩🇪", name: "German CV", action: () => handleCVDownload("DE") },
   ];
 
   return (
     <>
+      {/* Main SpeedDial */}
       <SpeedDial
         ariaLabel="SpeedDial menu"
         sx={{
@@ -208,32 +185,50 @@ check out the CV of Peter - Eloy H., a full-stack dev:
           },
         }}
         icon={<SpeedDialIcon openIcon={<CloseIcon />} />}
-        onClose={() => setOpen(false)}
+        onClose={() => {
+          setOpen(false);
+          setDownloadMenuOpen(false);
+        }}
         onOpen={() => setOpen(true)}
         open={open}
       >
-        {actions.map((action) => (
-          <SpeedDialAction
-            key={action.name}
-            icon={action.icon}
-            tooltipTitle={action.name}
-            onClick={() => {
-              if (action.action) {
-                action.action();
-              }
-              setOpen(false);
-            }}
-          />
-        ))}
+        {downloadMenuOpen
+          ? downloadActions.map((action) => (
+              <SpeedDialAction
+                key={action.name}
+                icon={action.icon}
+                tooltipTitle={action.name}
+                onClick={action.action}
+                FabProps={{
+                  sx: {
+                    fontSize: "1.2rem",
+                  },
+                }}
+              />
+            ))
+          : actions.map((action) => (
+              <SpeedDialAction
+                key={action.name}
+                icon={action.icon}
+                tooltipTitle={action.name}
+                onClick={() => {
+                  if (action.action) {
+                    action.action();
+                  }
+                  if (action.name !== "Download CV") {
+                    setOpen(false);
+                  }
+                }}
+              />
+            ))}
       </SpeedDial>
 
       <ChatComponent open={chatOpen} onClose={() => setChatOpen(false)} />
-      {/* Snackbar to show feedback */}
       <Snackbar
         open={snackbarOpen}
         autoHideDuration={3000}
         onClose={() => setSnackbarOpen(false)}
-        message="Content copied! Now you can share it easily!"
+        message={snackbarMessage}
       />
     </>
   );
