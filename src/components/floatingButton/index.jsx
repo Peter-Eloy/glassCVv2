@@ -55,16 +55,34 @@ check out the CV of Peter - Eloy H., a full-stack dev:
   Phone: ${phoneParts.join("")}
   Email: ${emailParts.join("")}`;
 
-  const copyToClipboard = () => {
-    navigator.clipboard
-      .writeText(contentToCopy)
-      .then(() => {
+  const handleShare = async () => {
+    if (navigator.share && (isAndroid || isIOS)) {
+      try {
+        await navigator.share({
+          title: "Peter Eloy - Full Stack Developer",
+          text: contentToCopy,
+          url: "https://peter-eloy.dev",
+        });
+        setSnackbarMessage("Thanks for sharing!");
+      } catch (error) {
+        if (error.name !== "AbortError") {
+          console.error("Error sharing:", error);
+          setSnackbarMessage("Couldn't share the content. Please try again.");
+          setSnackbarOpen(true);
+        }
+      }
+    } else {
+      // Fallback to clipboard for desktop
+      try {
+        await navigator.clipboard.writeText(contentToCopy);
         setSnackbarMessage("Content copied! Now you can share it easily!");
         setSnackbarOpen(true);
-      })
-      .catch((err) => {
-        console.error("Failed to copy: ", err);
-      });
+      } catch (err) {
+        console.error("Failed to copy:", err);
+        setSnackbarMessage("Couldn't copy the content. Please try again.");
+        setSnackbarOpen(true);
+      }
+    }
   };
 
   const handleCVDownload = async (language) => {
@@ -142,7 +160,7 @@ check out the CV of Peter - Eloy H., a full-stack dev:
       name: "Download CV",
       action: () => setDownloadMenuOpen(true),
     },
-    { icon: <ShareIcon />, name: "Share", action: copyToClipboard },
+    { icon: <ShareIcon />, name: "Share", action: handleShare },
   ];
 
   // Download menu actions
