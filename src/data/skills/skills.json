@@ -1,0 +1,75 @@
+{
+  "hardSkills": [
+    {
+      "id": "hs1",
+      "name": "JavaScript",
+      "proficiency": 90,
+      "category": "Programming Languages",
+      "keywords": ["js", "es6", "ecmascript"]
+    },
+    {
+      "id": "hs2",
+      "name": "React",
+      "proficiency": 85,
+      "category": "Frontend Frameworks",
+      "keywords": ["reactjs", "jsx", "hooks"]
+    },
+    {
+      "id": "hs3",
+      "name": "Node.js",
+      "proficiency": 80,
+      "category": "Backend Technologies",
+      "keywords": ["nodejs", "express", "server"]
+    },
+    {
+      "id": "hs4",
+      "name": "Python",
+      "proficiency": 75,
+      "category": "Programming Languages",
+      "keywords": ["py", "python3", "scripting"]
+    },
+    {
+      "id": "hs5",
+      "name": "SQL",
+      "proficiency": 85,
+      "category": "Databases",
+      "keywords": ["mysql", "postgresql", "database"]
+    }
+  ],
+  "softSkills": [
+    {
+      "id": "ss1",
+      "name": "Problem Solving",
+      "proficiency": 90,
+      "keywords": [
+        "analytical thinking",
+        "troubleshooting",
+        "solution oriented"
+      ]
+    },
+    {
+      "id": "ss2",
+      "name": "Team Collaboration",
+      "proficiency": 85,
+      "keywords": ["teamwork", "cooperation", "team player"]
+    },
+    {
+      "id": "ss3",
+      "name": "Communication",
+      "proficiency": 88,
+      "keywords": ["verbal", "written", "presentation"]
+    },
+    {
+      "id": "ss4",
+      "name": "Adaptability",
+      "proficiency": 85,
+      "keywords": ["flexibility", "versatility", "change management"]
+    },
+    {
+      "id": "ss5",
+      "name": "Leadership",
+      "proficiency": 80,
+      "keywords": ["team leading", "mentoring", "decision making"]
+    }
+  ]
+}

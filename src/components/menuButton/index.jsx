@@ -134,6 +134,18 @@ const MenuButton = ({ forceOpen = false }) => {
     setIsOpen(false);
   };
 
+  const handleSkillsClick = (e) => {
+    e.stopPropagation();
+    navigate("/skills");
+    setIsOpen(false);
+  };
+
+  const handleUnderConClick = (e) => {
+    e.stopPropagation();
+    navigate("/under_construction");
+    setIsOpen(false);
+  };
+
   const handleHomeClick = (e) => {
     e.stopPropagation();
     navigate("/");
@@ -152,21 +164,25 @@ const MenuButton = ({ forceOpen = false }) => {
           <Option isOpen={isOpen} position="left" onClick={handleAIChatClick}>
             AI Chat
           </Option>
-          <Option isOpen={isOpen} position="left" onClick={handleBlogClick}>
-            Blog
+          <Option isOpen={isOpen} position="left" onClick={handleSkillsClick}>
+            Skill.Scan
           </Option>
-          <Option isOpen={isOpen} position="left">
-            Option 3
+          <Option
+            isOpen={isOpen}
+            position="right"
+            onClick={handleUnderConClick}
+          >
+            Coming
           </Option>
-          <Option isOpen={isOpen} position="right">
-            Option 4
+          <Option isOpen={isOpen} position="right" onClick={handleBlogClick}>
+            Life.Bits
           </Option>
-          <Option isOpen={isOpen} position="right">
+          {/* <Option isOpen={isOpen} position="right">
             Option 5
           </Option>
           <Option isOpen={isOpen} position="right">
             Option 6
-          </Option>
+          </Option> */}
         </MenuOptions>
       </MenuButtonContainer>
       <ChatComponent open={chatOpen} onClose={() => setChatOpen(false)} />
