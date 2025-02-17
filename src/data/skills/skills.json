@@ -5,35 +5,144 @@
       "name": "JavaScript",
       "proficiency": 90,
       "category": "Programming Languages",
-      "keywords": ["js", "es6", "ecmascript"]
+      "keywords": [
+        "js",
+        "es6",
+        "ecmascript",
+        "vanilla js",
+        "async/await",
+        "closures",
+        "event loop",
+        "hoisting",
+        "promises",
+        "fetch API"
+      ]
     },
     {
       "id": "hs2",
-      "name": "React",
+      "name": "React.js",
       "proficiency": 85,
       "category": "Frontend Frameworks",
-      "keywords": ["reactjs", "jsx", "hooks"]
+      "keywords": [
+        "reactjs",
+        "jsx",
+        "hooks",
+        "react-router",
+        "react-query",
+        "context API",
+        "reconciliation",
+        "fiber architecture",
+        "react suspense",
+        "next.js"
+      ]
     },
     {
       "id": "hs3",
       "name": "Node.js",
       "proficiency": 80,
       "category": "Backend Technologies",
-      "keywords": ["nodejs", "express", "server"]
+      "keywords": [
+        "nodejs",
+        "express.js",
+        "server-side rendering",
+        "event-driven architecture",
+        "streams",
+        "middlewares",
+        "clustering",
+        "websockets",
+        "nest.js",
+        "microservices"
+      ]
     },
     {
       "id": "hs4",
-      "name": "Python",
+      "name": "Golang",
       "proficiency": 75,
       "category": "Programming Languages",
-      "keywords": ["py", "python3", "scripting"]
+      "keywords": [
+        "go",
+        "goroutines",
+        "fiber framework",
+        "concurrency",
+        "channels",
+        "gin-gonic",
+        "error handling",
+        "gRPC",
+        "protobuf",
+        "testing in Go"
+      ]
     },
     {
       "id": "hs5",
-      "name": "SQL",
+      "name": "SQL & Databases",
       "proficiency": 85,
       "category": "Databases",
-      "keywords": ["mysql", "postgresql", "database"]
+      "keywords": [
+        "mysql",
+        "postgresql",
+        "sqlite",
+        "database normalization",
+        "indexing",
+        "query optimization",
+        "stored procedures",
+        "transactions",
+        "orm",
+        "gorm"
+      ]
+    },
+    {
+      "id": "hs6",
+      "name": "Version Control & CI/CD",
+      "proficiency": 80,
+      "category": "DevOps & Tools",
+      "keywords": [
+        "git",
+        "github",
+        "gitflow",
+        "branching strategies",
+        "github actions",
+        "gitlab CI",
+        "bitbucket pipelines",
+        "circleci",
+        "docker",
+        "kubernetes"
+      ]
+    },
+    {
+      "id": "hs7",
+      "name": "State Management",
+      "proficiency": 82,
+      "category": "Frontend Development",
+      "keywords": [
+        "react-redux",
+        "redux toolkit",
+        "context API",
+        "mobx",
+        "recoil",
+        "zustand",
+        "react-query",
+        "react-hook-form",
+        "immer",
+        "rxjs"
+      ]
+    },
+    {
+      "id": "hs8",
+      "name": "Testing & Debugging",
+      "proficiency": 78,
+      "category": "Quality Assurance",
+      "keywords": [
+        "jest",
+        "react-testing-library",
+        "cypress",
+        "enzyme",
+        "chai",
+        "mocha",
+        "storybook",
+        "postman",
+        "swagger",
+        "playwright"
+      ]
     }
   ],
   "softSkills": [
@@ -44,32 +153,96 @@
       "keywords": [
         "analytical thinking",
         "troubleshooting",
-        "solution oriented"
+        "root cause analysis",
+        "solution-oriented",
+        "debugging",
+        "critical thinking",
+        "decision making"
       ]
     },
     {
       "id": "ss2",
       "name": "Team Collaboration",
       "proficiency": 85,
-      "keywords": ["teamwork", "cooperation", "team player"]
+      "keywords": [
+        "teamwork",
+        "cooperation",
+        "cross-functional collaboration",
+        "remote work",
+        "agile methodology",
+        "scrum",
+        "pair programming"
+      ]
     },
     {
       "id": "ss3",
       "name": "Communication",
       "proficiency": 88,
-      "keywords": ["verbal", "written", "presentation"]
+      "keywords": [
+        "verbal communication",
+        "written communication",
+        "presentation skills",
+        "documentation",
+        "active listening",
+        "technical writing",
+        "negotiation"
+      ]
     },
     {
       "id": "ss4",
       "name": "Adaptability",
       "proficiency": 85,
-      "keywords": ["flexibility", "versatility", "change management"]
+      "keywords": [
+        "flexibility",
+        "versatility",
+        "change management",
+        "continuous learning",
+        "handling uncertainty",
+        "open-mindedness",
+        "resilience"
+      ]
     },
     {
       "id": "ss5",
       "name": "Leadership",
       "proficiency": 80,
-      "keywords": ["team leading", "mentoring", "decision making"]
+      "keywords": [
+        "team leading",
+        "mentoring",
+        "decision making",
+        "coaching",
+        "conflict resolution",
+        "goal setting",
+        "motivation"
+      ]
+    },
+    {
+      "id": "ss6",
+      "name": "Time Management",
+      "proficiency": 82,
+      "keywords": [
+        "prioritization",
+        "task management",
+        "deadline adherence",
+        "productivity tools",
+        "goal setting",
+        "multitasking",
+        "efficiency optimization"
+      ]
+    },
+    {
+      "id": "ss7",
+      "name": "Creativity & Innovation",
+      "proficiency": 80,
+      "keywords": [
+        "creative problem-solving",
+        "brainstorming",
+        "design thinking",
+        "user experience improvement",
+        "continuous improvement",
+        "innovation strategies",
+        "idea generation"
+      ]
     }
   ]
 }
