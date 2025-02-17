@@ -1,14 +1,9 @@
 import { useState, useEffect } from "react";
-import {
-  Box,
-  TextField,
-  Typography,
-  Chip,
-  LinearProgress,
-} from "@mui/material";
+import { Box, TextField, Typography, Chip } from "@mui/material";
 import { useTheme } from "../../contexts";
 import GlassContainer from "../glassContainer";
 import skillsData from "../../data/skills/skills.json";
+import SearchIcon from "@mui/icons-material/Search";
 
 const SkillsChecklist = () => {
   const { isDarkMode } = useTheme();
@@ -106,7 +101,19 @@ const SkillsChecklist = () => {
         value={searchInput}
         onChange={handleSearchChange}
         onKeyPress={handleAddSearchTerm}
+        InputProps={{
+          startAdornment: (
+            <SearchIcon
+              sx={{
+                color: isDarkMode ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.5)",
+                mr: 1,
+              }}
+            />
+          ),
+        }}
         sx={{
+          width: "35%",
+          margin: "0 auto",
           mb: 3,
           "& .MuiOutlinedInput-root": {
             background: isDarkMode
@@ -137,16 +144,19 @@ const SkillsChecklist = () => {
           position: "relative",
           display: "flex",
           gap: 3,
-          height: "calc(100% - 60px)",
+          minHeight: "calc(100% - 60px)",
+          width: "100%",
         }}
       >
         {/* Search Panel */}
         <Box
           sx={{
+            position: "absolute",
             width: "40%",
             opacity: isSearchActive ? 1 : 0,
             visibility: isSearchActive ? "visible" : "hidden",
             transition: "all 0.3s ease-in-out",
+            left: 0,
           }}
         >
           <GlassContainer>
@@ -181,20 +191,22 @@ const SkillsChecklist = () => {
         {/* Skills Container */}
         <Box
           sx={{
-            position: "relative",
-            width: isSearchActive ? "60%" : "100%",
             display: "flex",
+            width: "100%",
+            marginLeft: isSearchActive ? "40%" : 0,
             transition: "all 0.3s ease-in-out",
+            position: "relative",
           }}
         >
           {/* Hard Skills */}
           <Box
             sx={{
-              position: isSearchActive ? "absolute" : "relative",
               width: "100%",
+              position: isSearchActive ? "absolute" : "relative",
               transform: isSearchActive ? "translateY(0)" : "none",
               transition: "all 0.3s ease-in-out",
               zIndex: 2,
+              flex: isSearchActive ? "none" : "1 1 50%",
             }}
           >
             <GlassContainer>
@@ -210,12 +222,13 @@ const SkillsChecklist = () => {
           {/* Soft Skills */}
           <Box
             sx={{
-              position: isSearchActive ? "absolute" : "relative",
               width: "100%",
+              position: isSearchActive ? "absolute" : "relative",
               transform: isSearchActive ? "translateY(30%)" : "none",
               transition: "all 0.3s ease-in-out",
-              marginLeft: isSearchActive ? 0 : 3,
               zIndex: 1,
+              flex: isSearchActive ? "none" : "1 1 50%",
+              marginLeft: isSearchActive ? 0 : 3,
             }}
           >
             <GlassContainer>
