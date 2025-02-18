@@ -99,9 +99,9 @@ const BlogPage = () => {
   return (
     <Box
       sx={{
-        p: 3,
+        // p: 3,
         // height: "calc(100vh - 64px)",
-        overflow: "hidden", // Prevent scrolling
+        // overflow: "hidden", // Prevent scrolling
         display: "flex",
         flexDirection: "column",
       }}
