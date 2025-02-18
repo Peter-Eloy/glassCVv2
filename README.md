@@ -118,24 +118,22 @@ glassCVv2/
 ## 🛠️ Getting Started
 
 1. **Clone the repo**:
-   ```bash
+   ````bash
    git clone https://github.com/your-username/GlassCVV2.git
-````
+   ````
 
 2. **Install dependencies**:
-
-   ```bash
+   ````bash
    npm install
-   ```
+   ````
 
 3. **Run the project**:
-
-   ```bash
+   ````bash
    npm run dev
-   ```
+   ````
 
 4. **Open in your browser**:  
-   Navigate to `http://localhost:3000/`.
+   Navigate to `http://localhost:5173/`.
 
 ## 🤝 Contributions
 
