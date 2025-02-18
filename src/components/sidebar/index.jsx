@@ -46,7 +46,7 @@ const Sidebar = ({ showContactShine = false, showStackedShine = false }) => {
           width: 240,
           boxSizing: "border-box",
           background: "transparent",
-          top: APPBAR_HEIGHT,
+          top: APPBAR_HEIGHT + 12,
           height: `calc(100% - ${APPBAR_HEIGHT}px - ${FOOTER_HEIGHT}px)`,
           overflow: "hidden",
           borderRight: `0px solid ${borderColor}`,

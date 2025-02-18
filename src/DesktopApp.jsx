@@ -64,7 +64,7 @@ function DesktopApp() {
           overflow: "hidden",
           position: "fixed",
           width: "100%",
-          top: 8,
+          top: 20,
           left: 0,
           opacity: welcomeStage === WELCOME_STAGES.LOADING ? 0 : 1,
           transition: "opacity 0.5s ease-in-out",
@@ -86,8 +86,8 @@ function DesktopApp() {
           <Box
             component="main"
             sx={{
-              flexGrow: 3,
-              overflow: "hidden",
+              // flexGrow: 3,
+              // overflow: "hidden",
               position: "relative",
               p: 3,
               ml: `${SIDEBAR_WIDTH}px`,
