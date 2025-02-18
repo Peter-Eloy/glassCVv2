@@ -4,6 +4,56 @@ import { useTheme } from "../../contexts";
 import GlassContainer from "../glassContainer";
 import skillsData from "../../data/skills/skills.json";
 import SearchIcon from "@mui/icons-material/Search";
+import styled from "@emotion/styled";
+
+const StackableContainer = styled(Box)`
+  transition: all 0.4s ease-in-out;
+  position: ${(props) =>
+    props.isstacked === "true" ? "absolute" : "relative"};
+  width: 100%;
+  transform: ${(props) =>
+    props.isstacked === "true"
+      ? `translate(${props.offset.x}px, ${props.offset.y}px)`
+      : "none"};
+  z-index: ${(props) => props.zindex};
+`;
+
+const SearchField = styled(TextField)`
+  & .MuiOutlinedInput-root {
+    background: ${(props) =>
+      props.isdarkmode === "true"
+        ? "rgba(255, 255, 255, 0.05)"
+        : "rgba(255, 255, 255, 0.5)"};
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    border: 1px solid
+      ${(props) =>
+        props.isdarkmode === "true"
+          ? "rgba(255, 255, 255, 0.1)"
+          : "rgba(0, 0, 0, 0.1)"};
+
+    &:hover,
+    &:focus-within {
+      background: ${(props) =>
+        props.isdarkmode === "true"
+          ? "rgba(255, 255, 255, 0.08)"
+          : "rgba(255, 255, 255, 0.65)"};
+      box-shadow: ${(props) =>
+        props.isdarkmode === "true"
+          ? "0 0 10px rgba(30, 144, 255, 0.15)"
+          : "0 0 15px rgba(30, 144, 255, 0.2)"};
+    }
+
+    & fieldset {
+      border: none;
+    }
+  }
+
+  & .MuiOutlinedInput-input {
+    color: ${(props) => (props.isdarkmode === "true" ? "#fff" : "#213547")};
+    padding: 12px 20px;
+  }
+`;
 
 const SkillsChecklist = () => {
   const { isDarkMode } = useTheme();
@@ -11,6 +61,7 @@ const SkillsChecklist = () => {
   const [searchTerms, setSearchTerms] = useState([]);
   const [matchedSkills, setMatchedSkills] = useState([]);
   const [isSearchActive, setIsSearchActive] = useState(false);
+  const [hardSkillsOnTop, setHardSkillsOnTop] = useState(true);
 
   const checkSkillMatch = (skill, terms) => {
     return terms.some((term) => {
@@ -30,6 +81,8 @@ const SkillsChecklist = () => {
     setSearchInput(value);
     if (!isSearchActive && value) {
       setIsSearchActive(true);
+    } else if (value === "" && searchTerms.length === 0) {
+      setIsSearchActive(false);
     }
   };
 
@@ -38,6 +91,16 @@ const SkillsChecklist = () => {
       setSearchTerms((prev) => [...prev, searchInput.trim()]);
       setSearchInput("");
     }
+  };
+
+  const handleStackClick = () => {
+    if (!isSearchActive) return;
+    setHardSkillsOnTop(!hardSkillsOnTop);
+  };
+
+  const getOffset = (isTop) => {
+    if (!isSearchActive) return { x: 0, y: 0 };
+    return isTop ? { x: 0, y: 0 } : { x: 40, y: 20 }; // Offset for the bottom card
   };
 
   const renderSkillList = (skills) => (
@@ -68,9 +131,11 @@ const SkillsChecklist = () => {
                 height: "100%",
                 width: `${skill.proficiency}%`,
                 bgcolor: matchedSkills.includes(skill)
-                  ? "#4caf50"
+                  ? isDarkMode
+                    ? "rgba(76, 175, 80, 0.8)"
+                    : "#4caf50"
                   : isDarkMode
-                  ? "#90caf9"
+                  ? "rgba(144, 202, 249, 0.8)"
                   : "#1976d2",
                 transition: "width 0.3s ease-in-out",
               }}
@@ -94,13 +159,13 @@ const SkillsChecklist = () => {
 
   return (
     <Box sx={{ height: "100%", padding: 2 }}>
-      {/* Search Bar */}
-      <TextField
+      <SearchField
         fullWidth
         placeholder="Type skill and press Enter to search..."
         value={searchInput}
         onChange={handleSearchChange}
         onKeyPress={handleAddSearchTerm}
+        isdarkmode={isDarkMode.toString()}
         InputProps={{
           startAdornment: (
             <SearchIcon
@@ -115,30 +180,9 @@ const SkillsChecklist = () => {
           width: "35%",
           margin: "0 auto",
           mb: 3,
-          "& .MuiOutlinedInput-root": {
-            background: isDarkMode
-              ? "rgba(255, 255, 255, 0.05)"
-              : "rgba(255, 255, 255, 0.5)",
-            backdropFilter: "blur(10px)",
-            borderRadius: "16px",
-            border: `1px solid ${
-              isDarkMode ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.1)"
-            }`,
-            "& fieldset": { border: "none" },
-            "&:hover": {
-              background: isDarkMode
-                ? "rgba(255, 255, 255, 0.08)"
-                : "rgba(255, 255, 255, 0.65)",
-            },
-          },
-          "& .MuiOutlinedInput-input": {
-            color: isDarkMode ? "#fff" : "#213547",
-            padding: "12px 20px",
-          },
         }}
       />
 
-      {/* Main Container */}
       <Box
         sx={{
           position: "relative",
@@ -169,10 +213,20 @@ const SkillsChecklist = () => {
                   <Chip
                     key={index}
                     label={term}
-                    onDelete={() =>
-                      setSearchTerms((terms) => terms.filter((t) => t !== term))
-                    }
+                    onDelete={() => {
+                      const newTerms = searchTerms.filter((t) => t !== term);
+                      setSearchTerms(newTerms);
+                      if (newTerms.length === 0 && !searchInput) {
+                        setIsSearchActive(false);
+                      }
+                    }}
                     size="small"
+                    sx={{
+                      bgcolor: isDarkMode
+                        ? "rgba(144, 202, 249, 0.2)"
+                        : "rgba(25, 118, 210, 0.1)",
+                      color: isDarkMode ? "#fff" : "#213547",
+                    }}
                   />
                 ))}
               </Box>
@@ -196,18 +250,17 @@ const SkillsChecklist = () => {
             marginLeft: isSearchActive ? "40%" : 0,
             transition: "all 0.3s ease-in-out",
             position: "relative",
+            gap: isSearchActive ? 0 : 3,
+            height: "500px",
           }}
         >
           {/* Hard Skills */}
-          <Box
-            sx={{
-              width: "100%",
-              position: isSearchActive ? "absolute" : "relative",
-              transform: isSearchActive ? "translateY(0)" : "none",
-              transition: "all 0.3s ease-in-out",
-              zIndex: 2,
-              flex: isSearchActive ? "none" : "1 1 50%",
-            }}
+          <StackableContainer
+            onClick={handleStackClick}
+            offset={getOffset(hardSkillsOnTop)}
+            zindex={hardSkillsOnTop ? 2 : 1}
+            isstacked={isSearchActive.toString()}
+            sx={{ flex: isSearchActive ? "none" : 1 }}
           >
             <GlassContainer>
               <Box sx={{ p: 2 }}>
@@ -217,19 +270,15 @@ const SkillsChecklist = () => {
                 {renderSkillList(skillsData.hardSkills)}
               </Box>
             </GlassContainer>
-          </Box>
+          </StackableContainer>
 
           {/* Soft Skills */}
-          <Box
-            sx={{
-              width: "100%",
-              position: isSearchActive ? "absolute" : "relative",
-              transform: isSearchActive ? "translateY(30%)" : "none",
-              transition: "all 0.3s ease-in-out",
-              zIndex: 1,
-              flex: isSearchActive ? "none" : "1 1 50%",
-              marginLeft: isSearchActive ? 0 : 3,
-            }}
+          <StackableContainer
+            onClick={handleStackClick}
+            offset={getOffset(!hardSkillsOnTop)}
+            zindex={hardSkillsOnTop ? 1 : 2}
+            isstacked={isSearchActive.toString()}
+            sx={{ flex: isSearchActive ? "none" : 1 }}
           >
             <GlassContainer>
               <Box sx={{ p: 2 }}>
@@ -239,7 +288,7 @@ const SkillsChecklist = () => {
                 {renderSkillList(skillsData.softSkills)}
               </Box>
             </GlassContainer>
-          </Box>
+          </StackableContainer>
         </Box>
       </Box>
     </Box>

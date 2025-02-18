@@ -3,12 +3,12 @@
     {
       "id": "hs1",
       "name": "JavaScript",
-      "proficiency": 90,
+      "proficiency": 95,
       "category": "Programming Languages",
       "keywords": [
         "js",
         "es6",
-        "ecmascript",
+        "typescript",
         "vanilla js",
         "async/await",
         "closures",
@@ -21,7 +21,7 @@
     {
       "id": "hs2",
       "name": "React.js",
-      "proficiency": 85,
+      "proficiency": 90,
       "category": "Frontend Frameworks",
       "keywords": [
         "reactjs",
@@ -30,16 +30,16 @@
         "react-router",
         "react-query",
         "context API",
-        "reconciliation",
         "fiber architecture",
         "react suspense",
-        "next.js"
+        "next.js",
+        "tailwindcss"
       ]
     },
     {
       "id": "hs3",
       "name": "Node.js",
-      "proficiency": 80,
+      "proficiency": 85,
       "category": "Backend Technologies",
       "keywords": [
         "nodejs",
@@ -48,16 +48,16 @@
         "event-driven architecture",
         "streams",
         "middlewares",
-        "clustering",
         "websockets",
         "nest.js",
-        "microservices"
+        "microservices",
+        "REST APIs"
       ]
     },
     {
       "id": "hs4",
       "name": "Golang",
-      "proficiency": 75,
+      "proficiency": 80,
       "category": "Programming Languages",
       "keywords": [
         "go",
@@ -75,7 +75,7 @@
     {
       "id": "hs5",
       "name": "SQL & Databases",
-      "proficiency": 85,
+      "proficiency": 88,
       "category": "Databases",
       "keywords": [
         "mysql",
@@ -93,7 +93,7 @@
     {
       "id": "hs6",
       "name": "Version Control & CI/CD",
-      "proficiency": 80,
+      "proficiency": 85,
       "category": "DevOps & Tools",
       "keywords": [
         "git",
@@ -103,45 +103,43 @@
         "github actions",
         "gitlab CI",
         "bitbucket pipelines",
-        "circleci",
         "docker",
-        "kubernetes"
+        "kubernetes",
+        "jenkins"
       ]
     },
     {
       "id": "hs7",
       "name": "State Management",
-      "proficiency": 82,
+      "proficiency": 85,
       "category": "Frontend Development",
       "keywords": [
         "react-redux",
         "redux toolkit",
         "context API",
-        "mobx",
         "recoil",
         "zustand",
         "react-query",
         "react-hook-form",
-        "immer",
-        "rxjs"
+        "mobx"
       ]
     },
     {
       "id": "hs8",
       "name": "Testing & Debugging",
-      "proficiency": 78,
+      "proficiency": 83,
       "category": "Quality Assurance",
       "keywords": [
         "jest",
         "react-testing-library",
         "cypress",
-        "enzyme",
-        "chai",
         "mocha",
-        "storybook",
+        "chai",
         "postman",
         "swagger",
-        "playwright"
+        "playwright",
+        "unit testing",
+        "integration testing"
       ]
     }
   ],
@@ -149,7 +147,7 @@
     {
       "id": "ss1",
       "name": "Problem Solving",
-      "proficiency": 90,
+      "proficiency": 92,
       "keywords": [
         "analytical thinking",
         "troubleshooting",
@@ -157,27 +155,28 @@
         "solution-oriented",
         "debugging",
         "critical thinking",
-        "decision making"
+        "decision making",
+        "systematic approach"
       ]
     },
     {
       "id": "ss2",
       "name": "Team Collaboration",
-      "proficiency": 85,
+      "proficiency": 87,
       "keywords": [
         "teamwork",
-        "cooperation",
         "cross-functional collaboration",
         "remote work",
         "agile methodology",
         "scrum",
-        "pair programming"
+        "pair programming",
+        "interpersonal communication"
       ]
     },
     {
       "id": "ss3",
       "name": "Communication",
-      "proficiency": 88,
+      "proficiency": 90,
       "keywords": [
         "verbal communication",
         "written communication",
@@ -185,13 +184,14 @@
         "documentation",
         "active listening",
         "technical writing",
-        "negotiation"
+        "negotiation",
+        "persuasion"
       ]
     },
     {
       "id": "ss4",
       "name": "Adaptability",
-      "proficiency": 85,
+      "proficiency": 88,
       "keywords": [
         "flexibility",
         "versatility",
@@ -205,7 +205,7 @@
     {
       "id": "ss5",
       "name": "Leadership",
-      "proficiency": 80,
+      "proficiency": 83,
       "keywords": [
         "team leading",
         "mentoring",
@@ -213,13 +213,14 @@
         "coaching",
         "conflict resolution",
         "goal setting",
-        "motivation"
+        "motivation",
+        "delegation"
       ]
     },
     {
       "id": "ss6",
       "name": "Time Management",
-      "proficiency": 82,
+      "proficiency": 85,
       "keywords": [
         "prioritization",
         "task management",
@@ -233,7 +234,7 @@
     {
       "id": "ss7",
       "name": "Creativity & Innovation",
-      "proficiency": 80,
+      "proficiency": 85,
       "keywords": [
         "creative problem-solving",
         "brainstorming",
