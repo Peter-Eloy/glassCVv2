@@ -3,73 +3,247 @@
     {
       "id": "hs1",
       "name": "JavaScript",
-      "proficiency": 90,
+      "proficiency": 95,
       "category": "Programming Languages",
-      "keywords": ["js", "es6", "ecmascript"]
+      "keywords": [
+        "js",
+        "es6",
+        "typescript",
+        "vanilla js",
+        "async/await",
+        "closures",
+        "event loop",
+        "hoisting",
+        "promises",
+        "fetch API"
+      ]
     },
     {
       "id": "hs2",
-      "name": "React",
-      "proficiency": 85,
+      "name": "React.js",
+      "proficiency": 90,
       "category": "Frontend Frameworks",
-      "keywords": ["reactjs", "jsx", "hooks"]
+      "keywords": [
+        "reactjs",
+        "jsx",
+        "hooks",
+        "react-router",
+        "react-query",
+        "context API",
+        "fiber architecture",
+        "react suspense",
+        "next.js",
+        "tailwindcss"
+      ]
     },
     {
       "id": "hs3",
       "name": "Node.js",
-      "proficiency": 80,
+      "proficiency": 85,
       "category": "Backend Technologies",
-      "keywords": ["nodejs", "express", "server"]
+      "keywords": [
+        "nodejs",
+        "express.js",
+        "server-side rendering",
+        "event-driven architecture",
+        "streams",
+        "middlewares",
+        "websockets",
+        "nest.js",
+        "microservices",
+        "REST APIs"
+      ]
     },
     {
       "id": "hs4",
-      "name": "Python",
-      "proficiency": 75,
+      "name": "Golang",
+      "proficiency": 80,
       "category": "Programming Languages",
-      "keywords": ["py", "python3", "scripting"]
+      "keywords": [
+        "go",
+        "goroutines",
+        "fiber framework",
+        "concurrency",
+        "channels",
+        "gin-gonic",
+        "error handling",
+        "gRPC",
+        "protobuf",
+        "testing in Go"
+      ]
     },
     {
       "id": "hs5",
-      "name": "SQL",
-      "proficiency": 85,
+      "name": "SQL & Databases",
+      "proficiency": 88,
       "category": "Databases",
-      "keywords": ["mysql", "postgresql", "database"]
+      "keywords": [
+        "mysql",
+        "postgresql",
+        "sqlite",
+        "database normalization",
+        "indexing",
+        "query optimization",
+        "stored procedures",
+        "transactions",
+        "orm",
+        "gorm"
+      ]
+    },
+    {
+      "id": "hs6",
+      "name": "Version Control & CI/CD",
+      "proficiency": 85,
+      "category": "DevOps & Tools",
+      "keywords": [
+        "git",
+        "github",
+        "gitflow",
+        "branching strategies",
+        "github actions",
+        "gitlab CI",
+        "bitbucket pipelines",
+        "docker",
+        "kubernetes",
+        "jenkins"
+      ]
+    },
+    {
+      "id": "hs7",
+      "name": "State Management",
+      "proficiency": 85,
+      "category": "Frontend Development",
+      "keywords": [
+        "react-redux",
+        "redux toolkit",
+        "context API",
+        "recoil",
+        "zustand",
+        "react-query",
+        "react-hook-form",
+        "mobx"
+      ]
+    },
+    {
+      "id": "hs8",
+      "name": "Testing & Debugging",
+      "proficiency": 83,
+      "category": "Quality Assurance",
+      "keywords": [
+        "jest",
+        "react-testing-library",
+        "cypress",
+        "mocha",
+        "chai",
+        "postman",
+        "swagger",
+        "playwright",
+        "unit testing",
+        "integration testing"
+      ]
     }
   ],
   "softSkills": [
     {
       "id": "ss1",
       "name": "Problem Solving",
-      "proficiency": 90,
+      "proficiency": 92,
       "keywords": [
         "analytical thinking",
         "troubleshooting",
-        "solution oriented"
+        "root cause analysis",
+        "solution-oriented",
+        "debugging",
+        "critical thinking",
+        "decision making",
+        "systematic approach"
       ]
     },
     {
       "id": "ss2",
       "name": "Team Collaboration",
-      "proficiency": 85,
-      "keywords": ["teamwork", "cooperation", "team player"]
+      "proficiency": 87,
+      "keywords": [
+        "teamwork",
+        "cross-functional collaboration",
+        "remote work",
+        "agile methodology",
+        "scrum",
+        "pair programming",
+        "interpersonal communication"
+      ]
     },
     {
       "id": "ss3",
       "name": "Communication",
-      "proficiency": 88,
-      "keywords": ["verbal", "written", "presentation"]
+      "proficiency": 90,
+      "keywords": [
+        "verbal communication",
+        "written communication",
+        "presentation skills",
+        "documentation",
+        "active listening",
+        "technical writing",
+        "negotiation",
+        "persuasion"
+      ]
     },
     {
       "id": "ss4",
       "name": "Adaptability",
-      "proficiency": 85,
-      "keywords": ["flexibility", "versatility", "change management"]
+      "proficiency": 88,
+      "keywords": [
+        "flexibility",
+        "versatility",
+        "change management",
+        "continuous learning",
+        "handling uncertainty",
+        "open-mindedness",
+        "resilience"
+      ]
     },
     {
       "id": "ss5",
       "name": "Leadership",
-      "proficiency": 80,
-      "keywords": ["team leading", "mentoring", "decision making"]
+      "proficiency": 83,
+      "keywords": [
+        "team leading",
+        "mentoring",
+        "decision making",
+        "coaching",
+        "conflict resolution",
+        "goal setting",
+        "motivation",
+        "delegation"
+      ]
+    },
+    {
+      "id": "ss6",
+      "name": "Time Management",
+      "proficiency": 85,
+      "keywords": [
+        "prioritization",
+        "task management",
+        "deadline adherence",
+        "productivity tools",
+        "goal setting",
+        "multitasking",
+        "efficiency optimization"
+      ]
+    },
+    {
+      "id": "ss7",
+      "name": "Creativity & Innovation",
+      "proficiency": 85,
+      "keywords": [
+        "creative problem-solving",
+        "brainstorming",
+        "design thinking",
+        "user experience improvement",
+        "continuous improvement",
+        "innovation strategies",
+        "idea generation"
+      ]
     }
   ]
 }

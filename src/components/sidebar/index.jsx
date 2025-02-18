@@ -57,9 +57,9 @@ const Sidebar = ({ showContactShine = false, showStackedShine = false }) => {
         <GlassContainer showShine={showContactShine}>
           <div
             style={{
-              display: "flex",
+              // display: "flex",
               alignItems: "center",
-              gap: "10px",
+              // gap: 5,
               marginBottom: "10px",
             }}
           >
@@ -71,7 +71,8 @@ const Sidebar = ({ showContactShine = false, showStackedShine = false }) => {
                 color: textColor,
                 display: "flex",
                 alignItems: "center",
-                gap: "5px",
+                gap: 10,
+                marginLeft: "20px",
               }}
               target="_blank"
               rel="noopener noreferrer"
@@ -84,22 +85,29 @@ const Sidebar = ({ showContactShine = false, showStackedShine = false }) => {
             style={{
               display: "flex",
               alignItems: "center",
-              gap: "10px",
+              gap: 10,
               marginBottom: "10px",
             }}
           >
             {/* Email Link */}
           </div>
-          <div style={{ display: "flex", gap: "10px" }}>
+          <div
+            style={{
+              display: "flex",
+              gap: 30,
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
             {/* Social Media Links */}
             <a
               href="mailto:petereloy@gmail.com"
               style={{
                 textDecoration: "none",
                 color: textColor,
-                display: "flex",
-                alignItems: "center",
-                gap: "5px",
+                // display: "flex",
+                // alignItems: "center",
+                // gap: "5px",
               }}
             >
               <MailOutlined />
