@@ -6,6 +6,7 @@ import FloatingButton from "../floatingButton";
 import AppMenu from "../menu/index";
 import { useWelcome } from "../../contexts/welcomeContext";
 import { WELCOME_STAGES } from "../../components/welcomeExperience/stages";
+import SiteVisitorCounter from "../siteVisitorCounter";
 
 const RootLayout = () => {
   const { welcomeStage } = useWelcome();
@@ -28,6 +29,7 @@ const RootLayout = () => {
         <Outlet />
       </Box>
       <FloatingButton />
+      <SiteVisitorCounter />
       <Footer />
     </Box>
   );

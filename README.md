@@ -1,5 +1,11 @@
 # GlassCV V2
 
+### Visitor Stats:
+
+[![GitHub Visitors](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://github.com/Peter-Eloy/glassCVv2&count_bg=%231E88E5&title_bg=%23555555&icon=github.svg&icon_color=%23E7E7E7&title=GitHub%20Visitors&edge_flat=false)](https://github.com/Peter-Eloy/glassCVv2)
+[![Website Visitors](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://petereloy.dev/website-only&count_bg=%2379C83D&title_bg=%23555555&icon=netlify.svg&icon_color=%23E7E7E7&title=Website%20Visitors&edge_flat=false)](https://petereloy.dev)
+[![Total Visitors](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://petereloy.dev&count_bg=%23FF9800&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=All%20Visitors&edge_flat=false)](https://petereloy.dev)
+
 Welcome to **GlassCV V2**, a React project showcasing a sleek and interactive CV. This repository combines modern design and clean code structure to create a seamless user experience.
 
 ## 🚀 Project Structure
