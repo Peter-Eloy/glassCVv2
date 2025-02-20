@@ -1,4 +1,3 @@
-// src/components/blogPostDialog/index.jsx
 import { Modal, Fade, Box, Typography, IconButton } from "@mui/material";
 import { CloseOutlined } from "@ant-design/icons";
 import { useTheme } from "../../contexts";
@@ -76,21 +75,34 @@ const BlogPostDialog = ({ open, post, onClose }) => {
             {post.title}
           </Typography>
 
-          <Box
-            component="img"
-            src={post.image}
-            alt={post.title}
-            sx={{
-              width: "100%",
-              height: "auto",
-              borderRadius: "8px",
-              mb: 3,
-            }}
-          />
+          {post.media?.[0] && (
+            <Box
+              component="img"
+              src={post.media[0].url}
+              alt={post.title}
+              sx={{
+                width: "100%",
+                height: "auto",
+                borderRadius: "8px",
+                mb: 3,
+              }}
+            />
+          )}
 
-          <Typography variant="body1" sx={{ whiteSpace: "pre-wrap" }}>
-            {post.content}
-          </Typography>
+          <Typography
+            variant="body1"
+            sx={{
+              whiteSpace: "pre-wrap",
+              "& a": {
+                color: isDarkMode ? "#4dabf5" : "#1976d2",
+                textDecoration: "none",
+                "&:hover": {
+                  textDecoration: "underline",
+                },
+              },
+            }}
+            dangerouslySetInnerHTML={{ __html: post.content }}
+          />
         </ModalContent>
       </Fade>
     </StyledModal>
@@ -101,7 +113,12 @@ BlogPostDialog.propTypes = {
   open: PropTypes.bool.isRequired,
   post: PropTypes.shape({
     title: PropTypes.string,
-    image: PropTypes.string,
+    media: PropTypes.arrayOf(
+      PropTypes.shape({
+        url: PropTypes.string,
+        type: PropTypes.string,
+      })
+    ),
     content: PropTypes.string,
   }),
   onClose: PropTypes.func.isRequired,

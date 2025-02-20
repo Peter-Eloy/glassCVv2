@@ -21,7 +21,7 @@ const RootLayout = () => {
         component="main"
         sx={{
           flexGrow: 1,
-          marginTop: "110px", // Height of the AppBar
+          marginTop: "70px", // Height of the AppBar
           marginBottom: "64px", // Height of the Footer
           overflow: "hidden", // Changed from 'auto' to 'hidden'
         }}
