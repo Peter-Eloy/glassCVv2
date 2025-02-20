@@ -15,7 +15,7 @@ const RootLayout = () => {
   const isHome = location.pathname === "/";
 
   return (
-    <Box sx={{ display: "flex", minHeight: "100vh" }}>
+    <Box>
       <AppMenu forceMenuOpen={isHome && welcomeStage === WELCOME_STAGES.MENU} />
       <Box
         component="main"
