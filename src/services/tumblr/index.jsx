@@ -2,41 +2,101 @@
 import axios from "axios";
 import { TUMBLR_CONFIG } from "./config";
 
+// ============= HELPER FUNCTIONS =============
+
+/**
+ * Creates an axios instance for Tumblr API
+ */
 const tumblrApi = axios.create({
   baseURL: TUMBLR_CONFIG.API_BASE,
   timeout: 10000,
 });
 
+/**
+ * Extracts a clean title from a post
+ * @param {Object} post - The Tumblr post object
+ * @returns {string} - The title
+ */
 const getPostTitle = (post) => {
   // If the post already has a title, use it
   if (post.title) {
     return post.title;
   }
 
-  // If there's no title, extract first sentence/line as title
-  const bodyText = getExcerpt(post.body || post.text || "", 100);
+  // Check for H1 tags in the content
+  const h1Match = (post.body || post.text || "").match(/<h1[^>]*>(.*?)<\/h1>/i);
+  if (h1Match && h1Match[1]) {
+    // Remove any HTML tags inside the H1
+    return h1Match[1].replace(/<[^>]+>/g, "").trim();
+  }
 
-  // Try to get the first sentence (ending with period, question mark, or exclamation)
+  // If no H1, extract first sentence with more generous length
+  const bodyText = getExcerpt(post.body || post.text || "", 200);
+
+  // Try to get the first sentence
   const sentenceMatch = bodyText.match(/^[^.!?]*[.!?]/);
   if (sentenceMatch && sentenceMatch[0].length > 10) {
     return sentenceMatch[0].trim();
   }
 
-  // If no clear sentence break, use first 50 chars
-  return bodyText.substring(0, 50) + (bodyText.length > 50 ? "..." : "");
+  // If no clear sentence break, use first 100 chars
+  return bodyText.substring(0, 100) + (bodyText.length > 100 ? "..." : "");
 };
 
+/**
+ * Extracts a plain text excerpt from HTML content
+ * @param {string} text - The HTML text
+ * @param {number} maxLength - Maximum length of excerpt
+ * @returns {string} - The clean excerpt
+ */
 const getExcerpt = (text = "", maxLength = 150) => {
-  const cleanText = text
+  // First remove any H1 tags and their content
+  const withoutH1 = text?.replace(/<h1[^>]*>.*?<\/h1>/gi, "");
+
+  // Then proceed with normal cleaning
+  const cleanText = withoutH1
     ?.replace(/<[^>]+>/g, "")
     ?.replace(/\n/g, " ")
     ?.trim();
+
   if (!cleanText) return "";
   return cleanText.length > maxLength
     ? `${cleanText.substring(0, maxLength)}...`
     : cleanText;
 };
 
+/**
+ * Creates a clean excerpt that doesn't repeat the title
+ * @param {Object} post - The Tumblr post object
+ * @param {string} title - The post title
+ * @returns {string} - Clean excerpt without title
+ */
+const createCleanExcerpt = (post, title, maxLength = 150) => {
+  let excerpt = getExcerpt(post.body || post.text || "", maxLength);
+
+  // Remove title from the beginning of excerpt
+  if (title) {
+    if (excerpt.startsWith(title)) {
+      excerpt = excerpt.substring(title.length).trim();
+      // Clean up punctuation at the beginning
+      excerpt = excerpt.replace(/^[^\w]+/, "").trim();
+    }
+
+    // Also check for title followed by space
+    const titleWithSpace = title + " ";
+    if (excerpt.startsWith(titleWithSpace)) {
+      excerpt = excerpt.substring(titleWithSpace.length).trim();
+    }
+  }
+
+  return excerpt || "Read more...";
+};
+
+/**
+ * Extracts media (images) from a post
+ * @param {Object} post - The Tumblr post object
+ * @returns {Array} - Array of media objects
+ */
 const extractMedia = (post) => {
   const media = [];
   if (post.type === "photo" && post.photos) {
@@ -52,8 +112,33 @@ const extractMedia = (post) => {
   return media;
 };
 
+/**
+ * Formats a raw Tumblr post into a consistent structure
+ * @param {Object} post - Raw Tumblr post
+ * @returns {Object} - Formatted post
+ */
+const formatPost = (post) => {
+  const title = getPostTitle(post);
+  return {
+    id: post.id,
+    title,
+    excerpt: getExcerpt(post.body || post.text || ""),
+    cleanExcerpt: createCleanExcerpt(post, title),
+    content: post.body || post.text || "",
+    tags: post.tags || [],
+    noteCount: post.note_count || 0,
+    url: post.post_url,
+    media: extractMedia(post),
+    timestamp: post.timestamp,
+  };
+};
+
+// Cache for storing fetched pages
 const pageCache = new Map();
 
+/**
+ * Prefetches the next page of results
+ */
 const prefetchPage = async (page = 1, limit = 6, tag = null) => {
   const cacheKey = `${page}-${limit}-${tag}`;
   if (pageCache.has(cacheKey)) return;
@@ -75,16 +160,7 @@ const prefetchPage = async (page = 1, limit = 6, tag = null) => {
 
     if (response.data?.response?.posts) {
       const result = {
-        posts: response.data.response.posts.map((post) => ({
-          id: post.id,
-          title: post.title || getExcerpt(post.body || post.text || "", 50),
-          excerpt: getExcerpt(post.body || post.text || ""),
-          content: post.body || post.text || "",
-          tags: post.tags || [],
-          noteCount: post.note_count || 0,
-          url: post.post_url,
-          media: extractMedia(post),
-        })),
+        posts: response.data.response.posts.map(formatPost),
         total: response.data.response.total_posts,
         hasNextPage: offset + limit < response.data.response.total_posts,
       };
@@ -95,7 +171,12 @@ const prefetchPage = async (page = 1, limit = 6, tag = null) => {
   }
 };
 
+// ============= EXPORTED FUNCTIONS =============
+
 export const tumblrService = {
+  /**
+   * Fetches posts from Tumblr with pagination and optional tag filtering
+   */
   getPosts: async (page = 1, limit = 6, tag = null) => {
     try {
       const offset = (page - 1) * limit;
@@ -125,12 +206,10 @@ export const tumblrService = {
 
         // Combine and deduplicate posts by ID
         let allPosts = [];
-        let totalPosts = 0;
 
         responses.forEach((response) => {
           if (response.data?.response?.posts) {
             allPosts = [...allPosts, ...response.data.response.posts];
-            totalPosts += response.data.response.total_posts;
           }
         });
 
@@ -147,35 +226,8 @@ export const tumblrService = {
         // Paginate the results
         const paginatedPosts = uniquePosts.slice(offset, offset + limit);
 
-        const createCleanExcerpt = (post, maxLength = 150) => {
-          let excerpt = getExcerpt(post.body || post.text || "", maxLength);
-          if (post.title) {
-            if (excerpt.startsWith(post.title)) {
-              excerpt = excerpt.substring(post.title.length).trim();
-              excerpt = excerpt.replace(/^[^\w]+/, "").trim();
-            }
-
-            const titleWithSpace = post.title + " ";
-            if (excerpt.startsWith(titleWithSpace)) {
-              excerpt = excerpt.substring(titleWithSpace.length).trim();
-            }
-          }
-
-          return excerpt || "Read more...";
-        };
-
         const result = {
-          posts: paginatedPosts.map((post) => ({
-            id: post.id,
-            title: post.title,
-            excerpt: getExcerpt(post.body || post.text || ""),
-            cleanExcerpt: createCleanExcerpt(post),
-            content: post.body || post.text || "",
-            tags: post.tags || [],
-            noteCount: post.note_count || 0,
-            url: post.post_url,
-            media: extractMedia(post),
-          })),
+          posts: paginatedPosts.map(formatPost),
           total: uniquePosts.length,
           hasNextPage: offset + limit < uniquePosts.length,
         };
@@ -183,6 +235,7 @@ export const tumblrService = {
         pageCache.set(cacheKey, result);
         return result;
       } else {
+        // Fetch posts with a single tag
         const response = await tumblrApi.get(
           `/blog/${TUMBLR_CONFIG.BLOG_URL}/posts`,
           {
@@ -201,16 +254,7 @@ export const tumblrService = {
         }
 
         const result = {
-          posts: response.data.response.posts.map((post) => ({
-            id: post.id,
-            title: post.title || getExcerpt(post.body || post.text || "", 50),
-            excerpt: getExcerpt(post.body || post.text || ""),
-            content: post.body || post.text || "",
-            tags: post.tags || [],
-            noteCount: post.note_count || 0,
-            url: post.post_url,
-            media: extractMedia(post),
-          })),
+          posts: response.data.response.posts.map(formatPost),
           total: response.data.response.total_posts,
           hasNextPage: offset + limit < response.data.response.total_posts,
         };
@@ -229,6 +273,9 @@ export const tumblrService = {
     }
   },
 
+  /**
+   * Fetches a single post by ID
+   */
   getFullPost: async (postId) => {
     try {
       const response = await tumblrApi.get(
@@ -247,21 +294,16 @@ export const tumblrService = {
       }
 
       const post = response.data.response.posts[0];
-      return {
-        id: post.id,
-        title: post.title || getExcerpt(post.body || post.text || "", 50),
-        content: post.body || post.text || "",
-        tags: post.tags || [],
-        noteCount: post.note_count || 0,
-        url: post.post_url,
-        media: extractMedia(post),
-      };
+      return formatPost(post);
     } catch (error) {
       console.error("Error fetching full post:", error);
       throw error;
     }
   },
 
+  /**
+   * Clears the cache
+   */
   clearCache: () => pageCache.clear(),
 };
 
