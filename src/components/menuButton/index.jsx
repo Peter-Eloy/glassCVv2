@@ -172,7 +172,7 @@ const MenuButton = ({ forceOpen = false }) => {
             position="right"
             onClick={handleUnderConClick}
           >
-            Coming
+            Src.Now
           </Option>
           <Option isOpen={isOpen} position="right" onClick={handleBlogClick}>
             Life.Bits

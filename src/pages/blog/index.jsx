@@ -156,7 +156,7 @@ const BlogPage = () => {
                             WebkitBoxOrient: "vertical",
                           }}
                         >
-                          {post.excerpt}
+                          {post.cleanExcerpt || post.excerpt}
                         </Typography>
                       </Box>
                     </BlogCard>
@@ -174,7 +174,19 @@ const BlogPage = () => {
         )}
       </Box>
 
-      <Box sx={{ display: "flex", justifyContent: "center", py: 2 }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          py: 2,
+          position: "fixed",
+          bottom: "70px",
+          left: 0,
+          right: 0,
+          zIndex: 10,
+          backdropFilter: "blur(8px)",
+        }}
+      >
         {!loading && totalPosts > POSTS_PER_PAGE && (
           <Pagination
             count={Math.ceil(totalPosts / POSTS_PER_PAGE)}

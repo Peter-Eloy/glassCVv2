@@ -7,6 +7,25 @@ const tumblrApi = axios.create({
   timeout: 10000,
 });
 
+const getPostTitle = (post) => {
+  // If the post already has a title, use it
+  if (post.title) {
+    return post.title;
+  }
+
+  // If there's no title, extract first sentence/line as title
+  const bodyText = getExcerpt(post.body || post.text || "", 100);
+
+  // Try to get the first sentence (ending with period, question mark, or exclamation)
+  const sentenceMatch = bodyText.match(/^[^.!?]*[.!?]/);
+  if (sentenceMatch && sentenceMatch[0].length > 10) {
+    return sentenceMatch[0].trim();
+  }
+
+  // If no clear sentence break, use first 50 chars
+  return bodyText.substring(0, 50) + (bodyText.length > 50 ? "..." : "");
+};
+
 const getExcerpt = (text = "", maxLength = 150) => {
   const cleanText = text
     ?.replace(/<[^>]+>/g, "")
@@ -128,11 +147,29 @@ export const tumblrService = {
         // Paginate the results
         const paginatedPosts = uniquePosts.slice(offset, offset + limit);
 
+        const createCleanExcerpt = (post, maxLength = 150) => {
+          let excerpt = getExcerpt(post.body || post.text || "", maxLength);
+          if (post.title) {
+            if (excerpt.startsWith(post.title)) {
+              excerpt = excerpt.substring(post.title.length).trim();
+              excerpt = excerpt.replace(/^[^\w]+/, "").trim();
+            }
+
+            const titleWithSpace = post.title + " ";
+            if (excerpt.startsWith(titleWithSpace)) {
+              excerpt = excerpt.substring(titleWithSpace.length).trim();
+            }
+          }
+
+          return excerpt || "Read more...";
+        };
+
         const result = {
           posts: paginatedPosts.map((post) => ({
             id: post.id,
-            title: post.title || getExcerpt(post.body || post.text || "", 50),
+            title: post.title,
             excerpt: getExcerpt(post.body || post.text || ""),
+            cleanExcerpt: createCleanExcerpt(post),
             content: post.body || post.text || "",
             tags: post.tags || [],
             noteCount: post.note_count || 0,
@@ -146,7 +183,6 @@ export const tumblrService = {
         pageCache.set(cacheKey, result);
         return result;
       } else {
-        // Original code for single tag
         const response = await tumblrApi.get(
           `/blog/${TUMBLR_CONFIG.BLOG_URL}/posts`,
           {

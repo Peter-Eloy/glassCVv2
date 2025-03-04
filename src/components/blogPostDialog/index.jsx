@@ -62,16 +62,22 @@ const BlogPostDialog = ({ open, post, onClose }) => {
           <IconButton
             onClick={onClose}
             sx={{
-              position: "absolute",
-              right: 16,
-              top: 16,
+              position: "sticky",
+              top: 0,
+              right: 0,
+              float: "right",
               color: isDarkMode ? "#fff" : "#213547",
             }}
           >
             <CloseOutlined />
           </IconButton>
 
-          <Typography variant="h4" component="h2" gutterBottom>
+          <Typography
+            variant="h4"
+            component="h2"
+            gutterBottom
+            sx={{ clear: "both", pt: 2 }}
+          >
             {post.title}
           </Typography>
 
