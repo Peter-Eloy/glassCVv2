@@ -83,6 +83,8 @@ const BlogPostDialog = ({ open, post, onClose }) => {
               sx={{
                 width: "100%",
                 height: "auto",
+                maxHeight: "500px", // Limit height to prevent excessive vertical space
+                objectFit: "contain", // Maintain aspect ratio without cropping
                 borderRadius: "8px",
                 mb: 3,
               }}
@@ -99,6 +101,10 @@ const BlogPostDialog = ({ open, post, onClose }) => {
                 "&:hover": {
                   textDecoration: "underline",
                 },
+              },
+              "& img": {
+                maxWidth: "100%", // Prevent images from causing horizontal scroll
+                height: "auto",
               },
             }}
             dangerouslySetInnerHTML={{ __html: post.content }}

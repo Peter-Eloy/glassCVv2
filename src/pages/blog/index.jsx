@@ -8,6 +8,7 @@ import { NavigationArrow } from "../../styles/navigationArrows";
 import styled from "@emotion/styled";
 
 const POSTS_PER_PAGE = 6;
+const CATEGORY_TAGS = ["tech", "coding", "finance", "lifestyle"];
 const FILTERS = [
   { id: "all", label: "All Posts" },
   { id: "tech", label: "Tech Bits" },
@@ -52,6 +53,10 @@ const BlogCard = styled(GlassContainer)`
   }
 `;
 
+const ClickableBox = styled(Box)`
+  cursor: pointer;
+`;
+
 const BlogPage = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -64,10 +69,13 @@ const BlogPage = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       setLoading(true);
+
+      const tagParam = activeFilter === "all" ? CATEGORY_TAGS : activeFilter;
+
       const response = await tumblrService.getPosts(
         page,
         POSTS_PER_PAGE,
-        activeFilter !== "all" ? activeFilter : null
+        tagParam
       );
       setPosts(response.posts);
       setTotalPosts(response.total);
@@ -100,7 +108,7 @@ const BlogPage = () => {
           <NavigationArrow
             className="prev"
             onClick={() => setPage(page - 1)}
-            style={{ left: 0 }}
+            style={{ left: 280 }}
           />
         )}
 
@@ -120,7 +128,7 @@ const BlogPage = () => {
               ))
             : posts.map((post) => (
                 <Grid item xs={12} sm={6} md={4} key={post.id}>
-                  <Box onClick={() => setSelectedPost(post)}>
+                  <ClickableBox onClick={() => setSelectedPost(post)}>
                     <BlogCard>
                       <Box sx={{ p: 3, height: "180px" }}>
                         <Typography
@@ -152,7 +160,7 @@ const BlogPage = () => {
                         </Typography>
                       </Box>
                     </BlogCard>
-                  </Box>
+                  </ClickableBox>
                 </Grid>
               ))}
         </Grid>
@@ -161,7 +169,7 @@ const BlogPage = () => {
           <NavigationArrow
             className="next"
             onClick={() => setPage(page + 1)}
-            style={{ right: 0 }}
+            style={{ right: 280 }}
           />
         )}
       </Box>

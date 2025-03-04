@@ -6,10 +6,10 @@ export const NavigationArrow = styled.button`
   border: none;
   cursor: pointer;
   padding: 12px;
-  position: absolute;
+  position: fixed;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 10;
+  z-index: 100;
 
   &:before {
     content: "";
@@ -26,12 +26,10 @@ export const NavigationArrow = styled.button`
 
   &.prev:before {
     transform: rotate(45deg);
-    left: 275px;
   }
 
   &.next:before {
     transform: rotate(225deg);
-    right: 275px;
   }
 
   &:hover:before {

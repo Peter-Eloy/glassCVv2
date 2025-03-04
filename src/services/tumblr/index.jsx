@@ -80,51 +80,113 @@ export const tumblrService = {
   getPosts: async (page = 1, limit = 6, tag = null) => {
     try {
       const offset = (page - 1) * limit;
-      const cacheKey = `${page}-${limit}-${tag}`;
+      const cacheKey = `${page}-${limit}-${
+        Array.isArray(tag) ? tag.join(",") : tag
+      }`;
 
       if (pageCache.has(cacheKey)) {
         return pageCache.get(cacheKey);
       }
 
-      const response = await tumblrApi.get(
-        `/blog/${TUMBLR_CONFIG.BLOG_URL}/posts`,
-        {
-          params: {
-            api_key: TUMBLR_CONFIG.API_KEY,
-            limit,
-            offset,
-            tag: tag || undefined,
-            filter: "raw",
-          },
+      // If tag is an array (for "all" filter), we need to handle multiple requests
+      if (Array.isArray(tag)) {
+        // Fetch posts for each tag
+        const allTagPromises = tag.map((singleTag) =>
+          tumblrApi.get(`/blog/${TUMBLR_CONFIG.BLOG_URL}/posts`, {
+            params: {
+              api_key: TUMBLR_CONFIG.API_KEY,
+              limit: 50, // Fetch more to ensure we have enough after filtering
+              tag: singleTag,
+              filter: "raw",
+            },
+          })
+        );
+
+        const responses = await Promise.all(allTagPromises);
+
+        // Combine and deduplicate posts by ID
+        let allPosts = [];
+        let totalPosts = 0;
+
+        responses.forEach((response) => {
+          if (response.data?.response?.posts) {
+            allPosts = [...allPosts, ...response.data.response.posts];
+            totalPosts += response.data.response.total_posts;
+          }
+        });
+
+        // Remove duplicates (same post might have multiple tags)
+        const uniquePosts = Array.from(
+          new Map(allPosts.map((post) => [post.id, post])).values()
+        );
+
+        // Sort by date (newest first)
+        uniquePosts.sort(
+          (a, b) => new Date(b.timestamp * 1000) - new Date(a.timestamp * 1000)
+        );
+
+        // Paginate the results
+        const paginatedPosts = uniquePosts.slice(offset, offset + limit);
+
+        const result = {
+          posts: paginatedPosts.map((post) => ({
+            id: post.id,
+            title: post.title || getExcerpt(post.body || post.text || "", 50),
+            excerpt: getExcerpt(post.body || post.text || ""),
+            content: post.body || post.text || "",
+            tags: post.tags || [],
+            noteCount: post.note_count || 0,
+            url: post.post_url,
+            media: extractMedia(post),
+          })),
+          total: uniquePosts.length,
+          hasNextPage: offset + limit < uniquePosts.length,
+        };
+
+        pageCache.set(cacheKey, result);
+        return result;
+      } else {
+        // Original code for single tag
+        const response = await tumblrApi.get(
+          `/blog/${TUMBLR_CONFIG.BLOG_URL}/posts`,
+          {
+            params: {
+              api_key: TUMBLR_CONFIG.API_KEY,
+              limit,
+              offset,
+              tag: tag || undefined,
+              filter: "raw",
+            },
+          }
+        );
+
+        if (!response.data?.response?.posts) {
+          return { posts: [], total: 0, hasNextPage: false };
         }
-      );
 
-      if (!response.data?.response?.posts) {
-        return { posts: [], total: 0, hasNextPage: false };
+        const result = {
+          posts: response.data.response.posts.map((post) => ({
+            id: post.id,
+            title: post.title || getExcerpt(post.body || post.text || "", 50),
+            excerpt: getExcerpt(post.body || post.text || ""),
+            content: post.body || post.text || "",
+            tags: post.tags || [],
+            noteCount: post.note_count || 0,
+            url: post.post_url,
+            media: extractMedia(post),
+          })),
+          total: response.data.response.total_posts,
+          hasNextPage: offset + limit < response.data.response.total_posts,
+        };
+
+        pageCache.set(cacheKey, result);
+
+        if (result.hasNextPage) {
+          prefetchPage(page + 1, limit, tag);
+        }
+
+        return result;
       }
-
-      const result = {
-        posts: response.data.response.posts.map((post) => ({
-          id: post.id,
-          title: post.title || getExcerpt(post.body || post.text || "", 50),
-          excerpt: getExcerpt(post.body || post.text || ""),
-          content: post.body || post.text || "",
-          tags: post.tags || [],
-          noteCount: post.note_count || 0,
-          url: post.post_url,
-          media: extractMedia(post),
-        })),
-        total: response.data.response.total_posts,
-        hasNextPage: offset + limit < response.data.response.total_posts,
-      };
-
-      pageCache.set(cacheKey, result);
-
-      if (result.hasNextPage) {
-        prefetchPage(page + 1, limit, tag);
-      }
-
-      return result;
     } catch (error) {
       console.error("Tumblr API Error:", error);
       return { posts: [], total: 0, hasNextPage: false };
