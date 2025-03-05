@@ -72,15 +72,6 @@ const BlogPostDialog = ({ open, post, onClose }) => {
             <CloseOutlined />
           </IconButton>
 
-          <Typography
-            variant="h4"
-            component="h2"
-            gutterBottom
-            sx={{ clear: "both", pt: 2 }}
-          >
-            {post.title}
-          </Typography>
-
           {post.media?.[0] && (
             <Box
               component="img"
