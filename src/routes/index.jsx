@@ -5,7 +5,7 @@ import MobileLayout from "../components/layout/MobileLayout";
 import DesktopApp from "../DesktopApp";
 import BlogPage from "../pages/blog";
 import SkillsPage from "../pages/skills";
-import UnderConstruction from "../components/UnderConstruction";
+import Portfolio from "../components/portfolio";
 import { WelcomeProvider } from "../contexts/welcomeContext";
 import FaviconChanger from "../utils/FaviconChanger";
 import ConsoleMessage from "../components/consoleMessage";
@@ -39,8 +39,8 @@ export const router = createBrowserRouter([
             element: <SkillsPage />,
           },
           {
-            path: "under_construction",
-            element: <UnderConstruction />,
+            path: "portfolio",
+            element: <Portfolio />,
           },
         ],
   },

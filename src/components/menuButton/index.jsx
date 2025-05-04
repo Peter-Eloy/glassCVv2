@@ -140,9 +140,9 @@ const MenuButton = ({ forceOpen = false }) => {
     setIsOpen(false);
   };
 
-  const handleUnderConClick = (e) => {
+  const handleSrcNow = (e) => {
     e.stopPropagation();
-    navigate("/under_construction");
+    navigate("/portfolio");
     setIsOpen(false);
   };
 
@@ -167,11 +167,7 @@ const MenuButton = ({ forceOpen = false }) => {
           <Option isOpen={isOpen} position="left" onClick={handleSkillsClick}>
             Skill.Scan
           </Option>
-          <Option
-            isOpen={isOpen}
-            position="right"
-            onClick={handleUnderConClick}
-          >
+          <Option isOpen={isOpen} position="right" onClick={handleSrcNow}>
             Src.Now
           </Option>
           <Option isOpen={isOpen} position="right" onClick={handleBlogClick}>
