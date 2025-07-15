@@ -94,7 +94,13 @@ const RevealText = styled.div`
   }
 `;
 
-const GlassContainer = ({ children, showShine = false }) => {
+const GlassContainer = ({
+  children,
+  showShine = false,
+  onClick,
+  sx,
+  ...otherProps
+}) => {
   const { isDarkMode } = useTheme();
   const themeStyles = isDarkMode ? glassStyles.dark : glassStyles.light;
   const textColor = isDarkMode ? "#fff" : "#213547";
@@ -102,6 +108,7 @@ const GlassContainer = ({ children, showShine = false }) => {
   return (
     <ShineContainer
       className={showShine ? "shine" : ""}
+      onClick={onClick}
       sx={{
         position: "relative",
         margin: "20px 20px",
@@ -110,7 +117,9 @@ const GlassContainer = ({ children, showShine = false }) => {
         ...themeStyles,
         "&:hover": glassStyles.hover,
         overflow: "hidden",
+        ...sx, // Allow custom styles to override
       }}
+      {...otherProps}
     >
       <Box
         sx={{
@@ -134,6 +143,8 @@ const GlassContainer = ({ children, showShine = false }) => {
 GlassContainer.propTypes = {
   children: PropTypes.node.isRequired,
   showShine: PropTypes.bool,
+  onClick: PropTypes.func,
+  sx: PropTypes.object,
 };
 
 export default GlassContainer;

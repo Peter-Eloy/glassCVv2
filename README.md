@@ -2,14 +2,19 @@
 
 ### Visitor Stats:
 
-[![GitHub Visitors](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://github.com/Peter-Eloy/glassCVv2&count_bg=%231E88E5&title_bg=%23555555&icon=github.svg&icon_color=%23E7E7E7&title=GitHub%20Visitors&edge_flat=false)](https://github.com/Peter-Eloy/glassCVv2)  -  [![Website Visitors](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://petereloy.dev/website-only&count_bg=%2379C83D&title_bg=%23555555&icon=netlify.svg&icon_color=%23E7E7E7&title=Website%20Visitors&edge_flat=false)](https://petereloy.dev)  -  [![Total Visitors](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://petereloy.dev&count_bg=%23FF9800&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=All%20Visitors&edge_flat=false)](https://petereloy.dev)
-
-
-
-
-
+[![GitHub Visitors](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://github.com/Peter-Eloy/glassCVv2&count_bg=%231E88E5&title_bg=%23555555&icon=github.svg&icon_color=%23E7E7E7&title=GitHub%20Visitors&edge_flat=false)](https://github.com/Peter-Eloy/glassCVv2) - [![Website Visitors](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://petereloy.dev/website-only&count_bg=%2379C83D&title_bg=%23555555&icon=netlify.svg&icon_color=%23E7E7E7&title=Website%20Visitors&edge_flat=false)](https://petereloy.dev) - [![Total Visitors](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://petereloy.dev&count_bg=%23FF9800&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=All%20Visitors&edge_flat=false)](https://petereloy.dev)
 
 Welcome to **GlassCV V2**, a React project showcasing a sleek and interactive CV. This repository combines modern design and clean code structure to create a seamless user experience.
+
+## ✨ Features
+
+- **🖼️ Interactive Portfolio**: Dynamic showcase of TradingView indicators, VS Code themes, and WordPress plugins
+- **📱 Responsive Design**: Works seamlessly on desktop and mobile devices
+- **🎨 Glass Morphism UI**: Modern translucent design with beautiful visual effects
+- **🌙 Dark/Light Mode**: Toggle between dark and light themes
+- **📝 Blog Integration**: Connected to Tumblr for "Life Bits" blog posts
+- **🤖 AI Chat**: Integrated chatbot for interactive assistance
+- **📊 Visitor Counter**: Track site engagement and analytics
 
 ## 📁 Project Structure
 
@@ -48,7 +53,7 @@ glassCVv2/
 │   │
 │   ├── 📁 data/                 # Static data files
 │   │   ├── 📁 aptitudes/        # Skills and abilities data
-│   │   ├── 📁 carrerData/       # Career information
+│   │   ├── 📁 careerData/       # Career information
 │   │   ├── 📁 education/        # Education history
 │   │   ├── 📁 education2/       # Additional education details
 │   │   ├── 📁 languages/        # Language proficiency
@@ -102,7 +107,6 @@ glassCVv2/
 └── vite.config.js               # Vite configuration
 ```
 
-
 ## 💻 Technologies Used
 
 - **React**: For building the UI.
@@ -118,19 +122,22 @@ glassCVv2/
 ## 🛠️ Getting Started
 
 1. **Clone the repo**:
-   ````bash
+
+   ```bash
    git clone https://github.com/your-username/GlassCVV2.git
-   ````
+   ```
 
 2. **Install dependencies**:
-   ````bash
+
+   ```bash
    npm install
-   ````
+   ```
 
 3. **Run the project**:
-   ````bash
+
+   ```bash
    npm run dev
-   ````
+   ```
 
 4. **Open in your browser**:  
    Navigate to `http://localhost:5173/`.

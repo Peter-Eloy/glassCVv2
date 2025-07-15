@@ -2,9 +2,9 @@
 import "./App.css";
 import Sidebar from "./components/sidebar";
 import { Box } from "@mui/material";
-import GlassContainer from "./components/glassContainer";
+import GlassContainer from "./components/GlassContainer";
 import StackedGlassContainers from "./components/stackedGlassContainers";
-import careerData from "./data/carrerData/carrerData";
+import careerData from "./data/careerData/careerData";
 import proSnapshot from "./data/proSnapshot/proSnapshot";
 import LoadingStage from "./components/welcomeExperience/LoadingStage";
 import WelcomeGuide from "./components/welcomeExperience/WelcomeGuide";
