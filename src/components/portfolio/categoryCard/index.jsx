@@ -14,9 +14,9 @@ const CategoryCard = ({ title, description, image, onClick, isExpanded }) => {
         cursor: "pointer",
         transition: "all 0.3s ease",
         transform: isExpanded ? "scale(0.98)" : "scale(1)",
-        height: isExpanded ? "100px" : "300px",
+        height: "120px",
         overflow: "hidden",
-        mb: 3,
+        mb: 2,
       }}
     >
       <Box
@@ -33,26 +33,29 @@ const CategoryCard = ({ title, description, image, onClick, isExpanded }) => {
         }}
       >
         <Typography
-          variant={isExpanded ? "h6" : "h4"}
+          variant="h5"
           sx={{
-            // color: "#fff",
+            color: isDarkMode ? "#fff" : "#000",
             mb: 1,
             textShadow: "0 2px 4px rgba(0,0,0,0.3)",
+            fontWeight: 600,
           }}
         >
           {title}
         </Typography>
-        {!isExpanded && (
-          <Typography
-            variant="body1"
-            sx={{
-              //   color: "#fff",
-              textShadow: "0 1px 2px rgba(0,0,0,0.5)",
-            }}
-          >
-            {description}
-          </Typography>
-        )}
+        <Typography
+          variant="body2"
+          sx={{
+            color: isDarkMode ? "rgba(255, 255, 255, 0.8)" : "rgba(0, 0, 0, 0.8)",
+            textShadow: "0 1px 2px rgba(0,0,0,0.5)",
+            display: "-webkit-box",
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: "vertical",
+            overflow: "hidden",
+          }}
+        >
+          {description}
+        </Typography>
       </Box>
     </GlassContainer>
   );

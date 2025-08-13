@@ -25,3 +25,6 @@ dist-ssr
 
 #enviroment files
 .env*
+
+#claude
+CLAUDE.md

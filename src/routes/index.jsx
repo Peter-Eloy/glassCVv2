@@ -6,6 +6,7 @@ import DesktopApp from "../DesktopApp";
 import BlogPage from "../pages/blog";
 import SkillsPage from "../pages/skills";
 import Portfolio from "../components/portfolio";
+import PortfolioSubcategoryView from "../components/portfolio/subcategoryView";
 import { WelcomeProvider } from "../contexts/welcomeContext";
 import FaviconChanger from "../utils/FaviconChanger";
 import ConsoleMessage from "../components/consoleMessage";
@@ -41,6 +42,10 @@ export const router = createBrowserRouter([
           {
             path: "portfolio",
             element: <Portfolio />,
+          },
+          {
+            path: "portfolio/:categoryId",
+            element: <PortfolioSubcategoryView />,
           },
         ],
   },

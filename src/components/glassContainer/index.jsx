@@ -94,7 +94,7 @@ const RevealText = styled.div`
   }
 `;
 
-const GlassContainer = ({ children, showShine = false }) => {
+const GlassContainer = ({ children, showShine = false, sx, ...props }) => {
   const { isDarkMode } = useTheme();
   const themeStyles = isDarkMode ? glassStyles.dark : glassStyles.light;
   const textColor = isDarkMode ? "#fff" : "#213547";
@@ -110,7 +110,9 @@ const GlassContainer = ({ children, showShine = false }) => {
         ...themeStyles,
         "&:hover": glassStyles.hover,
         overflow: "hidden",
+        ...sx,
       }}
+      {...props}
     >
       <Box
         sx={{
@@ -134,6 +136,7 @@ const GlassContainer = ({ children, showShine = false }) => {
 GlassContainer.propTypes = {
   children: PropTypes.node.isRequired,
   showShine: PropTypes.bool,
+  sx: PropTypes.object,
 };
 
 export default GlassContainer;
