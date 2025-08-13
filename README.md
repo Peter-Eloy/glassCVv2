@@ -34,13 +34,20 @@ glassCVv2/
 │   │   ├── 📁 floatingButton/   # Floating action button
 │   │   ├── 📁 footer/           # Page footer
 │   │   ├── 📁 glassContainer/   # Glass-morphism container component
-│   │   ├── 📁 layout/           # Layout components
+│   │   ├── 📁 layout/           # Layout components (RootLayout, MobileLayout)
 │   │   ├── 📁 menu/             # Navigation menu
 │   │   ├── 📁 menuButton/       # Menu toggle button
 │   │   ├── 📁 mobileLandingPage/# Mobile-specific landing page
+│   │   ├── 📁 portfolio/        # Portfolio section
+│   │   │   ├── 📁 categoryCard/ # Portfolio category cards
+│   │   │   ├── 📁 subcategoryView/ # Portfolio subcategory view with routing
+│   │   │   └── index.jsx        # Main portfolio component
 │   │   ├── 📁 sidebar/          # Sidebar navigation
+│   │   ├── 📁 siteVisitorCounter/ # Site visitor statistics
+│   │   ├── 📁 skillsChecklist/  # Skills display component
 │   │   ├── 📁 stackedGlassContainers/ # Stacked glass effect containers
-│   │   └── 📁 welcomeExperience/# Onboarding experience components
+│   │   ├── 📁 underConstruction/ # Under construction placeholder
+│   │   └── 📁 welcomeExperience/ # Onboarding experience (LoadingStage, WelcomeGuide)
 │   │
 │   ├── 📁 contexts/             # React context providers
 │   │   ├── index.jsx            # Theme context
@@ -52,17 +59,15 @@ glassCVv2/
 │   │   ├── 📁 education/        # Education history
 │   │   ├── 📁 education2/       # Additional education details
 │   │   ├── 📁 languages/        # Language proficiency
-│   │   └── 📁 proSnapshot/      # Professional summary
+│   │   ├── 📁 proSnapshot/      # Professional summary
+│   │   └── 📁 skills/           # Skills data (JSON format)
 │   │
 │   ├── 📁 pages/                # Page components
-│   │   ├── 📁 blog/             # Blog page
-│   │   ├── 📁 jobsDashboard/    # Jobs dashboard
+│   │   ├── 📁 blog/             # Blog page with Tumblr integration
 │   │   ├── 📁 main/             # Main landing page
 │   │   └── 📁 skills/           # Skills showcase page
 │   │
 │   ├── 📁 routes/               # Application routing
-│   │   ├── 📁 blog/             # Blog-specific routes
-│   │   ├── 📁 portfolio/        # Portfolio routes
 │   │   └── index.jsx            # Main routing configuration
 │   │
 │   ├── 📁 services/             # API services
@@ -71,12 +76,14 @@ glassCVv2/
 │   │   │   └── config.js        # API configuration
 │   │   ├── 📁 github/           # GitHub API integration
 │   │   │   └── cv.jsx           # CV fetching from GitHub
-│   │   └── 📁 tumblr/           # Tumblr API integration
-│   │       ├── config.js        # Tumblr configuration
-│   │       └── index.jsx        # Tumblr service methods
+│   │   ├── 📁 tumblr/           # Tumblr API integration
+│   │   │   ├── config.js        # Tumblr configuration
+│   │   │   └── index.jsx        # Tumblr service methods
+│   │   └── index.jsx            # Service exports
 │   │
 │   ├── 📁 styles/               # Global styles
-│   │   └── glassEffects.jsx     # Glass-morphism styling
+│   │   ├── glassEffects.jsx     # Glass-morphism styling
+│   │   └── navigationArrows.jsx # Navigation arrow components
 │   │
 │   ├── 📁 utils/                # Utility functions
 │   │   └── FaviconChanger.jsx   # Dynamic favicon manipulation
@@ -105,15 +112,20 @@ glassCVv2/
 
 ## 💻 Technologies Used
 
-- **React**: For building the UI.
-- **CSS**: For styling and layout.
-- **JSX**: To combine JavaScript and HTML for dynamic components.
+- **React 18**: Modern React framework
+- **Material-UI**: Component library
+- **React Router**: Client-side routing
+- **Vite**: Build tool and dev server
+- **Axios**: HTTP client
 
 ## 🎨 Features
 
-- **Glassmorphic Design**: Smooth and modern glass-style UI.
-- **Modular Architecture**: Easy-to-understand components for quick edits and updates.
-- **Customizable Data**: Swap out JSON files in `/data` to update CV information effortlessly.
+- **Glassmorphic Design**: Modern glass-style UI
+- **Responsive Layout**: Mobile and desktop optimized
+- **Portfolio System**: Categorized project showcase
+- **Blog Integration**: Dynamic content from Tumblr
+- **Theme Switching**: Light and dark modes
+- **Welcome Experience**: First-time visitor guide
 
 ## 🛠️ Getting Started
 
