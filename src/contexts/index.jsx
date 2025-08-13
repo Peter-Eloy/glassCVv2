@@ -17,6 +17,11 @@ const ThemeContext = createContext();
  */
 export const ThemeProvider = ({ children }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(() => {
+    // Load menu state from localStorage
+    const savedMenuState = localStorage.getItem('menu-open-state');
+    return savedMenuState ? JSON.parse(savedMenuState) : false;
+  });
 
   // Detect system theme preference
   useEffect(() => {
@@ -41,13 +46,32 @@ export const ThemeProvider = ({ children }) => {
     };
   }, []);
 
+  // Save menu state to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem('menu-open-state', JSON.stringify(isMenuOpen));
+  }, [isMenuOpen]);
+
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode);
     document.body.className = !isDarkMode ? "dark-mode" : "light-mode";
   };
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const setMenuOpen = (open) => {
+    setIsMenuOpen(open);
+  };
+
   return (
-    <ThemeContext.Provider value={{ isDarkMode, toggleTheme }}>
+    <ThemeContext.Provider value={{ 
+      isDarkMode, 
+      toggleTheme, 
+      isMenuOpen, 
+      toggleMenu, 
+      setMenuOpen 
+    }}>
       {children}
     </ThemeContext.Provider>
   );

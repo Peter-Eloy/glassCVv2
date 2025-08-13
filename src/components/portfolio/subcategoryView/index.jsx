@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Typography, IconButton } from "@mui/material";
 import { ArrowBack } from "@mui/icons-material";
 import { useNavigate, useParams } from "react-router-dom";
 import GlassContainer from "../../glassContainer";
+import ProjectDetailModal from "../projectDetailModal";
 import { useTheme } from "../../../contexts";
 
 const categories = [
@@ -15,16 +16,70 @@ const categories = [
         id: "ai-news-bot",
         title: "AI News Trading Bot Analyst",
         description: "Automated trading analysis using AI-powered news sentiment and market data processing for informed trading decisions.",
+        category: "Trading Bot",
+        fullDescription: `An advanced AI-powered trading bot that analyzes news sentiment and market data to provide real-time trading insights.
+
+The bot leverages natural language processing to interpret financial news, social media sentiment, and market indicators to generate actionable trading signals.
+
+Features real-time data processing, risk assessment algorithms, and customizable alert systems for different trading strategies.`,
+        image: "/peview-image.jpg",
+        technologies: ["Python", "TensorFlow", "NLTK", "Pandas", "WebSocket API", "REST API", "PostgreSQL"],
+        features: [
+          "Real-time news sentiment analysis",
+          "Multi-source data aggregation",
+          "Custom risk management algorithms", 
+          "Automated alert system",
+          "Backtesting capabilities",
+          "Portfolio performance tracking"
+        ],
+        liveUrl: "https://example.com/ai-bot-demo",
+        githubUrl: "https://github.com/peter-eloy/ai-trading-bot"
       },
       {
         id: "indicators-tools",
         title: "Indicators & Trading Tools",
         description: "Custom technical analysis indicators and comprehensive trading tools designed for market analysis and strategy development.",
+        category: "Trading Tools",
+        fullDescription: `A comprehensive suite of custom technical indicators and trading tools built for serious traders and analysts.
+
+Includes advanced charting capabilities, custom indicator development framework, and automated pattern recognition systems.
+
+Designed for both beginners and professional traders with customizable interfaces and extensive backtesting capabilities.`,
+        image: "/peview-image.jpg",
+        technologies: ["JavaScript", "React", "D3.js", "Python", "FastAPI", "Redis", "WebSocket"],
+        features: [
+          "50+ custom technical indicators",
+          "Real-time chart analysis",
+          "Pattern recognition algorithms",
+          "Multi-timeframe analysis",
+          "Custom indicator builder",
+          "Strategy backtesting engine"
+        ],
+        liveUrl: "https://example.com/trading-tools",
+        githubUrl: "https://github.com/peter-eloy/trading-indicators"
       },
       {
         id: "eas",
         title: "EAs (Expert Advisors)",
         description: "Automated trading systems and expert advisors for MetaTrader platforms with advanced risk management features.",
+        category: "Expert Advisor",
+        fullDescription: `Professional-grade Expert Advisors (EAs) for MetaTrader 4 and 5 platforms with sophisticated trading algorithms.
+
+Built with advanced risk management systems, these EAs can execute trades automatically based on predefined strategies and market conditions.
+
+Features include dynamic lot sizing, multi-currency support, and comprehensive reporting systems for performance tracking.`,
+        image: "/peview-image.jpg",
+        technologies: ["MQL4", "MQL5", "C++", "Python", "MySQL", "API Integration"],
+        features: [
+          "Multi-strategy trading algorithms",
+          "Advanced risk management",
+          "Dynamic position sizing",
+          "Real-time market monitoring",
+          "Performance analytics dashboard",
+          "Cross-platform compatibility"
+        ],
+        liveUrl: "https://example.com/expert-advisors",
+        githubUrl: "https://github.com/peter-eloy/mt4-expert-advisors"
       },
     ],
   },
@@ -68,6 +123,8 @@ const PortfolioSubcategoryView = () => {
   const navigate = useNavigate();
   const { categoryId } = useParams();
   const { isDarkMode } = useTheme();
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const category = categories.find(cat => cat.id === categoryId);
 
@@ -85,9 +142,14 @@ const PortfolioSubcategoryView = () => {
     navigate("/portfolio");
   };
 
-  const handleSubcategoryClick = (subcategoryId) => {
-    console.log(`Clicked subcategory: ${subcategoryId}`);
-    // Add specific functionality for each subcategory
+  const handleSubcategoryClick = (subcategory) => {
+    setSelectedProject(subcategory);
+    setModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setModalOpen(false);
+    setSelectedProject(null);
   };
 
   return (
@@ -149,7 +211,7 @@ const PortfolioSubcategoryView = () => {
         {category.subcategories?.map((subcategory, index) => (
           <GlassContainer
             key={subcategory.id}
-            onClick={() => handleSubcategoryClick(subcategory.id)}
+            onClick={() => handleSubcategoryClick(subcategory)}
             sx={{
               cursor: "pointer",
               transition: "all 0.3s ease",
@@ -207,6 +269,12 @@ const PortfolioSubcategoryView = () => {
           </GlassContainer>
         ))}
       </Box>
+
+      <ProjectDetailModal
+        open={modalOpen}
+        onClose={handleModalClose}
+        project={selectedProject}
+      />
     </Box>
   );
 };

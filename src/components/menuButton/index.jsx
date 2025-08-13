@@ -5,6 +5,7 @@ import ChatComponent from "../chatComponent";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { useWelcome } from "../../contexts/welcomeContext";
+import { useTheme } from "../../contexts";
 import { WELCOME_STAGES } from "../../components/welcomeExperience/stages";
 
 const MenuButtonContainer = styled.div`
@@ -102,54 +103,54 @@ const Option = styled.button`
 `;
 
 const MenuButton = ({ forceOpen = false }) => {
-  const [isOpen, setIsOpen] = useState(false);
   const [chatOpen, setChatOpen] = useState(false);
   const navigate = useNavigate();
   const { welcomeStage } = useWelcome();
+  const { isMenuOpen, toggleMenu, setMenuOpen } = useTheme();
 
   // Force the menu open during MENU stage
   useEffect(() => {
     if (welcomeStage === WELCOME_STAGES.MENU || forceOpen) {
-      setIsOpen(true);
+      setMenuOpen(true);
     }
-  }, [welcomeStage, forceOpen]);
+  }, [welcomeStage, forceOpen, setMenuOpen]);
 
   // Prevent closing during MENU stage
   const handleToggle = () => {
     if (welcomeStage === WELCOME_STAGES.MENU) {
       return; // Don't allow closing during MENU stage
     }
-    setIsOpen(!isOpen);
+    toggleMenu();
   };
 
   const handleAIChatClick = (e) => {
     e.stopPropagation(); // Prevent menu from closing when clicking the AI Chat button
     setChatOpen(true);
-    setIsOpen(false); // Close the menu when opening chat
+    // Don't close menu - let it persist
   };
 
   const handleBlogClick = (e) => {
     e.stopPropagation();
     navigate("/blog");
-    setIsOpen(false);
+    // Don't close menu - let it persist
   };
 
   const handleSkillsClick = (e) => {
     e.stopPropagation();
     navigate("/skills");
-    setIsOpen(false);
+    // Don't close menu - let it persist
   };
 
   const handleSrcNow = (e) => {
     e.stopPropagation();
     navigate("/portfolio");
-    setIsOpen(false);
+    // Don't close menu - let it persist
   };
 
   const handleHomeClick = (e) => {
     e.stopPropagation();
     navigate("/");
-    setIsOpen(false);
+    // Don't close menu - let it persist
   };
 
   return (
@@ -159,24 +160,24 @@ const MenuButton = ({ forceOpen = false }) => {
         data-testid="menu-button"
         data-stage={welcomeStage}
       >
-        <Triangle isOpen={isOpen} />
-        <MenuOptions isOpen={isOpen}>
-          <Option isOpen={isOpen} position="left" onClick={handleAIChatClick}>
+        <Triangle isOpen={isMenuOpen} />
+        <MenuOptions isOpen={isMenuOpen}>
+          <Option isOpen={isMenuOpen} position="left" onClick={handleAIChatClick}>
             AI Chat
           </Option>
-          <Option isOpen={isOpen} position="left" onClick={handleSkillsClick}>
+          <Option isOpen={isMenuOpen} position="left" onClick={handleSkillsClick}>
             Skill.Scan
           </Option>
-          <Option isOpen={isOpen} position="right" onClick={handleSrcNow}>
+          <Option isOpen={isMenuOpen} position="right" onClick={handleSrcNow}>
             Src.Now
           </Option>
-          <Option isOpen={isOpen} position="right" onClick={handleBlogClick}>
+          <Option isOpen={isMenuOpen} position="right" onClick={handleBlogClick}>
             Life.Bits
           </Option>
-          {/* <Option isOpen={isOpen} position="right">
+          {/* <Option isOpen={isMenuOpen} position="right">
             Option 5
           </Option>
-          <Option isOpen={isOpen} position="right">
+          <Option isOpen={isMenuOpen} position="right">
             Option 6
           </Option> */}
         </MenuOptions>

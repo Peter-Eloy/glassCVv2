@@ -1,5 +1,5 @@
 import { Modal, Fade, Box, Typography, IconButton } from "@mui/material";
-import { CloseOutlined } from "@ant-design/icons";
+import { Close as CloseIcon } from "@mui/icons-material";
 import { useTheme } from "../../contexts";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
@@ -12,9 +12,9 @@ const StyledModal = styled(Modal)`
 
 const ModalContent = styled(Box)`
   position: relative;
-  width: 90%;
-  max-width: 800px;
-  max-height: 90vh;
+  width: 95%;
+  max-width: 1000px;
+  max-height: 70vh;
   overflow-y: auto;
   border-radius: 16px;
   background: ${(props) =>
@@ -24,6 +24,7 @@ const ModalContent = styled(Box)`
     ${(props) =>
       props.isDarkMode ? "rgba(255, 255, 255, 0.12)" : "rgba(0, 0, 0, 0.12)"};
   padding: 32px;
+  padding-top: 20px;
   color: ${(props) => (props.isDarkMode ? "#fff" : "#213547")};
 
   &::-webkit-scrollbar {
@@ -48,64 +49,75 @@ const BlogPostDialog = ({ open, post, onClose }) => {
       open={open}
       onClose={onClose}
       closeAfterTransition
-      slotProps={{
-        backdrop: {
-          sx: {
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
-            backdropFilter: "blur(4px)",
-          },
+      BackdropProps={{
+        sx: {
+          backdropFilter: "blur(5px)",
+          backgroundColor: "rgba(0, 0, 0, 0.5)",
         },
       }}
     >
       <Fade in={open}>
         <ModalContent isDarkMode={isDarkMode}>
+          {/* Close Button - Top Right Corner */}
           <IconButton
             onClick={onClose}
             sx={{
               position: "sticky",
-              top: 0,
-              right: 0,
+              top: 16,
+              left: "calc(100% - 40px)",
+              zIndex: 10,
               float: "right",
-              color: isDarkMode ? "#fff" : "#213547",
+              color: isDarkMode ? "#fff" : "#000",
+              backgroundColor: isDarkMode
+                ? "rgba(0, 0, 0, 0.5)"
+                : "rgba(255, 255, 255, 0.5)",
+              "&:hover": {
+                backgroundColor: isDarkMode
+                  ? "rgba(0, 0, 0, 0.7)"
+                  : "rgba(255, 255, 255, 0.7)",
+              },
             }}
           >
-            <CloseOutlined />
+            <CloseIcon />
           </IconButton>
 
-          {post.media?.[0] && (
-            <Box
-              component="img"
-              src={post.media[0].url}
-              alt={post.title}
-              sx={{
-                width: "100%",
-                height: "auto",
-                maxHeight: "500px", // Limit height to prevent excessive vertical space
-                objectFit: "contain", // Maintain aspect ratio without cropping
-                borderRadius: "8px",
-                mb: 3,
-              }}
-            />
-          )}
+          {/* Content with spacing for close button */}
+          <Box sx={{ mt: 1 }}>
+            {post.media?.[0] && (
+              <Box
+                component="img"
+                src={post.media[0].url}
+                alt={post.title}
+                sx={{
+                  width: "100%",
+                  height: "auto",
+                  maxHeight: "500px", // Limit height to prevent excessive vertical space
+                  objectFit: "contain", // Maintain aspect ratio without cropping
+                  borderRadius: "8px",
+                  mb: 3,
+                }}
+              />
+            )}
 
-          <Typography
-            variant="body1"
-            sx={{
-              whiteSpace: "pre-wrap",
-              "& a": {
-                color: isDarkMode ? "#4dabf5" : "#1976d2",
-                textDecoration: "none",
-                "&:hover": {
-                  textDecoration: "underline",
+            <Typography
+              variant="body1"
+              sx={{
+                whiteSpace: "pre-wrap",
+                "& a": {
+                  color: isDarkMode ? "#4dabf5" : "#1976d2",
+                  textDecoration: "none",
+                  "&:hover": {
+                    textDecoration: "underline",
+                  },
                 },
-              },
-              "& img": {
-                maxWidth: "100%", // Prevent images from causing horizontal scroll
-                height: "auto",
-              },
-            }}
-            dangerouslySetInnerHTML={{ __html: post.content }}
-          />
+                "& img": {
+                  maxWidth: "100%", // Prevent images from causing horizontal scroll
+                  height: "auto",
+                },
+              }}
+              dangerouslySetInnerHTML={{ __html: post.content }}
+            />
+          </Box>
         </ModalContent>
       </Fade>
     </StyledModal>
