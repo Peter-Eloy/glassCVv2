@@ -259,12 +259,18 @@ const ChatComponent = ({ open, onClose }) => {
                 "& .MuiOutlinedInput-root": {
                   backgroundColor: isDarkMode
                     ? "rgba(255, 255, 255, 0.05)"
-                    : "rgba(255, 255, 255, 0.5)",
+                    : "rgba(255, 255, 255, 0.8)",
                   borderRadius: "12px",
                   color: colors.text.primary,
-                  "& fieldset": { borderColor: "transparent" },
-                  "&:hover fieldset": { borderColor: "transparent" },
-                  "&.Mui-focused fieldset": { borderColor: "transparent" },
+                  "& fieldset": { 
+                    borderColor: isDarkMode ? "transparent" : "rgba(0, 0, 0, 0.23)" 
+                  },
+                  "&:hover fieldset": { 
+                    borderColor: isDarkMode ? "transparent" : "rgba(0, 0, 0, 0.4)" 
+                  },
+                  "&.Mui-focused fieldset": { 
+                    borderColor: isDarkMode ? "transparent" : "rgba(25, 118, 210, 0.8)" 
+                  },
                 },
               }}
             />
