@@ -22,11 +22,11 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
 
       - name: Install dependencies
         run: |
-          npm install cheerio axios
+          npm install cheerio
 
       - name: Create data directory
         run: |
@@ -34,7 +34,7 @@ jobs:
 
       - name: Run TradingView scraper
         run: |
-          node scripts/fetch-tradingview.cjs
+          node scripts/fetch-tradingview-native.cjs
 
       - name: Commit and push changes
         run: |
