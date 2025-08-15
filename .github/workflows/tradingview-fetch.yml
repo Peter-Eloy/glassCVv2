@@ -1,0 +1,51 @@
+name: Fetch TradingView Ideas
+
+on:
+  schedule:
+    # Run twice a week: Tuesdays and Fridays at 9:00 AM UTC
+    - cron: '0 9 * * 2,5'
+  workflow_dispatch: # Allow manual triggering
+
+permissions:
+  contents: write
+
+jobs:
+  fetch-tradingview-data:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: |
+          npm install cheerio axios
+
+      - name: Create data directory
+        run: |
+          mkdir -p public/data
+
+      - name: Run TradingView scraper
+        run: |
+          node scripts/fetch-tradingview.cjs
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add public/data/tradingview-ideas.json
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "🤖 Update TradingView ideas data"
+            git push
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

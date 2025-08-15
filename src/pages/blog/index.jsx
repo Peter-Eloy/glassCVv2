@@ -3,6 +3,7 @@ import { Box, Grid, Typography, Skeleton, Pagination } from "@mui/material";
 import { useTheme } from "../../contexts";
 import GlassContainer from "../../components/glassContainer";
 import BlogPostDialog from "../../components/blogPostDialog";
+import TradingViewIdeas from "../../components/tradingViewIdeas";
 import { tumblrService } from "../../services/tumblr";
 import { NavigationArrow } from "../../styles/navigationArrows";
 import styled from "@emotion/styled";
@@ -112,58 +113,62 @@ const BlogPage = () => {
           />
         )}
 
-        <Grid container spacing={3}>
-          {loading
-            ? Array.from(new Array(POSTS_PER_PAGE)).map((_, index) => (
-                <Grid item xs={12} sm={6} md={4} key={`skeleton-${index}`}>
-                  <BlogCard>
-                    <Box sx={{ p: 3, height: "180px" }}>
-                      <Skeleton variant="text" height={32} width="80%" />
-                      <Skeleton variant="text" height={20} />
-                      <Skeleton variant="text" height={20} />
-                      <Skeleton variant="text" height={20} width="60%" />
-                    </Box>
-                  </BlogCard>
-                </Grid>
-              ))
-            : posts.map((post) => (
-                <Grid item xs={12} sm={6} md={4} key={post.id}>
-                  <ClickableBox onClick={() => setSelectedPost(post)}>
+        {activeFilter === "finance" ? (
+          <TradingViewIdeas postsPerPage={POSTS_PER_PAGE} />
+        ) : (
+          <Grid container spacing={3}>
+            {loading
+              ? Array.from(new Array(POSTS_PER_PAGE)).map((_, index) => (
+                  <Grid item xs={12} sm={6} md={4} key={`skeleton-${index}`}>
                     <BlogCard>
                       <Box sx={{ p: 3, height: "180px" }}>
-                        <Typography
-                          variant="h6"
-                          sx={{
-                            mb: 1,
-                            fontSize: "1.1rem",
-                            fontWeight: 600,
-                            height: "52px",
-                            overflow: "hidden",
-                            display: "-webkit-box",
-                            WebkitLineClamp: 2,
-                            WebkitBoxOrient: "vertical",
-                          }}
-                        >
-                          {post.title}
-                        </Typography>
-                        <Typography
-                          variant="body2"
-                          sx={{
-                            mb: "auto",
-                            overflow: "hidden",
-                            display: "-webkit-box",
-                            WebkitLineClamp: 4,
-                            WebkitBoxOrient: "vertical",
-                          }}
-                        >
-                          {post.cleanExcerpt || post.excerpt}
-                        </Typography>
+                        <Skeleton variant="text" height={32} width="80%" />
+                        <Skeleton variant="text" height={20} />
+                        <Skeleton variant="text" height={20} />
+                        <Skeleton variant="text" height={20} width="60%" />
                       </Box>
                     </BlogCard>
-                  </ClickableBox>
-                </Grid>
-              ))}
-        </Grid>
+                  </Grid>
+                ))
+              : posts.map((post) => (
+                  <Grid item xs={12} sm={6} md={4} key={post.id}>
+                    <ClickableBox onClick={() => setSelectedPost(post)}>
+                      <BlogCard>
+                        <Box sx={{ p: 3, height: "180px" }}>
+                          <Typography
+                            variant="h6"
+                            sx={{
+                              mb: 1,
+                              fontSize: "1.1rem",
+                              fontWeight: 600,
+                              height: "52px",
+                              overflow: "hidden",
+                              display: "-webkit-box",
+                              WebkitLineClamp: 2,
+                              WebkitBoxOrient: "vertical",
+                            }}
+                          >
+                            {post.title}
+                          </Typography>
+                          <Typography
+                            variant="body2"
+                            sx={{
+                              mb: "auto",
+                              overflow: "hidden",
+                              display: "-webkit-box",
+                              WebkitLineClamp: 4,
+                              WebkitBoxOrient: "vertical",
+                            }}
+                          >
+                            {post.cleanExcerpt || post.excerpt}
+                          </Typography>
+                        </Box>
+                      </BlogCard>
+                    </ClickableBox>
+                  </Grid>
+                ))}
+          </Grid>
+        )}
 
         {!loading && page * POSTS_PER_PAGE < totalPosts && (
           <NavigationArrow
