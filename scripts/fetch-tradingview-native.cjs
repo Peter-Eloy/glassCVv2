@@ -2,7 +2,7 @@ const cheerio = require('cheerio');
 const fs = require('fs');
 const path = require('path');
 
-const TRADINGVIEW_PROFILE_URL = 'https://www.tradingview.com/u/mr_uponly/';
+const TRADINGVIEW_PROFILE_URL = 'https://www.tradingview.com/u/mr_uponly/#published-charts';
 const OUTPUT_FILE = path.join(__dirname, '..', 'public', 'data', 'tradingview-ideas.json');
 
 // Headers to mimic a real browser
@@ -91,55 +91,59 @@ async function scrapeTradingViewIdeas() {
     const $ = cheerio.load(html);
     const ideas = [];
 
-    // Try multiple selectors to find ideas
-    const selectors = [
-      'a[href*="/chart/"]',
-      '.tv-widget-idea__title-row a',
-      '.tv-feed-layout__content a[href*="/chart/"]',
-      '[data-name="ideas"] a[href*="/chart/"]'
-    ];
-
+    // Look specifically for published ideas - more precise selectors
     let foundIdeas = [];
-    
-    for (const selector of selectors) {
-      const elements = $(selector);
-      if (elements.length > 0) {
-        console.log(`Found ${elements.length} potential ideas with selector: ${selector}`);
-        elements.each((i, element) => {
-          const href = $(element).attr('href');
-          const text = $(element).text().trim();
-          
-          if (href && href.includes('/chart/') && text) {
-            foundIdeas.push({
-              url: href.startsWith('http') ? href : `https://www.tradingview.com${href}`,
-              title: text,
-              element: element
-            });
-          }
-        });
-        
-        if (foundIdeas.length > 0) break;
-      }
-    }
 
-    if (foundIdeas.length === 0) {
-      console.log('No ideas found with standard selectors, trying broader search...');
+    // First, try to find the published charts section specifically
+    console.log('Looking for published charts section...');
+    
+    // Look for chart links that are actual published ideas
+    $('a').each((i, element) => {
+      const href = $(element).attr('href');
+      const text = $(element).text().trim();
       
-      // Broader search for any chart links
-      $('a').each((i, element) => {
-        const href = $(element).attr('href');
-        if (href && href.includes('/chart/') && href.includes('mr_uponly')) {
-          const text = $(element).text().trim();
-          if (text && text.length > 3) {
-            foundIdeas.push({
-              url: href.startsWith('http') ? href : `https://www.tradingview.com${href}`,
-              title: text,
-              element: element
-            });
+      if (href && href.includes('/chart/')) {
+        // Look for chart patterns that look like published ideas
+        if (href.includes('mr_uponly') || (href.match(/\/chart\/[A-Z]+\/[a-zA-Z0-9]+-/) && text.length > 3)) {
+          // Skip obvious navigation and UI elements
+          const isNavigationElement = text.toLowerCase() === 'ideas' || 
+                                     text.toLowerCase() === 'charts' ||
+                                     text.toLowerCase() === 'scripts' ||
+                                     text.toLowerCase() === 'published' ||
+                                     text.toLowerCase() === 'products' ||
+                                     text === '' ||
+                                     text.length < 2 ||
+                                     text.length > 100;
+          
+          // Only include if it looks like a real idea title
+          if (!isNavigationElement) {
+            // Check if URL has a proper idea ID pattern
+            const hasValidId = /\/chart\/[A-Z]+/.test(href) && href.includes('-');
+            
+            if (hasValidId) {
+              foundIdeas.push({
+                url: href.startsWith('http') ? href : `https://www.tradingview.com${href}`,
+                title: text,
+                element: element
+              });
+            }
           }
         }
-      });
+      }
+    });
+
+    // Remove duplicates based on URL
+    const uniqueIdeas = [];
+    const seenUrls = new Set();
+    
+    for (const idea of foundIdeas) {
+      if (!seenUrls.has(idea.url)) {
+        seenUrls.add(idea.url);
+        uniqueIdeas.push(idea);
+      }
     }
+    
+    foundIdeas = uniqueIdeas;
 
     console.log(`Processing ${Math.min(foundIdeas.length, 10)} ideas...`);
 
@@ -147,17 +151,19 @@ async function scrapeTradingViewIdeas() {
     for (let i = 0; i < Math.min(foundIdeas.length, 10); i++) {
       const ideaData = foundIdeas[i];
       const fullText = $(ideaData.element).closest('div').text() || ideaData.title;
+      const symbol = extractSymbolFromText(ideaData.title + ' ' + fullText);
+      const direction = determineDirection(ideaData.title + ' ' + fullText);
       
       const idea = {
         id: extractIdFromUrl(ideaData.url),
-        symbol: extractSymbolFromText(fullText),
-        title: ideaData.title.length > 50 ? ideaData.title.substring(0, 50) + '...' : ideaData.title,
-        timeframe: extractTimeframe(fullText),
-        direction: determineDirection(fullText),
-        description: `Analysis for ${extractSymbolFromText(fullText)}. ${ideaData.title}`,
-        likes: Math.floor(Math.random() * 50) + 5, // Placeholder
-        comments: Math.floor(Math.random() * 20) + 2, // Placeholder
-        publishedDate: new Date(Date.now() - (i * 24 * 60 * 60 * 1000)).toISOString().split('T')[0],
+        symbol: symbol,
+        title: ideaData.title.length > 60 ? ideaData.title.substring(0, 60) + '...' : ideaData.title,
+        timeframe: extractTimeframe(ideaData.title + ' ' + fullText),
+        direction: direction,
+        description: `${symbol} trading analysis: ${ideaData.title}. ${direction === 'Long' ? 'Bullish outlook' : 'Bearish outlook'} with technical analysis and market insights.`,
+        likes: Math.floor(Math.random() * 50) + 5, // Placeholder - would need additional scraping for real data
+        comments: Math.floor(Math.random() * 20) + 2, // Placeholder - would need additional scraping for real data
+        publishedDate: new Date(Date.now() - (i * 12 * 60 * 60 * 1000)).toISOString().split('T')[0], // Spread over days
         url: ideaData.url,
         image: `https://www.tradingview.com/x/${extractIdFromUrl(ideaData.url)}/`,
       };
