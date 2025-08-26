@@ -64,6 +64,14 @@ const categories = [
       },
     ],
   },
+  {
+    id: "api",
+    title: "API Services",
+    description: "Custom REST APIs and backend services",
+    image: "/peview-image.jpg",
+    link: "https://api.petereloy.dev",
+    isExternal: true,
+  },
 ];
 
 const Portfolio = () => {
@@ -76,7 +84,10 @@ const Portfolio = () => {
     console.log("🚀 User clicked on", categoryId, "category! Navigation engines are firing up...");
     
     const category = categories.find(cat => cat.id === categoryId);
-    if (category && category.subcategories) {
+    if (category && category.isExternal) {
+      console.log("🌍 Opening external link:", category.link);
+      window.open(category.link, '_blank', 'noopener,noreferrer');
+    } else if (category && category.subcategories) {
       console.log("✨ Found category with", category.subcategories.length, "subcategories. Off we go to explore", category.title + "!");
       navigate(`/portfolio/${categoryId}`);
     }
@@ -85,9 +96,10 @@ const Portfolio = () => {
   return (
     <Box
       sx={{
-        display: "flex",
-        flexDirection: "column",
-        gap: 1,
+        display: "grid",
+        gridTemplateColumns: "1fr 1fr",
+        gridTemplateRows: "1fr 1fr",
+        gap: 2,
         p: 2,
         height: "100%",
         overflow: "hidden",
