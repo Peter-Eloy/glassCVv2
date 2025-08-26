@@ -8,6 +8,14 @@ export const WelcomeProvider = ({ children }) => {
   // Initialize state from localStorage
   const [welcomeStage, setWelcomeStage] = useState(() => {
     const hasSeenWelcome = localStorage.getItem("hasSeenWelcome");
+    const isFirstTime = !hasSeenWelcome;
+    
+    if (isFirstTime) {
+      console.info("🎉 First-time visitor detected! Preparing the welcome experience...");
+    } else {
+      console.info("👋 Welcome back! Skipping the intro - you know the drill!");
+    }
+    
     return hasSeenWelcome ? WELCOME_STAGES.COMPLETE : WELCOME_STAGES.LOADING;
   });
 
@@ -24,6 +32,7 @@ export const WelcomeProvider = ({ children }) => {
             return WELCOME_STAGES.MENU;
           case WELCOME_STAGES.MENU:
             // Save to localStorage when completing the welcome experience
+            console.info("✅ Welcome experience completed! You're now a certified glass morphism navigator!");
             localStorage.setItem("hasSeenWelcome", "true");
             return WELCOME_STAGES.COMPLETE;
           default:

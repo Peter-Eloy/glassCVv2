@@ -88,6 +88,7 @@ const SkillsChecklist = () => {
 
   const handleAddSearchTerm = (event) => {
     if (event.key === "Enter" && searchInput.trim()) {
+      console.log("🔍 New skill search term added:", searchInput.trim(), "- let the skill hunting begin!");
       setSearchTerms((prev) => [...prev, searchInput.trim()]);
       setSearchInput("");
     }
@@ -154,6 +155,9 @@ const SkillsChecklist = () => {
     const matches = allSkills.filter((skill) =>
       checkSkillMatch(skill, searchTerms)
     );
+    
+    console.log("🎯 Skills search complete! Found", matches.length, "matching skills out of", allSkills.length, "total skills. Your requirements are my command!");
+    
     setMatchedSkills(matches);
   }, [searchTerms]);
 

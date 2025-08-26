@@ -179,12 +179,15 @@ export const tumblrService = {
    */
   getPosts: async (page = 1, limit = 6, tag = null) => {
     try {
+      console.info("📝 Fetching blog posts from Tumblr API - because who doesn't love fresh content?", { page, limit, tag });
+      
       const offset = (page - 1) * limit;
       const cacheKey = `${page}-${limit}-${
         Array.isArray(tag) ? tag.join(",") : tag
       }`;
 
       if (pageCache.has(cacheKey)) {
+        console.info("⚡ Cache hit! Serving you pre-loaded blog posts faster than you can say 'optimization'");
         return pageCache.get(cacheKey);
       }
 
@@ -258,6 +261,12 @@ export const tumblrService = {
           total: response.data.response.total_posts,
           hasNextPage: offset + limit < response.data.response.total_posts,
         };
+
+        console.info("📚 Blog posts loaded successfully!", { 
+          postsCount: result.posts.length, 
+          totalAvailable: result.total,
+          hasMore: result.hasNextPage ? "Yes, there's more!" : "That's all folks!"
+        });
 
         pageCache.set(cacheKey, result);
 

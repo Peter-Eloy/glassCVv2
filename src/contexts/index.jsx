@@ -27,6 +27,9 @@ export const ThemeProvider = ({ children }) => {
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
     const userPrefersDark = mediaQuery.matches;
+    
+    console.log("🌙 Theme detection activated! System prefers", userPrefersDark ? "dark" : "light", "mode. Your eyes will thank you!");
+    
     setIsDarkMode(userPrefersDark);
 
     // Apply the theme class to the body
@@ -34,6 +37,7 @@ export const ThemeProvider = ({ children }) => {
 
     // Listen for changes in the system theme
     const handleChange = (e) => {
+      console.log("🔄 System theme changed to", e.matches ? "dark" : "light", "mode! Adapting like a chameleon...");
       setIsDarkMode(e.matches);
       document.body.className = e.matches ? "dark-mode" : "light-mode";
     };
@@ -52,6 +56,9 @@ export const ThemeProvider = ({ children }) => {
   }, [isMenuOpen]);
 
   const toggleTheme = () => {
+    const newMode = !isDarkMode ? "dark" : "light";
+    console.log("💡 Manual theme switch activated! Switching to", newMode, "mode. Because you're the boss of your visual experience!");
+    
     setIsDarkMode(!isDarkMode);
     document.body.className = !isDarkMode ? "dark-mode" : "light-mode";
   };

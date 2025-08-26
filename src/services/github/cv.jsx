@@ -19,10 +19,14 @@ const githubApi = axios.create({
 
 export const getLatestCVDownloadUrls = async () => {
   try {
+    console.log("📄 Time to fetch the latest CV! Knocking on GitHub's door to get the freshest resume files...");
+    
     const response = await githubApi.get(
       `/repos/${REPO_OWNER}/${REPO_NAME}/releases/latest`
     );
     const assets = response.data.assets;
+    
+    console.log("🎉 GitHub responded with", assets?.length || 0, "CV assets! Ready to impress some recruiters!");
 
     if (!assets || assets.length === 0) {
       console.error("No assets found in the latest release");
@@ -40,6 +44,12 @@ export const getLatestCVDownloadUrls = async () => {
     };
 
     // Filter out any undefined URLs
+    const availableLanguages = Object.keys(Object.fromEntries(
+      Object.entries(urls).filter(([_, url]) => url !== undefined)
+    ));
+    
+    console.log("🌍 CV available in these languages:", availableLanguages.join(", "), "- polyglot professional at your service!");
+    
     return Object.fromEntries(
       Object.entries(urls).filter(([_, url]) => url !== undefined)
     );

@@ -70,9 +70,14 @@ const Portfolio = () => {
   const navigate = useNavigate();
   const { isDarkMode } = useTheme();
 
+  console.log("🎨 Welcome to the portfolio gallery! Showcasing", categories.length, "categories of awesome projects. Prepare to be amazed!");
+
   const handleCategoryClick = (categoryId) => {
+    console.log("🚀 User clicked on", categoryId, "category! Navigation engines are firing up...");
+    
     const category = categories.find(cat => cat.id === categoryId);
     if (category && category.subcategories) {
+      console.log("✨ Found category with", category.subcategories.length, "subcategories. Off we go to explore", category.title + "!");
       navigate(`/portfolio/${categoryId}`);
     }
   };

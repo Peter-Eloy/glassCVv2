@@ -32,6 +32,9 @@ class TradingViewService {
   // Fetch ideas from JSON file (updated by GitHub Actions)
   async fetchIdeasFromFile() {
     try {
+      console.info("📈 Fetching TradingView ideas from static JSON file - this site is 100% serverless and proud of it!");
+      console.table({ "Data Source": "Static JSON", "Update Method": "GitHub Actions", "Architecture": "JAMstack" });
+      
       // Add cache busting to ensure fresh data
       const cacheBuster = Date.now();
       const response = await fetch(`${DATA_FILE_URL}?t=${cacheBuster}`);
@@ -47,9 +50,16 @@ class TradingViewService {
         throw new Error('Invalid data structure in JSON file');
       }
       
+      console.info("💡 TradingView ideas loaded!", { 
+        totalIdeas: data.ideas.length, 
+        lastUpdated: data.lastUpdated,
+        source: "GitHub Actions automation"
+      });
+      
       return data;
     } catch (error) {
       console.warn('Failed to fetch TradingView data from file:', error.message);
+      console.info("🛡️ No worries! Falling back to hardcoded data - resilience is our middle name!");
       
       // Return fallback data
       return {
@@ -67,6 +77,7 @@ class TradingViewService {
       // Check cache first
       const now = Date.now();
       if (this.cachedData && this.lastFetch && (now - this.lastFetch) < this.cacheTimeout) {
+        console.info("🏎️ TradingView cache is still fresh! Serving trading ideas at lightning speed!");
         return this.paginateIdeas(this.cachedData, page, limit);
       }
 
