@@ -1,9 +1,9 @@
 {
-  "lastUpdated": "2025-11-14T09:07:38.038Z",
+  "lastUpdated": "2025-11-18T09:07:57.251Z",
   "total": 1,
   "ideas": [
     {
-      "id": "fallback-1763111258037",
+      "id": "fallback-1763456877250",
       "symbol": "BTCUSD",
       "title": "Latest TradingView Analysis",
       "timeframe": "1D",
@@ -11,7 +11,7 @@
       "description": "Check out the latest trading ideas and analysis.",
       "likes": 10,
       "comments": 3,
-      "publishedDate": "2025-11-14",
+      "publishedDate": "2025-11-18",
       "url": "https://www.tradingview.com/u/mr_uponly/#published-charts#published-charts",
       "image": "https://www.tradingview.com/favicon.ico"
     }
