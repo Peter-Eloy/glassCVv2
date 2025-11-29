@@ -23,6 +23,7 @@ import {
   isAndroid,
 } from "react-device-detect";
 import ChatComponent from "../chatComponent";
+import { getLatestCVDownloadUrls } from "../../services/github/cv";
 
 const FloatingButton = () => {
   const [open, setOpen] = useState(false);
@@ -35,15 +36,20 @@ const FloatingButton = () => {
   const { isDarkMode, toggleTheme } = useTheme();
 
   useEffect(() => {
-    // Initialize download URLs
-    const baseURL =
-      "https://github.com/Peter-Eloy/glassCVv2/releases/download/cv-2025-02-15";
-    setDownloadUrls({
-      EN: `${baseURL}/Peter_Eloy_CV_EN.pdf`,
-      ES: `${baseURL}/Peter_Eloy_CV_ES.pdf`,
-      DE: `${baseURL}/Peter_Eloy_CV_DE.pdf`,
-    });
-    setLoadingCV(false);
+    // Fetch latest CV download URLs from GitHub API
+    const fetchCVUrls = async () => {
+      try {
+        const urls = await getLatestCVDownloadUrls();
+        setDownloadUrls(urls);
+      } catch (error) {
+        console.error("Error fetching CV URLs:", error);
+        setSnackbarMessage("Error loading CV download links.");
+        setSnackbarOpen(true);
+      } finally {
+        setLoadingCV(false);
+      }
+    };
+    fetchCVUrls();
   }, []);
 
   const emailParts = ["p", "eter", "elo", "y", "@", "gmail", ".com"];
@@ -94,13 +100,18 @@ check out the CV of Peter - Eloy H., a full-stack dev:
     }
 
     try {
+      const response = await fetch(url);
+      if (!response.ok) throw new Error("Download failed");
+
+      const blob = await response.blob();
+      const downloadUrl = window.URL.createObjectURL(blob);
       const a = document.createElement("a");
-      a.style.display = "none";
-      a.href = url;
+      a.href = downloadUrl;
       a.download = `Peter_Eloy_CV_${language}.pdf`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
+      window.URL.revokeObjectURL(downloadUrl);
 
       setSnackbarMessage(`CV downloaded successfully in ${language}`);
       setSnackbarOpen(true);
