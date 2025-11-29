@@ -37,7 +37,7 @@ const CVDownloadButton = () => {
     }
   };
 
-  const handleDownload = async (language) => {
+  const handleDownload = (language) => {
     const url = downloadUrls[language];
     if (!url) {
       setSnackbarMessage(`CV in ${language} is not available at the moment.`);
@@ -46,20 +46,16 @@ const CVDownloadButton = () => {
     }
 
     try {
-      const response = await fetch(url);
-      if (!response.ok) throw new Error("Download failed");
-
-      const blob = await response.blob();
-      const downloadUrl = window.URL.createObjectURL(blob);
+      // Direct download without fetch (to avoid CORS issues)
       const a = document.createElement("a");
-      a.href = downloadUrl;
+      a.href = url;
       a.download = `Peter_Eloy_CV_${language}.pdf`;
+      a.target = "_blank";
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
-      window.URL.revokeObjectURL(downloadUrl);
 
-      setSnackbarMessage(`CV downloaded successfully in ${language}`);
+      setSnackbarMessage(`CV download started in ${language}`);
       setSnackbarOpen(true);
     } catch (error) {
       console.error("Error downloading CV:", error);
