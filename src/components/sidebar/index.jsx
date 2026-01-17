@@ -3,7 +3,7 @@ import List from "@mui/material/List";
 import { useTheme as useMuiTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "../../contexts/index";
-import GlassContainer from "../GlassContainer";
+import GlassContainer from "../glassContainer";
 import {
   XOutlined,
   LinkedinOutlined,
