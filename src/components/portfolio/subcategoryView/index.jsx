@@ -138,6 +138,83 @@ Designed for both beginners and professional traders with personalizable interfa
       },
     ],
   },
+  {
+    id: "api",
+    title: "API Central",
+    description: "API orchestration platforms and development tools",
+    subcategories: [
+      {
+        id: "backend-apis",
+        title: "Backend APIs Platform",
+        description:
+          "Self-hosted API orchestration hub that aggregates and manages data from 9+ external APIs via RapidAPI, with automated cron jobs and AI integration.",
+        category: "API Platform",
+        fullDescription: `A comprehensive Next.js-based API orchestration platform that serves as a centralized hub for managing and integrating multiple external APIs from RapidAPI Hub.
+
+The platform aggregates data from 9+ job board APIs (ArbeitNow, JobsAPI14, Swiss Jobs, Adzuna, Google Jobs, Himalayas, LinkedIn, and more), providing unified endpoints for data access and management.
+
+Features automated cron jobs for scheduled data syncing, AI-powered data processing using a local LLM (Qwen model via Lemonade Server), Gmail API integration for email automation, and comprehensive PDF processing capabilities.
+
+Self-hosted on a Windows server with PostgreSQL database, NextAuth.js authentication, and automated deployment pipelines. The platform handles real-time data synchronization, contact extraction, email verification, and web scraping services.`,
+        image: "/peview-image.jpg",
+        technologies: [
+          "Next.js 15",
+          "PostgreSQL",
+          "Prisma ORM",
+          "NextAuth.js",
+          "RapidAPI",
+          "Node Cron",
+          "Gmail API",
+          "Qwen AI",
+          "TypeScript",
+          "Tailwind CSS",
+        ],
+        features: [
+          "Integration with 9+ job board APIs via RapidAPI Hub",
+          "Automated cron jobs for scheduled data synchronization",
+          "AI-powered data processing with local LLM integration",
+          "Gmail API integration for automated email workflows",
+          "Real-time contact extraction and email verification",
+          "PDF text extraction and generation services",
+          "PostgreSQL database with Prisma ORM",
+          "Self-hosted on Windows server with PM2 process manager",
+          "Unified REST API endpoints for all integrated services",
+          "Web scraping and data transformation pipelines",
+        ],
+        liveUrl: "https://api.petereloy.dev",
+        githubUrl: "https://github.com/Peter-Eloy/be-apis",
+      },
+      {
+        id: "mock-api-server",
+        title: "Mock API Server",
+        description:
+          "Free, open-source desktop application for creating and testing REST APIs without writing backend code. Perfect for rapid prototyping and frontend development.",
+        category: "Development Tool",
+        fullDescription: `A free, open-source desktop application that enables developers to create and test REST APIs without writing any backend code. Designed specifically for frontend developers, QA testers, and anyone prototyping APIs.
+
+The application runs quietly in the system tray, providing a no-code visual admin panel for defining API routes and responses. Supports both JSON data responses and static file serving, with flexible project organization for managing multiple endpoint collections.
+
+Built with Python and Flask, packaged with PyInstaller for easy distribution. Operates on localhost:5000 by default, with installation and setup completed in seconds. No account creation required, fully offline capable.
+
+Available as downloadable installers for both Windows (.exe) and macOS (.pkg) platforms, distributed under the MIT License via GitHub releases.`,
+        image: "/peview-image.jpg",
+        technologies: ["Python", "Flask", "PyInstaller"],
+        features: [
+          "System tray integration for background operation",
+          "No-code visual admin panel for route configuration",
+          "Flexible JSON responses and static file serving",
+          "Project-based organization for multiple endpoints",
+          "localhost:5000 default server with customizable port",
+          "Quick setup - ready to use in seconds",
+          "No account creation or authentication required",
+          "Cross-platform installers for Windows and macOS",
+          "MIT License - completely free and open-source",
+        ],
+        liveUrl: "https://peter-eloy.github.io/Landing-py-server/",
+        githubUrl: "https://github.com/Peter-Eloy/py-server",
+      },
+    ],
+  },
 ];
 
 const PortfolioSubcategoryView = () => {

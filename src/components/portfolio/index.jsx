@@ -74,10 +74,22 @@ const categories = [
   {
     id: "api",
     title: "API Central",
-    description: "Custom REST APIs and backend services",
+    description: "API orchestration platforms and development tools",
     image: "/peview-image.jpg",
-    link: "https://api.petereloy.dev",
-    isExternal: true,
+    subcategories: [
+      {
+        id: "backend-apis",
+        title: "Backend APIs Platform",
+        description:
+          "Self-hosted API orchestration hub that aggregates and manages data from 9+ external APIs via RapidAPI, with automated cron jobs and AI integration.",
+      },
+      {
+        id: "mock-api-server",
+        title: "Mock API Server",
+        description:
+          "Free, open-source desktop application for creating and testing REST APIs without writing backend code. Perfect for rapid prototyping and frontend development.",
+      },
+    ],
   },
 ];
 
