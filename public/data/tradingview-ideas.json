@@ -1,19 +1,20 @@
 {
-  "lastUpdated": "2026-01-16T09:09:48.638Z",
+  "lastUpdated": "2026-01-18T00:35:46.714Z",
   "total": 1,
   "ideas": [
     {
-      "id": "fallback-1768554588638",
+      "id": "error-fallback",
       "symbol": "BTCUSD",
-      "title": "Latest TradingView Analysis",
+      "title": "TradingView Profile - Check for Latest Ideas",
       "timeframe": "1D",
       "direction": "Long",
-      "description": "Check out the latest trading ideas and analysis.",
-      "likes": 10,
-      "comments": 3,
-      "publishedDate": "2026-01-16",
-      "url": "https://www.tradingview.com/u/mr_uponly/#published-charts#published-charts",
+      "description": "Visit the TradingView profile for the latest trading ideas and analysis.",
+      "likes": 0,
+      "comments": 0,
+      "publishedDate": "2026-01-18",
+      "url": "https://www.tradingview.com/u/mr_uponly/#published-charts",
       "image": "https://www.tradingview.com/favicon.ico"
     }
-  ]
+  ],
+  "error": "page.waitForTimeout is not a function"
 }
