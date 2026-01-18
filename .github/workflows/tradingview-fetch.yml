@@ -40,14 +40,23 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
+
+          # Only add the specific JSON file
           git add public/data/tradingview-ideas.json
+
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
             git commit -m "🤖 Update TradingView ideas data"
-            # Pull latest changes with rebase to avoid conflicts
-            git pull --rebase origin main
-            git push
+
+            # Fetch latest changes
+            git fetch origin main
+
+            # Rebase our commit on top of latest main
+            git rebase origin/main
+
+            # Push the changes
+            git push origin HEAD:main
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
