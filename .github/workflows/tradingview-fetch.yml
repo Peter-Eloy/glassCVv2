@@ -26,7 +26,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          npm install cheerio
+          npm install puppeteer
 
       - name: Create data directory
         run: |
@@ -34,7 +34,7 @@ jobs:
 
       - name: Run TradingView scraper
         run: |
-          node scripts/fetch-tradingview-native.cjs
+          node scripts/fetch-tradingview-puppeteer.cjs
 
       - name: Commit and push changes
         run: |
