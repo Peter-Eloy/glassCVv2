@@ -45,6 +45,8 @@ jobs:
             echo "No changes to commit"
           else
             git commit -m "🤖 Update TradingView ideas data"
+            # Pull latest changes with rebase to avoid conflicts
+            git pull --rebase origin main
             git push
           fi
         env:
