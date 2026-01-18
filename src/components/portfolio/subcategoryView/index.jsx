@@ -1,10 +1,11 @@
 import { useState } from "react";
 import React from "react";
-import { Box, Typography, IconButton, Pagination } from "@mui/material";
+import { Box, Typography, IconButton } from "@mui/material";
 import { ArrowBack } from "@mui/icons-material";
 import { useNavigate, useParams } from "react-router-dom";
 import GlassContainer from "../../glassContainer";
 import ProjectDetailModal from "../projectDetailModal";
+import CustomPagination from "../../CustomPagination";
 import { useTheme } from "../../../contexts";
 
 const ITEMS_PER_PAGE = 6;
@@ -511,7 +512,7 @@ const PortfolioSubcategoryView = () => {
     setSelectedProject(null);
   };
 
-  const handlePageChange = (event, value) => {
+  const handlePageChange = (value) => {
     setCurrentPage(value);
   };
 
@@ -646,38 +647,13 @@ const PortfolioSubcategoryView = () => {
         ))}
       </Box>
 
-      {/* Pagination */}
-      {totalPages > 1 && (
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            p: 2,
-            borderTop: `1px solid ${
-              isDarkMode ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.1)"
-            }`,
-          }}
-        >
-          <Pagination
-            count={totalPages}
-            page={currentPage}
-            onChange={handlePageChange}
-            sx={{
-              "& .MuiPaginationItem-root": {
-                color: isDarkMode ? "#fff" : "#000",
-                borderColor: isDarkMode
-                  ? "rgba(255, 255, 255, 0.3)"
-                  : "rgba(0, 0, 0, 0.3)",
-              },
-              "& .MuiPaginationItem-root.Mui-selected": {
-                backgroundColor: isDarkMode
-                  ? "rgba(255, 255, 255, 0.2)"
-                  : "rgba(0, 0, 0, 0.2)",
-              },
-            }}
-          />
-        </Box>
-      )}
+      {/* Custom Pagination with Navigation Arrows */}
+      <CustomPagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+        showArrows={true}
+      />
 
       <ProjectDetailModal
         open={modalOpen}

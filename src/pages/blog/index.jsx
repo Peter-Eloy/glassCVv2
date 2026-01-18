@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import { Box, Grid, Typography, Skeleton, Pagination } from "@mui/material";
+import { Box, Grid, Typography, Skeleton } from "@mui/material";
 import { useTheme } from "../../contexts";
 import GlassContainer from "../../components/glassContainer";
 import BlogPostDialog from "../../components/blogPostDialog";
 import TradingViewIdeas from "../../components/tradingViewIdeas";
+import CustomPagination from "../../components/CustomPagination";
 import { tumblrService } from "../../services/tumblr";
-import { NavigationArrow } from "../../styles/navigationArrows";
 import styled from "@emotion/styled";
 
 const POSTS_PER_PAGE = 6;
@@ -105,14 +105,6 @@ const BlogPage = () => {
       </Box>
 
       <Box sx={{ position: "relative", flex: 1, mx: 6 }}>
-        {!loading && page > 1 && (
-          <NavigationArrow
-            className="prev"
-            onClick={() => setPage(page - 1)}
-            style={{ left: 280 }}
-          />
-        )}
-
         {activeFilter === "finance" ? (
           <TradingViewIdeas postsPerPage={POSTS_PER_PAGE} />
         ) : (
@@ -169,49 +161,18 @@ const BlogPage = () => {
                 ))}
           </Grid>
         )}
-
-        {!loading && page * POSTS_PER_PAGE < totalPosts && (
-          <NavigationArrow
-            className="next"
-            onClick={() => setPage(page + 1)}
-            style={{ right: 280 }}
-          />
-        )}
       </Box>
 
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          py: 2,
-          position: "fixed",
-          bottom: "70px",
-          left: 0,
-          right: 0,
-          zIndex: 10,
-          backdropFilter: "blur(8px)",
-        }}
-      >
-        {!loading && totalPosts > POSTS_PER_PAGE && (
-          <Pagination
-            count={Math.ceil(totalPosts / POSTS_PER_PAGE)}
-            page={page}
-            hidePrevButton
-            hideNextButton
-            size="large"
-            sx={{
-              "& .MuiPaginationItem-root": {
-                color: isDarkMode ? "#fff" : "#213547",
-                "&.Mui-selected": {
-                  backgroundColor: isDarkMode
-                    ? "rgba(255, 255, 255, 0.1)"
-                    : "rgba(0, 0, 0, 0.1)",
-                },
-              },
-            }}
-          />
-        )}
-      </Box>
+      {/* Pagination */}
+      {activeFilter !== "finance" && (
+        <CustomPagination
+          currentPage={page}
+          totalPages={Math.ceil(totalPosts / POSTS_PER_PAGE)}
+          onPageChange={setPage}
+          showArrows={true}
+          loading={loading}
+        />
+      )}
 
       <BlogPostDialog
         open={!!selectedPost}
