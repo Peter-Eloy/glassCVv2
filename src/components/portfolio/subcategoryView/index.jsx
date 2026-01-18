@@ -1,10 +1,13 @@
 import { useState } from "react";
-import { Box, Typography, IconButton } from "@mui/material";
+import React from "react";
+import { Box, Typography, IconButton, Pagination } from "@mui/material";
 import { ArrowBack } from "@mui/icons-material";
 import { useNavigate, useParams } from "react-router-dom";
 import GlassContainer from "../../glassContainer";
 import ProjectDetailModal from "../projectDetailModal";
 import { useTheme } from "../../../contexts";
+
+const ITEMS_PER_PAGE = 6;
 
 const categories = [
   {
@@ -120,10 +123,9 @@ Designed for both beginners and professional traders with personalizable interfa
     ],
   },
   {
-    id: "wordpress",
-    title: "WordPress Development",
-    description:
-      "Custom WordPress plugins and themes for real estate platforms",
+    id: "wordpress-plugins",
+    title: "WordPress Plugins",
+    description: "Custom plugins for the VisaVerde real estate platform",
     subcategories: [
       {
         id: "user-management",
@@ -343,6 +345,13 @@ Developed for the VisaVerde real estate platform to protect high-quality propert
         liveUrl: "https://www.visaverde.com",
         githubUrl: "https://github.com/Peter-Eloy/Image-Watermark-Protection",
       },
+    ],
+  },
+  {
+    id: "wordpress-themes",
+    title: "WordPress Themes",
+    description: "Custom high-performance themes for real estate platforms",
+    subcategories: [
       {
         id: "visaverde-theme",
         title: "VisaVerde Custom Theme",
@@ -467,8 +476,16 @@ const PortfolioSubcategoryView = () => {
   const { isDarkMode } = useTheme();
   const [selectedProject, setSelectedProject] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const category = categories.find((cat) => cat.id === categoryId);
+
+  // Calculate pagination
+  const totalItems = category?.subcategories?.length || 0;
+  const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+  const paginatedSubcategories = category?.subcategories?.slice(startIndex, endIndex) || [];
 
   if (!category) {
     return (
@@ -493,6 +510,19 @@ const PortfolioSubcategoryView = () => {
     setModalOpen(false);
     setSelectedProject(null);
   };
+
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+  };
+
+  // Reset to page 1 when category changes
+  const previousCategoryId = React.useRef(categoryId);
+  React.useEffect(() => {
+    if (previousCategoryId.current !== categoryId) {
+      setCurrentPage(1);
+      previousCategoryId.current = categoryId;
+    }
+  }, [categoryId]);
 
   return (
     <Box
@@ -550,7 +580,7 @@ const PortfolioSubcategoryView = () => {
           overflow: "hidden",
         }}
       >
-        {category.subcategories?.map((subcategory, index) => (
+        {paginatedSubcategories.map((subcategory, index) => (
           <GlassContainer
             key={subcategory.id}
             onClick={() => handleSubcategoryClick(subcategory)}
@@ -615,6 +645,39 @@ const PortfolioSubcategoryView = () => {
           </GlassContainer>
         ))}
       </Box>
+
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            p: 2,
+            borderTop: `1px solid ${
+              isDarkMode ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.1)"
+            }`,
+          }}
+        >
+          <Pagination
+            count={totalPages}
+            page={currentPage}
+            onChange={handlePageChange}
+            sx={{
+              "& .MuiPaginationItem-root": {
+                color: isDarkMode ? "#fff" : "#000",
+                borderColor: isDarkMode
+                  ? "rgba(255, 255, 255, 0.3)"
+                  : "rgba(0, 0, 0, 0.3)",
+              },
+              "& .MuiPaginationItem-root.Mui-selected": {
+                backgroundColor: isDarkMode
+                  ? "rgba(255, 255, 255, 0.2)"
+                  : "rgba(0, 0, 0, 0.2)",
+              },
+            }}
+          />
+        </Box>
+      )}
 
       <ProjectDetailModal
         open={modalOpen}

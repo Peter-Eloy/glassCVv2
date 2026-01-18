@@ -52,22 +52,30 @@ const categories = [
     ],
   },
   {
-    id: "wordpress",
-    title: "WordPress",
-    description: "Custom WordPress plugins and themes",
+    id: "wordpress-plugins",
+    title: "WordPress Plugins",
+    description: "Custom plugins for real estate platforms",
     image: "/peview-image.jpg",
     subcategories: [
       {
         id: "plugins",
-        title: "Custom Plugins",
+        title: "VisaVerde Plugins",
         description:
-          "Tailored WordPress plugins for enhanced functionality and user experience.",
+          "7 custom WordPress plugins built for the VisaVerde real estate platform.",
       },
+    ],
+  },
+  {
+    id: "wordpress-themes",
+    title: "WordPress Themes",
+    description: "Custom themes with performance optimization",
+    image: "/peview-image.jpg",
+    subcategories: [
       {
         id: "themes",
-        title: "Custom Themes",
+        title: "VisaVerde Theme",
         description:
-          "Responsive and SEO-optimized WordPress themes with modern design principles.",
+          "High-performance custom theme refactored from legacy system.",
       },
     ],
   },
@@ -129,12 +137,16 @@ const Portfolio = () => {
     <Box
       sx={{
         display: "grid",
-        gridTemplateColumns: "1fr 1fr",
-        gridTemplateRows: "1fr 1fr",
+        gridTemplateColumns: {
+          xs: "1fr",
+          sm: "1fr 1fr",
+          md: "repeat(3, 1fr)",
+        },
+        gridAutoRows: "minmax(200px, 1fr)",
         gap: 2,
         p: 2,
         height: "100%",
-        overflow: "hidden",
+        overflow: "auto",
       }}
     >
       {categories.map((category) => (
