@@ -52,6 +52,10 @@ jobs:
             # Fetch latest changes
             git fetch origin main
 
+            # Discard any unstaged changes (from npm install, etc.)
+            # We already committed what we care about (the JSON file)
+            git reset --hard HEAD
+
             # Rebase our commit on top of latest main
             git rebase origin/main
 
