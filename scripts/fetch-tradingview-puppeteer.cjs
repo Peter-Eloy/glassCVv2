@@ -88,9 +88,10 @@ async function scrapeTradingViewIdeas() {
       timeout: 60000,
     });
 
-    // Wait for content to load (adjust selector based on actual TradingView HTML)
+    // Wait for content to load
     console.log('Waiting for charts to load...');
-    await page.waitForTimeout(5000); // Give extra time for JavaScript to render
+    // Use proper delay method instead of deprecated waitForTimeout
+    await new Promise(resolve => setTimeout(resolve, 5000));
 
     // Try to find chart links
     const ideas = await page.evaluate(() => {
