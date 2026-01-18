@@ -121,20 +121,264 @@ Designed for both beginners and professional traders with personalizable interfa
   },
   {
     id: "wordpress",
-    title: "WordPress Plugins",
-    description: "Custom WordPress plugins and themes",
+    title: "WordPress Development",
+    description:
+      "Custom WordPress plugins and themes for real estate platforms",
     subcategories: [
       {
-        id: "plugins",
-        title: "Custom Plugins",
+        id: "user-management",
+        title: "User Management Plugin",
         description:
-          "Tailored WordPress plugins for enhanced functionality and user experience.",
+          "Advanced user management system with role-based access control and user profile customization for WordPress.",
+        category: "WordPress Plugin",
+        fullDescription: `A comprehensive user management plugin designed for WordPress platforms requiring advanced user administration capabilities.
+
+The plugin extends WordPress's native user management with enhanced role-based access control (RBAC), custom user profile fields, and streamlined user registration workflows. Built for scalability and security, it handles multi-level user hierarchies and permissions.
+
+Developed for the VisaVerde real estate platform, it manages agents, property managers, administrators, and clients with distinct permission sets and capabilities. Features include custom user meta fields, bulk user operations, and integration with external authentication systems.`,
+        image: "/peview-image.jpg",
+        technologies: ["PHP", "WordPress", "MySQL", "JavaScript", "REST API"],
+        features: [
+          "Role-based access control (RBAC) system",
+          "Custom user profile fields and meta data",
+          "Advanced user registration workflows",
+          "Bulk user management operations",
+          "Multi-level permission hierarchies",
+          "Integration with WordPress REST API",
+          "Secure authentication and authorization",
+          "User activity logging and monitoring",
+        ],
+        liveUrl: "https://www.visaverde.com",
+        githubUrl: "https://github.com/Peter-Eloy/UserManagment",
       },
       {
-        id: "themes",
-        title: "Custom Themes",
+        id: "property-management",
+        title: "Property Management Plugin",
         description:
-          "Responsive and SEO-optimized WordPress themes with modern design principles.",
+          "Full-featured property listing and management system for real estate websites with advanced search and filtering.",
+        category: "WordPress Plugin",
+        fullDescription: `A powerful property management plugin designed for real estate platforms, enabling comprehensive property listing, search, and management capabilities.
+
+The plugin provides a complete solution for managing real estate listings with custom post types for properties, advanced taxonomy for property features, and sophisticated search and filtering mechanisms. Supports multiple property types, locations, and custom attributes.
+
+Built for the VisaVerde real estate platform, it handles property listings, agent assignments, property status workflows, and client inquiries. Features include interactive property galleries, Google Maps integration, and lead generation forms.`,
+        image: "/peview-image.jpg",
+        technologies: [
+          "PHP",
+          "WordPress",
+          "MySQL",
+          "JavaScript",
+          "AJAX",
+          "Google Maps API",
+        ],
+        features: [
+          "Custom post types for property listings",
+          "Advanced property search and filtering",
+          "Property status workflow management",
+          "Agent-to-property assignment system",
+          "Interactive property image galleries",
+          "Google Maps location integration",
+          "Lead generation and inquiry forms",
+          "Property comparison functionality",
+          "Export and import property data",
+        ],
+        liveUrl: "https://www.visaverde.com",
+        githubUrl: "https://github.com/Peter-Eloy/PropertyManagment",
+      },
+      {
+        id: "universal-print",
+        title: "Universal Print Plugin",
+        description:
+          "Flexible print management system for generating PDF documents and printable property listings from WordPress.",
+        category: "WordPress Plugin",
+        fullDescription: `A versatile print management plugin that provides comprehensive PDF generation and print formatting capabilities for WordPress content.
+
+The plugin enables automatic generation of print-optimized layouts for posts, pages, and custom post types. Features template-based PDF generation with customizable headers, footers, and styling options.
+
+Designed for the VisaVerde platform to generate professional property brochures, listing sheets, and documentation. Supports batch printing, watermarking, and brand customization for real estate marketing materials.`,
+        image: "/peview-image.jpg",
+        technologies: [
+          "PHP",
+          "WordPress",
+          "PDF Libraries",
+          "CSS",
+          "JavaScript",
+        ],
+        features: [
+          "Automated PDF generation from WordPress content",
+          "Customizable print templates",
+          "Batch printing for multiple listings",
+          "Watermark and branding support",
+          "Print-optimized layouts",
+          "Header and footer customization",
+          "Professional property brochure generation",
+        ],
+        liveUrl: "https://www.visaverde.com",
+        githubUrl: "https://github.com/Peter-Eloy/universal-print",
+      },
+      {
+        id: "social-media-contact",
+        title: "Social Media Contact Plugin",
+        description:
+          "Social media integration and contact management plugin with WhatsApp, email, and social platform connectivity.",
+        category: "WordPress Plugin",
+        fullDescription: `A comprehensive social media integration plugin that connects WordPress sites with multiple social platforms and communication channels.
+
+The plugin provides seamless integration with WhatsApp, Facebook Messenger, email systems, and other communication platforms. Features click-to-call, click-to-message, and social sharing functionality.
+
+Built for the VisaVerde real estate platform to facilitate direct communication between potential buyers and property agents through their preferred channels. Includes lead tracking and contact analytics.`,
+        image: "/peview-image.jpg",
+        technologies: [
+          "PHP",
+          "WordPress",
+          "WhatsApp API",
+          "JavaScript",
+          "REST API",
+        ],
+        features: [
+          "WhatsApp click-to-message integration",
+          "Multi-platform social media connectivity",
+          "Click-to-call and click-to-email functionality",
+          "Social sharing for property listings",
+          "Contact form with social platform options",
+          "Lead tracking and analytics",
+          "Mobile-optimized contact buttons",
+        ],
+        liveUrl: "https://www.visaverde.com",
+        githubUrl: "https://github.com/Peter-Eloy/SocialMediaContact",
+      },
+      {
+        id: "visaverde-pwa",
+        title: "VisaVerde PWA Plugin",
+        description:
+          "Progressive Web App functionality for WordPress, enabling offline access and mobile app-like experience.",
+        category: "WordPress Plugin",
+        fullDescription: `A Progressive Web App (PWA) plugin that transforms WordPress sites into installable, app-like experiences with offline capabilities.
+
+The plugin implements service workers, manifest files, and caching strategies to enable offline browsing, push notifications, and home screen installation. Provides native app-like performance and user experience.
+
+Developed for the VisaVerde real estate platform to allow users to browse properties offline, save favorites, and receive notifications about new listings. Improves mobile engagement and conversion rates.`,
+        image: "/peview-image.jpg",
+        technologies: [
+          "PHP",
+          "WordPress",
+          "Service Workers",
+          "JavaScript",
+          "PWA APIs",
+        ],
+        features: [
+          "Service worker implementation",
+          "Offline content caching",
+          "Home screen installation",
+          "Push notification support",
+          "App-like navigation experience",
+          "Background sync for saved items",
+          "Progressive image loading",
+          "Mobile-optimized performance",
+        ],
+        liveUrl: "https://www.visaverde.com",
+        githubUrl: "https://github.com/Peter-Eloy/VisaVerde-PWA",
+      },
+      {
+        id: "visaverde-maps",
+        title: "VisaVerde Maps Plugin",
+        description:
+          "Advanced Google Maps integration with custom markers, property location visualization, and interactive map search.",
+        category: "WordPress Plugin",
+        fullDescription: `A feature-rich maps integration plugin providing advanced location-based property search and visualization capabilities.
+
+The plugin extends Google Maps functionality with custom markers for property types, clustering for dense areas, and interactive map-based search. Supports drawing tools for area selection and proximity-based filtering.
+
+Built for the VisaVerde real estate platform to enable users to search properties by location, view nearby amenities, and explore neighborhoods. Features include geolocation, route planning, and street view integration.`,
+        image: "/peview-image.jpg",
+        technologies: [
+          "PHP",
+          "WordPress",
+          "Google Maps API",
+          "JavaScript",
+          "AJAX",
+        ],
+        features: [
+          "Interactive property map with custom markers",
+          "Map-based property search and filtering",
+          "Property clustering for dense areas",
+          "Drawing tools for area selection",
+          "Proximity-based search functionality",
+          "Street view integration",
+          "Geolocation for nearby properties",
+          "Neighborhood and amenity visualization",
+        ],
+        liveUrl: "https://www.visaverde.com",
+        githubUrl: "https://github.com/Peter-Eloy/VisaVerde-Maps",
+      },
+      {
+        id: "image-watermark",
+        title: "Image Watermark Protection",
+        description:
+          "Automated image watermarking and protection system to prevent unauthorized use of property photos.",
+        category: "WordPress Plugin",
+        fullDescription: `An intelligent image protection plugin that automatically applies watermarks to uploaded images and implements right-click protection.
+
+The plugin processes images during upload to apply customizable watermarks with agency branding, preventing unauthorized use of property photography. Features bulk watermarking for existing media libraries.
+
+Developed for the VisaVerde real estate platform to protect high-quality property images from being copied by competitors. Includes configurable watermark positioning, opacity, and brand customization options.`,
+        image: "/peview-image.jpg",
+        technologies: [
+          "PHP",
+          "WordPress",
+          "GD Library",
+          "ImageMagick",
+          "JavaScript",
+        ],
+        features: [
+          "Automatic watermark on image upload",
+          "Bulk watermark existing media library",
+          "Customizable watermark positioning and opacity",
+          "Right-click protection for images",
+          "Brand logo and text watermarks",
+          "Selective watermarking by post type",
+          "High-quality image processing",
+          "Performance-optimized batch operations",
+        ],
+        liveUrl: "https://www.visaverde.com",
+        githubUrl: "https://github.com/Peter-Eloy/Image-Watermark-Protection",
+      },
+      {
+        id: "visaverde-theme",
+        title: "VisaVerde Custom Theme",
+        description:
+          "Fully responsive WordPress theme designed for real estate platforms with optimized performance and modern design.",
+        category: "WordPress Theme",
+        fullDescription: `A custom-built WordPress theme specifically designed for the VisaVerde real estate platform, combining modern aesthetics with high performance.
+
+The theme was inherited from a legacy system and completely refactored to improve site speed, usability, and workflow efficiency. Features a mobile-first responsive design with optimized asset loading and caching strategies.
+
+Built with performance as a priority, the theme achieves excellent Core Web Vitals scores through lazy loading, critical CSS inlining, and optimized JavaScript execution. Integrates seamlessly with all custom VisaVerde plugins.
+
+The design maintains the original visual identity while modernizing the user experience with improved navigation, faster search functionality, and streamlined property browsing workflows.`,
+        image: "/peview-image.jpg",
+        technologies: [
+          "PHP",
+          "WordPress",
+          "JavaScript",
+          "CSS3",
+          "HTML5",
+          "jQuery",
+        ],
+        features: [
+          "Fully responsive mobile-first design",
+          "Optimized Core Web Vitals performance",
+          "Lazy loading for images and assets",
+          "Critical CSS inlining",
+          "Advanced property search integration",
+          "Custom page templates for listings",
+          "SEO-optimized structure",
+          "Cross-browser compatibility",
+          "Improved workflow and usability from legacy system",
+          "Seamless integration with custom plugins",
+        ],
+        liveUrl: "https://www.visaverde.com",
+        githubUrl: "https://github.com/Peter-Eloy/VisaVerde-Theme",
       },
     ],
   },

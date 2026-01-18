@@ -53,7 +53,7 @@ const categories = [
   },
   {
     id: "wordpress",
-    title: "WordPress Plugins",
+    title: "WordPress",
     description: "Custom WordPress plugins and themes",
     image: "/peview-image.jpg",
     subcategories: [
