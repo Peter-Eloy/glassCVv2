@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 /**
  * Reusable pagination component with navigation arrows and page dots
  * Matches the blog page design with glowing arrows and fixed bottom positioning
+ * Responsive arrow positioning for different screen sizes
  */
 const CustomPagination = ({
   currentPage,
@@ -39,7 +40,6 @@ const CustomPagination = ({
         <NavigationArrow
           className="prev"
           onClick={handlePrevClick}
-          style={{ left: 280 }}
           aria-label="Previous page"
         />
       )}
@@ -83,7 +83,6 @@ const CustomPagination = ({
         <NavigationArrow
           className="next"
           onClick={handleNextClick}
-          style={{ right: 280 }}
           aria-label="Next page"
         />
       )}

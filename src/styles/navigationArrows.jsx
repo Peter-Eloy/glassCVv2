@@ -11,6 +11,56 @@ export const NavigationArrow = styled.button`
   transform: translateY(-50%);
   z-index: 100;
 
+  /* Responsive positioning - arrows placed symmetrically at equal distances from viewport edges */
+  /* Perfect mirror symmetry: same pixel value from left and right edges */
+  &.prev {
+    /* Mobile and small tablets - no sidebar */
+    @media (max-width: 899px) {
+      left: 10px;
+    }
+    /* Tablets and small laptops */
+    @media (min-width: 900px) and (max-width: 1199px) {
+      left: 226px;
+    }
+    /* MacBook Pro 13" and similar (1200-1439px) */
+    @media (min-width: 1200px) and (max-width: 1439px) {
+      left: 226px;
+    }
+    /* Standard laptops and MacBook Pro 14" (1440-1679px) */
+    @media (min-width: 1440px) and (max-width: 1679px) {
+      left: 221px;
+    }
+    /* Large screens and MacBook Pro 16" (1680px+) */
+    @media (min-width: 1680px) {
+      left: 216px;
+    }
+  }
+
+  /* Responsive positioning for next arrow */
+  /* Right arrow mirrors left arrow - same pixel distance from viewport edge */
+  &.next {
+    /* Mobile and small tablets */
+    @media (max-width: 899px) {
+      right: 10px;
+    }
+    /* Tablets and small laptops */
+    @media (min-width: 900px) and (max-width: 1199px) {
+      right: 226px; /* Perfect mirror of left arrow */
+    }
+    /* MacBook Pro 13" and similar (1200-1439px) */
+    @media (min-width: 1200px) and (max-width: 1439px) {
+      right: 226px; /* Perfect mirror of left arrow */
+    }
+    /* Standard laptops and MacBook Pro 14" (1440-1679px) */
+    @media (min-width: 1440px) and (max-width: 1679px) {
+      right: 221px; /* Perfect mirror of left arrow */
+    }
+    /* Large screens and MacBook Pro 16" (1680px+) */
+    @media (min-width: 1680px) {
+      right: 216px; /* Perfect mirror of left arrow */
+    }
+  }
+
   &:before {
     content: "";
     display: block;
