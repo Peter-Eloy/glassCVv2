@@ -10,8 +10,8 @@ const MobileHome = () => {
   const { isDarkMode } = useTheme();
 
   const skills = [
-    "React.js", "Node.js", "Go", "TypeScript", 
-    "Next.js", "WordPress", "PostgreSQL", "AI Integration"
+    "React.js", "React Native", "Node.js", "Go", "TypeScript",
+    "Next.js", "PostgreSQL", "AI Integration", "AI Agents"
   ];
 
   const highlights = [
@@ -107,9 +107,10 @@ const MobileHome = () => {
           About
         </Typography>
         <Typography variant="body2" sx={{ lineHeight: 1.6, opacity: 0.9 }}>
-          Full-stack developer with 7+ years of experience building scalable web applications. 
-          Specialized in React, Node.js, and Go. Currently leading development at NARTEX SOFTWARE 
-          while building AI-powered trading tools and automation projects.
+          Full-stack developer with 7+ years of experience building scalable web and mobile applications.
+          Specialized in React, React Native, Node.js, and Go, with a growing focus on AI agents and
+          automation. Currently leading development at NARTEX SOFTWARE while building an AI-powered
+          React Native health app and automation tooling as an indie developer.
         </Typography>
       </GlassContainer>
 
