@@ -459,6 +459,57 @@ Available as downloadable installers for both Windows (.exe) and macOS (.pkg) pl
       },
     ],
   },
+  {
+    id: "hobbies",
+    title: "Hobbies & Experiments",
+    description: "Personal automation projects and creative ventures",
+    subcategories: [
+      {
+        id: "openclaw",
+        title: "OpenClaw Automation",
+        description:
+          "Game automation project exploring computer vision and AI-driven bot development.",
+        category: "Automation",
+        fullDescription: `A personal hobby project exploring game automation through computer vision and AI. OpenClaw is a retro platformer game that serves as a testing ground for building intelligent automation bots.
+
+The project involves capturing game screen data, processing it with computer vision algorithms, and using AI to make gameplay decisions. Currently experimenting with different approaches including template matching, object detection, and reinforcement learning.
+
+While primarily a learning project, it demonstrates practical application of computer vision libraries and AI integration in real-time scenarios.`,
+        image: "/peview-image.jpg",
+        technologies: ["Python", "OpenCV", "NumPy", "PyAutoGUI", "Machine Learning"],
+        features: [
+          "Real-time screen capture and analysis",
+          "Computer vision-based object detection",
+          "AI-driven decision making",
+          "Automated input simulation",
+          "Performance metrics and logging",
+        ],
+        status: "In Development",
+      },
+      {
+        id: "audiobook",
+        title: "YouTube Audiobook Channel",
+        description:
+          "Curated audiobook content focusing on tech, business, and personal development.",
+        category: "Content Creation",
+        fullDescription: `A YouTube channel dedicated to bringing audiobook content to tech enthusiasts, entrepreneurs, and lifelong learners. Focusing on books about software development, business strategy, productivity, and personal growth.
+
+Content is produced using AI-assisted tools for voice synthesis and audio engineering, allowing for rapid content creation while maintaining high audio quality. Each video includes chapter timestamps and key takeaways for easy reference.
+
+The channel aims to make valuable knowledge accessible to busy professionals who prefer listening over reading.`,
+        image: "/peview-image.jpg",
+        technologies: ["YouTube API", "Audio Engineering", "AI Voice Synthesis", "Content Strategy"],
+        features: [
+          "Weekly audiobook releases",
+          "Tech and business focused content",
+          "AI-assisted production pipeline",
+          "Chapter timestamps and summaries",
+          "Curated book recommendations",
+        ],
+        status: "Launching Soon",
+      },
+    ],
+  },
 ];
 
 const PortfolioSubcategoryView = () => {
