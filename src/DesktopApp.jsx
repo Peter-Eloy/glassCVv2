@@ -60,7 +60,7 @@ function DesktopApp() {
         sx={{
           display: "flex",
           flexDirection: "column",
-          height: "100vh",
+          height: "calc(100vh - 20px)",
           overflow: "hidden",
           position: "fixed",
           width: "100%",
