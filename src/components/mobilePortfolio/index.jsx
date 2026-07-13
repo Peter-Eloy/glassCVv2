@@ -5,6 +5,9 @@ import { useParams, useNavigate } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import LaunchIcon from "@mui/icons-material/Launch";
 import GitHubIcon from "@mui/icons-material/GitHub";
+import RevealOnScroll from "../revealOnScroll";
+
+const GLOW = "0, 191, 255";
 
 const categories = [
   {
@@ -152,45 +155,46 @@ const MobilePortfolio = () => {
           Portfolio
         </Typography>
         
-        {categories.map((category) => (
-          <Card
-            key={category.id}
-            onClick={() => setSelectedCategory(category)}
-            sx={{
-              mb: 2,
-              background: isDarkMode
-                ? "rgba(255, 255, 255, 0.05)"
-                : "rgba(0, 0, 0, 0.02)",
-              border: `1px solid ${
-                isDarkMode ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.1)"
-              }`,
-              borderRadius: 3,
-              cursor: "pointer",
-              transition: "transform 0.2s",
-              "&:active": { transform: "scale(0.98)" },
-            }}
-          >
-            <CardContent>
-              <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
-                {category.title}
-              </Typography>
-              <Typography variant="body2" sx={{ opacity: 0.8, mb: 2 }}>
-                {category.description}
-              </Typography>
-              <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                <Chip
-                  label={`${category.projects.length} projects`}
-                  size="small"
-                  sx={{
-                    bgcolor: isDarkMode ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.05)",
-                  }}
-                />
-                <Typography variant="caption" sx={{ opacity: 0.6 }}>
-                  Tap to view →
+        {categories.map((category, index) => (
+          <RevealOnScroll key={category.id} delay={index * 60}>
+            <Card
+              onClick={() => setSelectedCategory(category)}
+              sx={{
+                mb: 2,
+                background: isDarkMode
+                  ? "rgba(255, 255, 255, 0.05)"
+                  : "rgba(0, 0, 0, 0.02)",
+                border: `1px solid rgba(${GLOW}, ${isDarkMode ? 0.18 : 0.15})`,
+                borderLeft: `3px solid rgba(${GLOW}, 0.7)`,
+                borderRadius: 3,
+                cursor: "pointer",
+                transition: "transform 0.2s, box-shadow 0.2s",
+                "&:active": { transform: "scale(0.98)" },
+                "&:hover": { boxShadow: `0 0 16px rgba(${GLOW}, 0.15)` },
+              }}
+            >
+              <CardContent>
+                <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
+                  {category.title}
                 </Typography>
-              </Box>
-            </CardContent>
-          </Card>
+                <Typography variant="body2" sx={{ opacity: 0.8, mb: 2 }}>
+                  {category.description}
+                </Typography>
+                <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <Chip
+                    label={`${category.projects.length} projects`}
+                    size="small"
+                    sx={{
+                      bgcolor: isDarkMode ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.05)",
+                    }}
+                  />
+                  <Typography variant="caption" sx={{ color: `rgb(${GLOW})`, fontWeight: 600 }}>
+                    Tap to view →
+                  </Typography>
+                </Box>
+              </CardContent>
+            </Card>
+          </RevealOnScroll>
         ))}
       </Box>
     );
@@ -210,20 +214,21 @@ const MobilePortfolio = () => {
       </Box>
 
       {/* Projects */}
-      {selectedCategory.projects.map((project) => (
+      {selectedCategory.projects.map((project, index) => (
+        <RevealOnScroll key={project.id} delay={index * 60}>
         <Card
-          key={project.id}
           onClick={() => setSelectedProject(project)}
           sx={{
             mb: 2,
             background: isDarkMode
               ? "rgba(255, 255, 255, 0.05)"
               : "rgba(0, 0, 0, 0.02)",
-            border: `1px solid ${
-              isDarkMode ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.1)"
-            }`,
+            border: `1px solid rgba(${GLOW}, ${isDarkMode ? 0.18 : 0.15})`,
+            borderLeft: `3px solid rgba(${GLOW}, 0.7)`,
             borderRadius: 3,
             cursor: "pointer",
+            transition: "box-shadow 0.2s",
+            "&:hover": { boxShadow: `0 0 16px rgba(${GLOW}, 0.15)` },
           }}
         >
           <CardContent>
@@ -235,8 +240,7 @@ const MobilePortfolio = () => {
                 <Chip
                   label={project.status}
                   size="small"
-                  color="primary"
-                  sx={{ fontSize: "0.7rem" }}
+                  sx={{ fontSize: "0.7rem", bgcolor: `rgba(${GLOW}, 0.15)`, color: `rgb(${GLOW})`, fontWeight: 600 }}
                 />
               )}
             </Box>
@@ -268,6 +272,7 @@ const MobilePortfolio = () => {
             </Box>
           </CardContent>
         </Card>
+        </RevealOnScroll>
       ))}
 
       {/* Project Detail Dialog */}
@@ -294,8 +299,7 @@ const MobilePortfolio = () => {
                 <Chip
                   label={selectedProject.status}
                   size="small"
-                  color="primary"
-                  sx={{ mt: 1 }}
+                  sx={{ mt: 1, bgcolor: `rgba(${GLOW}, 0.15)`, color: `rgb(${GLOW})`, fontWeight: 600 }}
                 />
               )}
             </DialogTitle>
@@ -348,6 +352,11 @@ const MobilePortfolio = () => {
                     href={selectedProject.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
+                    sx={{
+                      bgcolor: `rgb(${GLOW})`,
+                      boxShadow: `0 0 12px rgba(${GLOW}, 0.5)`,
+                      "&:hover": { bgcolor: `rgb(${GLOW})`, boxShadow: `0 0 20px rgba(${GLOW}, 0.7)` },
+                    }}
                   >
                     Live Demo
                   </Button>
@@ -360,6 +369,7 @@ const MobilePortfolio = () => {
                     href={selectedProject.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
+                    sx={{ borderColor: `rgba(${GLOW}, 0.5)`, color: `rgb(${GLOW})` }}
                   >
                     Code
                   </Button>
