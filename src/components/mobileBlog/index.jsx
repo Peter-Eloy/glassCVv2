@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import { Box, Typography, Card, CardContent, Chip, CircularProgress, Pagination } from "@mui/material";
 import { useTheme } from "../../contexts";
 import { tumblrService } from "../../services/tumblr";
+import RevealOnScroll from "../revealOnScroll";
+
+const GLOW = "0, 191, 255";
 
 const FILTERS = [
   { id: "all", label: "All" },
@@ -57,15 +60,17 @@ const MobileBlog = () => {
             }}
             sx={{
               bgcolor: activeFilter === filter.id
-                ? isDarkMode ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.1)"
+                ? `rgba(${GLOW}, 0.18)`
                 : isDarkMode ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.03)",
               border: `1px solid ${
                 activeFilter === filter.id
-                  ? isDarkMode ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.2)"
+                  ? `rgba(${GLOW}, 0.6)`
                   : "transparent"
               }`,
-              color: "inherit",
+              color: activeFilter === filter.id ? `rgb(${GLOW})` : "inherit",
+              fontWeight: activeFilter === filter.id ? 600 : 400,
               flexShrink: 0,
+              transition: "all 0.2s ease",
             }}
           />
         ))}
@@ -78,20 +83,21 @@ const MobileBlog = () => {
         </Box>
       ) : (
         <>
-          {posts.map((post) => (
+          {posts.map((post, index) => (
+            <RevealOnScroll key={post.id} delay={Math.min(index, 4) * 60}>
             <Card
-              key={post.id}
               onClick={() => setSelectedPost(post)}
               sx={{
                 mb: 2,
                 background: isDarkMode
                   ? "rgba(255, 255, 255, 0.05)"
                   : "rgba(0, 0, 0, 0.02)",
-                border: `1px solid ${
-                  isDarkMode ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.1)"
-                }`,
+                border: `1px solid rgba(${GLOW}, ${isDarkMode ? 0.18 : 0.15})`,
+                borderLeft: `3px solid rgba(${GLOW}, 0.7)`,
                 borderRadius: 3,
                 cursor: "pointer",
+                transition: "box-shadow 0.2s",
+                "&:hover": { boxShadow: `0 0 16px rgba(${GLOW}, 0.15)` },
               }}
             >
               <CardContent>
@@ -113,7 +119,7 @@ const MobileBlog = () => {
                 </Typography>
                 <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                   <Typography variant="caption" sx={{ opacity: 0.6 }}>
-                    {new Date(post.date).toLocaleDateString()}
+                    {post.date ? new Date(post.date).toLocaleDateString() : ""}
                   </Typography>
                   {post.tags?.slice(0, 2).map((tag) => (
                     <Chip
@@ -130,6 +136,7 @@ const MobileBlog = () => {
                 </Box>
               </CardContent>
             </Card>
+            </RevealOnScroll>
           ))}
 
           {/* Pagination */}
@@ -145,7 +152,8 @@ const MobileBlog = () => {
                     color: isDarkMode ? "#fff" : "#213547",
                   },
                   "& .Mui-selected": {
-                    bgcolor: isDarkMode ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)",
+                    bgcolor: `rgba(${GLOW}, 0.2)`,
+                    color: `rgb(${GLOW})`,
                   },
                 }}
               />

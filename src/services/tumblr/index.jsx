@@ -13,6 +13,18 @@ const tumblrApi = axios.create({
 });
 
 /**
+ * Decodes HTML entities (e.g. &ouml; -> ö) using the browser's own parser
+ * @param {string} text - Text that may contain HTML entities
+ * @returns {string} - Decoded text
+ */
+const decodeHtmlEntities = (text = "") => {
+  if (!text) return "";
+  const textarea = document.createElement("textarea");
+  textarea.innerHTML = text;
+  return textarea.value;
+};
+
+/**
  * Extracts a clean title from a post
  * @param {Object} post - The Tumblr post object
  * @returns {string} - The title
@@ -20,14 +32,14 @@ const tumblrApi = axios.create({
 const getPostTitle = (post) => {
   // If the post already has a title, use it
   if (post.title) {
-    return post.title;
+    return decodeHtmlEntities(post.title);
   }
 
   // Check for H1 tags in the content
   const h1Match = (post.body || post.text || "").match(/<h1[^>]*>(.*?)<\/h1>/i);
   if (h1Match && h1Match[1]) {
     // Remove any HTML tags inside the H1
-    return h1Match[1].replace(/<[^>]+>/g, "").trim();
+    return decodeHtmlEntities(h1Match[1].replace(/<[^>]+>/g, "").trim());
   }
 
   // If no H1, extract first sentence with more generous length
@@ -54,10 +66,12 @@ const getExcerpt = (text = "", maxLength = 150) => {
   const withoutH1 = text?.replace(/<h1[^>]*>.*?<\/h1>/gi, "");
 
   // Then proceed with normal cleaning
-  const cleanText = withoutH1
-    ?.replace(/<[^>]+>/g, "")
-    ?.replace(/\n/g, " ")
-    ?.trim();
+  const cleanText = decodeHtmlEntities(
+    withoutH1
+      ?.replace(/<[^>]+>/g, "")
+      ?.replace(/\n/g, " ")
+      ?.trim()
+  );
 
   if (!cleanText) return "";
   return cleanText.length > maxLength
@@ -125,11 +139,13 @@ const formatPost = (post) => {
     excerpt: getExcerpt(post.body || post.text || ""),
     cleanExcerpt: createCleanExcerpt(post, title),
     content: post.body || post.text || "",
+    body: post.body || post.text || "",
     tags: post.tags || [],
     noteCount: post.note_count || 0,
     url: post.post_url,
     media: extractMedia(post),
     timestamp: post.timestamp,
+    date: post.timestamp ? new Date(post.timestamp * 1000).toISOString() : null,
   };
 };
 
