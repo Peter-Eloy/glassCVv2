@@ -87,9 +87,21 @@ const MobileNavigation = () => {
               minWidth: "auto",
               padding: "6px 0",
               transition: "color 0.25s ease, transform 0.2s ease",
+              outline: "none",
+              "-webkit-tap-highlight-color": "transparent",
             },
             "& .MuiBottomNavigationAction-root:active": {
               transform: "scale(0.92)",
+            },
+            "& .MuiBottomNavigationAction-root:focus": {
+              outline: "none",
+            },
+            "& .MuiBottomNavigationAction-root.Mui-focusVisible": {
+              backgroundColor: "transparent",
+              outline: "none",
+            },
+            "& .MuiTouchRipple-root": {
+              display: "none",
             },
             "& .Mui-selected": {
               color: `rgb(${GLOW})`,
