@@ -111,9 +111,9 @@ const MobileHome = () => {
           Full-stack developer with 7+ years of experience building scalable web and mobile applications.
           Specialized in React, React Native, Node.js, and Go. Deep hands-on experience with AI agents and
           agent orchestration, prompt engineering, and self-hosted local LLMs (Ollama, vLLM, LM Studio) on
-          dedicated GPU hardware. Currently leading development at NARTEX SOFTWARE while building an
-          AI-powered React Native health app as an indie developer and contributing to open-source
-          multi-agent AI projects.
+          dedicated GPU hardware. Currently working as a Full-Stack Developer at NARTEX SOFTWARE while
+          building an AI-powered React Native health app as an indie developer and contributing to
+          open-source multi-agent AI projects.
         </Typography>
       </GlassContainer>
 
