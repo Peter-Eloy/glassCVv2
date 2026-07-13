@@ -194,8 +194,12 @@ const MobileHome = () => {
                   <Chip
                     label={project.status}
                     size="small"
-                    color="primary"
-                    sx={{ fontSize: "0.7rem" }}
+                    sx={{
+                      fontSize: "0.7rem",
+                      bgcolor: "rgba(0, 191, 255, 0.15)",
+                      color: "rgb(0, 191, 255)",
+                      fontWeight: 600,
+                    }}
                   />
                 </Box>
                 <Typography variant="caption" sx={{ opacity: 0.7 }}>

@@ -164,6 +164,7 @@ const MobilePortfolio = () => {
                 background: isDarkMode
                   ? "rgba(255, 255, 255, 0.05)"
                   : "rgba(0, 0, 0, 0.02)",
+                color: isDarkMode ? "#fff" : "#213547",
                 border: `1px solid rgba(${GLOW}, ${isDarkMode ? 0.18 : 0.15})`,
                 borderLeft: `3px solid rgba(${GLOW}, 0.7)`,
                 borderRadius: 3,
@@ -223,6 +224,7 @@ const MobilePortfolio = () => {
             background: isDarkMode
               ? "rgba(255, 255, 255, 0.05)"
               : "rgba(0, 0, 0, 0.02)",
+            color: isDarkMode ? "#fff" : "#213547",
             border: `1px solid rgba(${GLOW}, ${isDarkMode ? 0.18 : 0.15})`,
             borderLeft: `3px solid rgba(${GLOW}, 0.7)`,
             borderRadius: 3,
@@ -286,6 +288,7 @@ const MobilePortfolio = () => {
             borderRadius: 3,
             m: 2,
             background: isDarkMode ? "#1e1e1e" : "#fff",
+            color: isDarkMode ? "#fff" : "#213547",
           },
         }}
       >
