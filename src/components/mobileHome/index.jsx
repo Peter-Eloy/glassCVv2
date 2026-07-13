@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useTheme } from "../../contexts";
 import GlassContainer from "../glassContainer";
+import RevealOnScroll from "../revealOnScroll";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import EmailIcon from "@mui/icons-material/Email";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
@@ -64,18 +65,33 @@ const MobileHome = () => {
     >
       {/* Header Section */}
       <Box sx={{ textAlign: "center", mb: 3 }}>
-        <Avatar
+        <Box
           sx={{
-            width: 100,
-            height: 100,
+            width: 116,
+            height: 116,
             mx: "auto",
             mb: 2,
-            bgcolor: isDarkMode ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)",
-            fontSize: "2.5rem",
+            borderRadius: "50%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            background: "linear-gradient(135deg, rgba(0,191,255,0.7), rgba(0,191,255,0.05))",
+            boxShadow: "0 0 20px rgba(0,191,255,0.5), 0 0 40px rgba(0,191,255,0.25)",
           }}
         >
-          PE
-        </Avatar>
+          <Avatar
+            sx={{
+              width: 100,
+              height: 100,
+              bgcolor: isDarkMode ? "rgba(20,20,30,0.9)" : "rgba(255,255,255,0.9)",
+              color: isDarkMode ? "#fff" : "#213547",
+              fontSize: "2.5rem",
+              fontWeight: 700,
+            }}
+          >
+            PE
+          </Avatar>
+        </Box>
         <Typography variant="h4" sx={{ fontWeight: 700, mb: 1 }}>
           Peter Eloy
         </Typography>
@@ -115,25 +131,28 @@ const MobileHome = () => {
       </Box>
 
       {/* Quick Stats */}
-      <GlassContainer sx={{ mb: 2, p: 2 }}>
-        <Box sx={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 1, textAlign: "center" }}>
-          {highlights.map((item) => (
-            <Box key={item.title}>
-              <Typography variant="caption" sx={{ opacity: 0.7, display: "block" }}>
-                {item.title}
-              </Typography>
-              <Typography variant="body2" sx={{ fontWeight: 600 }}>
-                {item.value}
-              </Typography>
-              <Typography variant="caption" sx={{ opacity: 0.5, fontSize: "0.65rem" }}>
-                {item.subtext}
-              </Typography>
-            </Box>
-          ))}
-        </Box>
-      </GlassContainer>
+      <RevealOnScroll>
+        <GlassContainer sx={{ mb: 2, p: 2 }}>
+          <Box sx={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 1, textAlign: "center" }}>
+            {highlights.map((item) => (
+              <Box key={item.title}>
+                <Typography variant="caption" sx={{ opacity: 0.7, display: "block" }}>
+                  {item.title}
+                </Typography>
+                <Typography variant="body2" sx={{ fontWeight: 600 }}>
+                  {item.value}
+                </Typography>
+                <Typography variant="caption" sx={{ opacity: 0.5, fontSize: "0.65rem" }}>
+                  {item.subtext}
+                </Typography>
+              </Box>
+            ))}
+          </Box>
+        </GlassContainer>
+      </RevealOnScroll>
 
       {/* Currently Building */}
+      <RevealOnScroll delay={80}>
       <GlassContainer sx={{ mb: 2, p: 2 }}>
         <Box
           onClick={() => setBuildingOpen((prev) => !prev)}
@@ -187,43 +206,49 @@ const MobileHome = () => {
           </Box>
         )}
       </GlassContainer>
+      </RevealOnScroll>
 
       {/* About */}
-      <GlassContainer sx={{ mb: 2, p: 2 }}>
-        <Typography variant="h6" sx={{ mb: 1, fontWeight: 600 }}>
-          About
-        </Typography>
-        <Typography variant="body2" sx={{ lineHeight: 1.6, opacity: 0.9 }}>
-          Full-stack developer with 7+ years of experience building scalable web and mobile applications.
-          Specialized in React, React Native, Node.js, and Go. Deep hands-on experience with AI agents and
-          agent orchestration, prompt engineering, and self-hosted local LLMs (Ollama, vLLM, LM Studio) on
-          dedicated GPU hardware. Currently working as a Full-Stack Developer at NARTEX SOFTWARE while
-          building an AI-powered React Native health app as an indie developer and contributing to
-          open-source multi-agent AI projects.
-        </Typography>
-      </GlassContainer>
+      <RevealOnScroll delay={80}>
+        <GlassContainer sx={{ mb: 2, p: 2 }}>
+          <Typography variant="h6" sx={{ mb: 1, fontWeight: 600 }}>
+            About
+          </Typography>
+          <Typography variant="body2" sx={{ lineHeight: 1.6, opacity: 0.9 }}>
+            Full-stack developer with 7+ years of experience building scalable web and mobile applications.
+            Specialized in React, React Native, Node.js, and Go. Deep hands-on experience with AI agents and
+            agent orchestration, prompt engineering, and self-hosted local LLMs (Ollama, vLLM, LM Studio) on
+            dedicated GPU hardware. Currently working as a Full-Stack Developer at NARTEX SOFTWARE while
+            building an AI-powered React Native health app as an indie developer and contributing to
+            open-source multi-agent AI projects.
+          </Typography>
+        </GlassContainer>
+      </RevealOnScroll>
 
       {/* Skills */}
-      <GlassContainer sx={{ mb: 2, p: 2 }}>
-        <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
-          Tech Stack
-        </Typography>
-        <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
-          {skills.map((skill) => (
-            <Chip
-              key={skill}
-              label={skill}
-              size="small"
-              sx={{
-                bgcolor: isDarkMode ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.05)",
-                color: "inherit",
-              }}
-            />
-          ))}
-        </Box>
-      </GlassContainer>
+      <RevealOnScroll delay={80}>
+        <GlassContainer sx={{ mb: 2, p: 2 }}>
+          <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
+            Tech Stack
+          </Typography>
+          <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
+            {skills.map((skill) => (
+              <Chip
+                key={skill}
+                label={skill}
+                size="small"
+                sx={{
+                  bgcolor: isDarkMode ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.05)",
+                  color: "inherit",
+                }}
+              />
+            ))}
+          </Box>
+        </GlassContainer>
+      </RevealOnScroll>
 
       {/* Contact Buttons */}
+      <RevealOnScroll delay={80}>
       <Box sx={{ display: "flex", gap: 2, mb: 2 }}>
         <Button
           fullWidth
@@ -279,6 +304,7 @@ const MobileHome = () => {
           GitHub
         </Button>
       </Box>
+      </RevealOnScroll>
     </Box>
   );
 };
