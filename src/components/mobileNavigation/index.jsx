@@ -39,17 +39,19 @@ const MobileNavigation = () => {
     <Paper
       sx={{
         position: "fixed",
-        bottom: 0,
-        left: 0,
-        right: 0,
+        bottom: 16,
+        left: 16,
+        right: 16,
         zIndex: 1000,
+        borderRadius: "28px",
+        overflow: "hidden",
         background: isDarkMode
-          ? "rgba(20, 20, 30, 0.75)"
-          : "rgba(255, 255, 255, 0.75)",
-        backdropFilter: "blur(16px)",
-        WebkitBackdropFilter: "blur(16px)",
-        borderTop: `1px solid rgba(${GLOW}, ${isDarkMode ? 0.25 : 0.2})`,
-        boxShadow: `0 -4px 24px rgba(${GLOW}, 0.08)`,
+          ? "rgba(24, 24, 34, 0.8)"
+          : "rgba(255, 255, 255, 0.8)",
+        backdropFilter: "blur(20px)",
+        WebkitBackdropFilter: "blur(20px)",
+        border: `1px solid rgba(${GLOW}, ${isDarkMode ? 0.3 : 0.25})`,
+        boxShadow: `0 8px 32px rgba(0, 0, 0, ${isDarkMode ? 0.4 : 0.15}), 0 0 20px rgba(${GLOW}, 0.12)`,
       }}
       elevation={0}
     >
@@ -59,6 +61,7 @@ const MobileNavigation = () => {
         showLabels
         sx={{
           background: "transparent",
+          height: 64,
           "& .MuiBottomNavigationAction-root": {
             color: isDarkMode ? "rgba(255, 255, 255, 0.5)" : "rgba(0, 0, 0, 0.5)",
             minWidth: "auto",
@@ -84,7 +87,7 @@ const MobileNavigation = () => {
       <Box
         sx={{
           position: "absolute",
-          top: 0,
+          top: 6,
           left: `${value * 25}%`,
           width: "25%",
           height: "2px",
