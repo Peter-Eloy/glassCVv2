@@ -1,4 +1,8 @@
+import { useState } from "react";
 import { Box, Typography, Chip, Button, Avatar } from "@mui/material";
+import { TypeAnimation } from "react-type-animation";
+import { useNavigate } from "react-router-dom";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useTheme } from "../../contexts";
 import GlassContainer from "../glassContainer";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
@@ -8,6 +12,8 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 
 const MobileHome = () => {
   const { isDarkMode } = useTheme();
+  const navigate = useNavigate();
+  const [buildingOpen, setBuildingOpen] = useState(false);
 
   const skills = [
     "React.js", "React Native", "Node.js", "Go", "TypeScript",
@@ -17,20 +23,33 @@ const MobileHome = () => {
 
   const highlights = [
     {
-      title: "Current Role",
-      value: "Full-Stack Dev @ NARTEX SOFTWARE",
-      subtext: "Feb 2024 - Present"
-    },
-    {
       title: "Experience",
       value: "7+ Years",
       subtext: "Web Development & PM"
     },
     {
-      title: "Projects",
-      value: "15+ Delivered",
-      subtext: "Production apps"
+      title: "Indie Apps",
+      value: "2 Shipped",
+      subtext: "Open-D & Nadie Sin Su Medicina"
+    },
+    {
+      title: "Open Source",
+      value: "1 Contribution",
+      subtext: "Multi-agent AI platform"
     }
+  ];
+
+  const currentlyBuilding = [
+    {
+      title: "Open-D",
+      subtitle: "AI companion for Type 1 diabetes",
+      status: "Private Beta",
+    },
+    {
+      title: "Nadie Sin Su Medicina",
+      subtitle: "Open-source patient advocacy platform",
+      status: "Live",
+    },
   ];
 
   return (
@@ -60,14 +79,26 @@ const MobileHome = () => {
         <Typography variant="h4" sx={{ fontWeight: 700, mb: 1 }}>
           Peter Eloy
         </Typography>
-        <Typography 
-          variant="subtitle1" 
-          sx={{ 
+        <Typography
+          variant="subtitle1"
+          component="div"
+          sx={{
             color: isDarkMode ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.7)",
-            mb: 2 
+            mb: 2,
+            minHeight: "1.6em",
           }}
         >
-          Full-Stack Developer
+          <TypeAnimation
+            sequence={[
+              "Full-Stack Developer", 2000,
+              "AI Agent Builder", 2000,
+              "Indie Developer", 2000,
+            ]}
+            wrapper="span"
+            speed={50}
+            deletionSpeed={65}
+            repeat={Infinity}
+          />
         </Typography>
         
         {/* Availability Badge */}
@@ -100,6 +131,61 @@ const MobileHome = () => {
             </Box>
           ))}
         </Box>
+      </GlassContainer>
+
+      {/* Currently Building */}
+      <GlassContainer sx={{ mb: 2, p: 2 }}>
+        <Box
+          onClick={() => setBuildingOpen((prev) => !prev)}
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            cursor: "pointer",
+          }}
+        >
+          <Typography variant="h6" sx={{ fontWeight: 600 }}>
+            Currently Building
+          </Typography>
+          <ExpandMoreIcon
+            sx={{
+              transform: buildingOpen ? "rotate(180deg)" : "rotate(0deg)",
+              transition: "transform 0.2s ease",
+            }}
+          />
+        </Box>
+        {buildingOpen && (
+          <Box sx={{ mt: 2, display: "flex", flexDirection: "column", gap: 1 }}>
+            {currentlyBuilding.map((project) => (
+              <Box
+                key={project.title}
+                onClick={() => navigate("/portfolio/hobbies")}
+                sx={{
+                  p: 1.5,
+                  borderRadius: 2,
+                  cursor: "pointer",
+                  bgcolor: isDarkMode ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.03)",
+                  "&:active": { transform: "scale(0.98)" },
+                }}
+              >
+                <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 0.5 }}>
+                  <Typography variant="body2" sx={{ fontWeight: 600 }}>
+                    {project.title}
+                  </Typography>
+                  <Chip
+                    label={project.status}
+                    size="small"
+                    color="primary"
+                    sx={{ fontSize: "0.7rem" }}
+                  />
+                </Box>
+                <Typography variant="caption" sx={{ opacity: 0.7 }}>
+                  {project.subtitle}
+                </Typography>
+              </Box>
+            ))}
+          </Box>
+        )}
       </GlassContainer>
 
       {/* About */}
