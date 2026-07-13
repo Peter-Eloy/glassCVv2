@@ -88,9 +88,18 @@ const categories = [
   },
   {
     id: "automation",
-    title: "Automation & Hobbies",
-    description: "Personal automation projects and creative ventures",
+    title: "Products & Experiments",
+    description: "Indie products, automation projects, and creative ventures",
     projects: [
+      {
+        id: "open-d",
+        title: "Open-D",
+        description: "React Native AI companion app for Type 1 diabetes management, built solo and currently in private beta with real CGM users.",
+        technologies: ["React Native", "TypeScript", "CGM APIs (Libre 3, Dexcom)"],
+        features: ["Predictive high/low alerts", "Personalized insulin dosing calculator", "Local-only, on-device data storage"],
+        liveUrl: "https://open-d.app",
+        status: "Private Beta",
+      },
       {
         id: "openclaw",
         title: "OpenClaw Automation",

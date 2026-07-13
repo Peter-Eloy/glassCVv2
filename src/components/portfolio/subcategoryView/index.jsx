@@ -461,9 +461,33 @@ Available as downloadable installers for both Windows (.exe) and macOS (.pkg) pl
   },
   {
     id: "hobbies",
-    title: "Hobbies & Experiments",
-    description: "Personal automation projects and creative ventures",
+    title: "Products & Experiments",
+    description: "Indie products, automation projects, and creative ventures",
     subcategories: [
+      {
+        id: "open-d",
+        title: "Open-D",
+        description:
+          "React Native AI companion app for Type 1 diabetes management, built solo and currently in private beta with real CGM users.",
+        category: "Indie Product",
+        fullDescription: `Open-D is a mobile AI companion for people managing Type 1 diabetes, built as an indie developer end-to-end: product design, mobile app, backend, and CGM hardware integrations.
+
+The app connects to continuous glucose monitors (Libre 3 and Dexcom G6/G7) to learn individual glucose patterns and surface proactive alerts before highs and lows occur, rather than passive after-the-fact tracking. It includes an insulin dosing calculator based on personal patterns, meal and workout planning with AI-driven coaching, and a night-time safety monitor with escalation alerts.
+
+All health data is stored locally on-device rather than synced to the cloud, a deliberate architecture decision for a sensitive health data product. Currently in a closed beta with real users, refining the product based on live feedback ahead of a wider release.`,
+        image: "/peview-image.jpg",
+        technologies: ["React Native", "TypeScript", "CGM APIs (Libre 3, Dexcom)", "On-device storage"],
+        features: [
+          "Continuous glucose monitor integration",
+          "Predictive high/low alerts",
+          "Personalized insulin dosing calculator",
+          "AI-driven meal and workout coaching",
+          "Local-only, on-device data storage",
+          "Night-time safety monitoring with escalation alerts",
+        ],
+        liveUrl: "https://open-d.app",
+        status: "Private Beta",
+      },
       {
         id: "openclaw",
         title: "OpenClaw Automation",

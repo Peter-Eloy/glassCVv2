@@ -67,10 +67,16 @@ const categories = [
   },
   {
     id: "hobbies",
-    title: "Hobbies & Experiments",
-    description: "Personal automation projects and creative ventures",
+    title: "Products & Experiments",
+    description: "Indie products, automation projects, and creative ventures",
     image: "/peview-image.jpg",
     subcategories: [
+      {
+        id: "open-d",
+        title: "Open-D",
+        description:
+          "React Native AI companion app for Type 1 diabetes management, in private beta.",
+      },
       {
         id: "openclaw",
         title: "OpenClaw Automation",
