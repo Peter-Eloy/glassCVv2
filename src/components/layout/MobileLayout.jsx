@@ -16,7 +16,7 @@ const MobileLayout = () => {
       <ConsoleMessage />
       <Box
         sx={{
-          minHeight: "100vh",
+          height: "100vh",
           display: "flex",
           flexDirection: "column",
           background: isDarkMode ? "#121212" : "#f5f5f5",
@@ -27,7 +27,8 @@ const MobileLayout = () => {
           component="main"
           sx={{
             flexGrow: 1,
-            overflow: "auto",
+            overflowY: "auto",
+            WebkitOverflowScrolling: "touch",
           }}
         >
           <Outlet />

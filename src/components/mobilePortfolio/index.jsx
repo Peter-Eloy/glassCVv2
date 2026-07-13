@@ -119,7 +119,7 @@ const MobilePortfolio = () => {
   // Category List View
   if (!selectedCategory) {
     return (
-      <Box sx={{ padding: "80px 16px 100px 16px", minHeight: "100vh" }}>
+      <Box sx={{ padding: "24px 16px 100px 16px" }}>
         <Typography variant="h5" sx={{ fontWeight: 700, mb: 3 }}>
           Portfolio
         </Typography>
@@ -170,7 +170,7 @@ const MobilePortfolio = () => {
 
   // Project List View
   return (
-    <Box sx={{ padding: "80px 16px 100px 16px", minHeight: "100vh" }}>
+    <Box sx={{ padding: "24px 16px 100px 16px" }}>
       {/* Header */}
       <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
         <IconButton onClick={() => setSelectedCategory(null)} sx={{ mr: 1 }}>

@@ -37,7 +37,7 @@ const MobileBlog = () => {
   }, [activeFilter, page]);
 
   return (
-    <Box sx={{ padding: "80px 16px 120px 16px", minHeight: "100vh" }}>
+    <Box sx={{ padding: "24px 16px 120px 16px" }}>
       <Typography variant="h5" sx={{ fontWeight: 700, mb: 1 }}>
         Blog
       </Typography>
