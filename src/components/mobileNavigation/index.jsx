@@ -55,47 +55,56 @@ const MobileNavigation = () => {
       }}
       elevation={0}
     >
-      <BottomNavigation
-        value={value}
-        onChange={handleChange}
-        showLabels
-        sx={{
-          background: "transparent",
-          height: 64,
-          "& .MuiBottomNavigationAction-root": {
-            color: isDarkMode ? "rgba(255, 255, 255, 0.5)" : "rgba(0, 0, 0, 0.5)",
-            minWidth: "auto",
-            padding: "6px 0",
-            transition: "color 0.25s ease, transform 0.2s ease",
-          },
-          "& .MuiBottomNavigationAction-root:active": {
-            transform: "scale(0.92)",
-          },
-          "& .Mui-selected": {
-            color: `rgb(${GLOW})`,
-          },
-          "& .Mui-selected .MuiSvgIcon-root": {
-            filter: `drop-shadow(0 0 6px rgba(${GLOW}, 0.9)) drop-shadow(0 0 12px rgba(${GLOW}, 0.5))`,
-          },
-        }}
-      >
-        <BottomNavigationAction label="Home" icon={<HomeIcon />} />
-        <BottomNavigationAction label="Portfolio" icon={<WorkIcon />} />
-        <BottomNavigationAction label="Skills" icon={<PsychologyIcon />} />
-        <BottomNavigationAction label="Blog" icon={<ArticleIcon />} />
-      </BottomNavigation>
-      <Box
-        sx={{
-          position: "absolute",
-          top: 6,
-          left: `${value * 25}%`,
-          width: "25%",
-          height: "2px",
-          background: `linear-gradient(90deg, transparent, rgb(${GLOW}), transparent)`,
-          boxShadow: `0 0 8px 1px rgba(${GLOW}, 0.8)`,
-          transition: "left 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-        }}
-      />
+      <Box sx={{ position: "relative" }}>
+        {/* Sliding active-tab pill, sits behind the icons/labels */}
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: `calc(${value * 25}% + 6px)`,
+            width: "calc(25% - 12px)",
+            height: 48,
+            transform: "translateY(-50%)",
+            borderRadius: "18px",
+            background: isDarkMode
+              ? `rgba(${GLOW}, 0.16)`
+              : `rgba(${GLOW}, 0.12)`,
+            transition: "left 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+            zIndex: 0,
+          }}
+        />
+        <BottomNavigation
+          value={value}
+          onChange={handleChange}
+          showLabels
+          sx={{
+            position: "relative",
+            zIndex: 1,
+            background: "transparent",
+            height: 64,
+            "& .MuiBottomNavigationAction-root": {
+              color: isDarkMode ? "rgba(255, 255, 255, 0.5)" : "rgba(0, 0, 0, 0.5)",
+              minWidth: "auto",
+              padding: "6px 0",
+              transition: "color 0.25s ease, transform 0.2s ease",
+            },
+            "& .MuiBottomNavigationAction-root:active": {
+              transform: "scale(0.92)",
+            },
+            "& .Mui-selected": {
+              color: `rgb(${GLOW})`,
+            },
+            "& .Mui-selected .MuiSvgIcon-root": {
+              filter: `drop-shadow(0 0 6px rgba(${GLOW}, 0.9)) drop-shadow(0 0 12px rgba(${GLOW}, 0.5))`,
+            },
+          }}
+        >
+          <BottomNavigationAction label="Home" icon={<HomeIcon />} />
+          <BottomNavigationAction label="Portfolio" icon={<WorkIcon />} />
+          <BottomNavigationAction label="Skills" icon={<PsychologyIcon />} />
+          <BottomNavigationAction label="Blog" icon={<ArticleIcon />} />
+        </BottomNavigation>
+      </Box>
     </Paper>
   );
 };
