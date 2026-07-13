@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Box, BottomNavigation, BottomNavigationAction, Paper } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import WorkIcon from "@mui/icons-material/Work";
@@ -6,6 +5,7 @@ import PsychologyIcon from "@mui/icons-material/Psychology";
 import ArticleIcon from "@mui/icons-material/Article";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useTheme } from "../../contexts";
+import { getMobileNavIndex } from "../../utils/mobileNavIndex";
 
 const GLOW = "0, 191, 255";
 
@@ -14,19 +14,9 @@ const MobileNavigation = () => {
   const location = useLocation();
   const { isDarkMode } = useTheme();
 
-  const getActiveValue = () => {
-    const path = location.pathname;
-    if (path === "/") return 0;
-    if (path.startsWith("/portfolio")) return 1;
-    if (path === "/skills") return 2;
-    if (path === "/blog") return 3;
-    return 0;
-  };
-
-  const [value, setValue] = useState(getActiveValue());
+  const value = getMobileNavIndex(location.pathname);
 
   const handleChange = (event, newValue) => {
-    setValue(newValue);
     switch (newValue) {
       case 0:
         navigate("/");

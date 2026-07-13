@@ -58,9 +58,6 @@ const MobileHome = () => {
       sx={{
         minHeight: "100%",
         padding: "24px 16px 100px 16px",
-        background: isDarkMode
-          ? "linear-gradient(180deg, #1a1a2e 0%, #16213e 100%)"
-          : "linear-gradient(180deg, #f5f5f5 0%, #e8e8e8 100%)",
       }}
     >
       {/* Header Section */}
