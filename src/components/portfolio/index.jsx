@@ -78,10 +78,22 @@ const categories = [
           "React Native AI companion app for Type 1 diabetes management, in private beta.",
       },
       {
+        id: "medicina-open-d",
+        title: "Nadie Sin Su Medicina",
+        description:
+          "Open-source platform helping diabetes patients denied medication gather support and generate formal complaint letters.",
+      },
+      {
         id: "openclaw",
         title: "OpenClaw Automation",
         description:
           "Game automation project exploring computer vision and AI-driven bot development.",
+      },
+      {
+        id: "openclaw-ai-contrib",
+        title: "OpenClaw.ai (Open Source Contributor)",
+        description:
+          "Core patches and custom skills contributed to an open-source multi-agent AI orchestration platform.",
       },
       {
         id: "audiobook",

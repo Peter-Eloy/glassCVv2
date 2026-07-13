@@ -489,6 +489,29 @@ All health data is stored locally on-device rather than synced to the cloud, a d
         status: "Private Beta",
       },
       {
+        id: "medicina-open-d",
+        title: "Nadie Sin Su Medicina",
+        description:
+          "Open-source platform where diabetes patients denied medication gather signatures and auto-generate a formal complaint letter for healthcare providers.",
+        category: "Open Source",
+        fullDescription: `Built after seeing a patient online say she'd been refused her diabetes medication, this is a small open-source platform to help patients push back.
+
+A patient who's been denied insulin, test strips, CGM sensors, or other supplies creates a case. Supporters receive an email and sign in one click. Once a case reaches 50 signatures, the platform automatically generates a formal PDF complaint letter that the patient can hand to their health center, hospital, or the relevant authority.
+
+Built and shipped solo in a short burst as a direct, practical response to a real problem rather than a portfolio exercise.`,
+        image: "/peview-image.jpg",
+        technologies: ["Next.js 14", "PostgreSQL (Neon)", "Drizzle ORM", "Resend", "pdf-lib", "Tailwind CSS"],
+        features: [
+          "Signature-collection campaigns per patient case",
+          "Automatic formal PDF letter generation at 50 signatures",
+          "Transactional email notifications",
+          "Fully open source",
+        ],
+        liveUrl: "https://medicina.open-d.app",
+        githubUrl: "https://github.com/noemi-paradise/medicina.open-d.app",
+        status: "Live",
+      },
+      {
         id: "openclaw",
         title: "OpenClaw Automation",
         description:
@@ -509,6 +532,29 @@ While primarily a learning project, it demonstrates practical application of com
           "Performance metrics and logging",
         ],
         status: "In Development",
+      },
+      {
+        id: "openclaw-ai-contrib",
+        title: "OpenClaw.ai (Open Source Contributor)",
+        description:
+          "Contributed core patches and custom skills to OpenClaw.ai, an open-source multi-agent AI orchestration platform.",
+        category: "Open Source",
+        fullDescription: `OpenClaw.ai is an open-source multi-agent AI platform built and maintained by a fellow developer. I contribute patches and build custom skills for it, unrelated to the OpenClaw Automation project above despite the shared name.
+
+Contributions include core patches to the agent memory system (a 3-layer memory architecture) and context-handling fixes, plus standalone skills that extend what the agents can do: controlling a local LLM server (Lemonade Server), monitoring a Raspberry Pi's status, and finding Amazon products for affiliate workflows.
+
+This work is hands-on experience with real multi-agent orchestration, agent memory design, and building tool integrations ("skills") that let LLM agents act on real systems.`,
+        image: "/peview-image.jpg",
+        technologies: ["TypeScript", "Multi-agent orchestration", "Local LLMs", "Lemonade Server"],
+        features: [
+          "3-layer agent memory system patches",
+          "Context-handling fixes",
+          "Custom skill: local LLM (Lemonade Server) control",
+          "Custom skill: Raspberry Pi monitoring",
+          "Custom skill: Amazon product finder",
+        ],
+        githubUrl: "https://github.com/noemi-paradise/openclaw-empire",
+        status: "Open Source",
       },
       {
         id: "audiobook",

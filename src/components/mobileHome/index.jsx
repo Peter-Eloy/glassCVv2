@@ -11,7 +11,8 @@ const MobileHome = () => {
 
   const skills = [
     "React.js", "React Native", "Node.js", "Go", "TypeScript",
-    "Next.js", "PostgreSQL", "AI Integration", "AI Agents"
+    "Next.js", "PostgreSQL", "AI Agents", "Prompt Engineering",
+    "Ollama", "vLLM", "LM Studio"
   ];
 
   const highlights = [
@@ -108,9 +109,11 @@ const MobileHome = () => {
         </Typography>
         <Typography variant="body2" sx={{ lineHeight: 1.6, opacity: 0.9 }}>
           Full-stack developer with 7+ years of experience building scalable web and mobile applications.
-          Specialized in React, React Native, Node.js, and Go, with a growing focus on AI agents and
-          automation. Currently leading development at NARTEX SOFTWARE while building an AI-powered
-          React Native health app and automation tooling as an indie developer.
+          Specialized in React, React Native, Node.js, and Go. Deep hands-on experience with AI agents and
+          agent orchestration, prompt engineering, and self-hosted local LLMs (Ollama, vLLM, LM Studio) on
+          dedicated GPU hardware. Currently leading development at NARTEX SOFTWARE while building an
+          AI-powered React Native health app as an indie developer and contributing to open-source
+          multi-agent AI projects.
         </Typography>
       </GlassContainer>
 
