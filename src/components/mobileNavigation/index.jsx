@@ -88,7 +88,7 @@ const MobileNavigation = () => {
               padding: "6px 0",
               transition: "color 0.25s ease, transform 0.2s ease",
               outline: "none",
-              "-webkit-tap-highlight-color": "transparent",
+              WebkitTapHighlightColor: "transparent",
             },
             "& .MuiBottomNavigationAction-root:active": {
               transform: "scale(0.92)",
