@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Box, Typography, Card, CardContent, Chip, Button, IconButton, Dialog, DialogContent, DialogTitle } from "@mui/material";
 import { useTheme } from "../../contexts";
 import { useParams, useNavigate } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import CloseIcon from "@mui/icons-material/Close";
 import LaunchIcon from "@mui/icons-material/Launch";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import RevealOnScroll from "../revealOnScroll";
@@ -144,8 +145,13 @@ const categories = [
 
 const MobilePortfolio = () => {
   const { isDarkMode } = useTheme();
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  const { categoryId } = useParams();
+  const navigate = useNavigate();
   const [selectedProject, setSelectedProject] = useState(null);
+
+  const selectedCategory = categoryId
+    ? categories.find((cat) => cat.id === categoryId) || null
+    : null;
 
   // Category List View
   if (!selectedCategory) {
@@ -154,11 +160,11 @@ const MobilePortfolio = () => {
         <Typography variant="h5" sx={{ fontWeight: 700, mb: 3 }}>
           Portfolio
         </Typography>
-        
+
         {categories.map((category, index) => (
           <RevealOnScroll key={category.id} delay={index * 60}>
             <Card
-              onClick={() => setSelectedCategory(category)}
+              onClick={() => navigate(`/portfolio/${category.id}`)}
               sx={{
                 mb: 2,
                 background: isDarkMode
@@ -206,7 +212,7 @@ const MobilePortfolio = () => {
     <Box sx={{ padding: "24px 16px 100px 16px" }}>
       {/* Header */}
       <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
-        <IconButton onClick={() => setSelectedCategory(null)} sx={{ mr: 1 }}>
+        <IconButton onClick={() => navigate("/portfolio")} sx={{ mr: 1 }}>
           <ArrowBackIcon />
         </IconButton>
         <Typography variant="h5" sx={{ fontWeight: 700 }}>
@@ -294,7 +300,7 @@ const MobilePortfolio = () => {
       >
         {selectedProject && (
           <>
-            <DialogTitle sx={{ pb: 1 }}>
+            <DialogTitle sx={{ pb: 1, pr: 6 }}>
               <Typography variant="h6" sx={{ fontWeight: 700 }}>
                 {selectedProject.title}
               </Typography>
@@ -305,6 +311,17 @@ const MobilePortfolio = () => {
                   sx={{ mt: 1, bgcolor: `rgba(${GLOW}, 0.15)`, color: `rgb(${GLOW})`, fontWeight: 600 }}
                 />
               )}
+              <IconButton
+                onClick={() => setSelectedProject(null)}
+                sx={{
+                  position: "absolute",
+                  top: 12,
+                  right: 12,
+                  color: isDarkMode ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.6)",
+                }}
+              >
+                <CloseIcon />
+              </IconButton>
             </DialogTitle>
             <DialogContent>
               <Typography variant="body2" sx={{ mb: 3, opacity: 0.9 }}>

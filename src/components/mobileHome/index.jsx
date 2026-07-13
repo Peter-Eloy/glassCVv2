@@ -45,11 +45,13 @@ const MobileHome = () => {
       title: "Open-D",
       subtitle: "AI companion for Type 1 diabetes",
       status: "Private Beta",
+      categoryId: "automation",
     },
     {
       title: "Nadie Sin Su Medicina",
       subtitle: "Open-source patient advocacy platform",
       status: "Live",
+      categoryId: "automation",
     },
   ];
 
@@ -175,7 +177,7 @@ const MobileHome = () => {
             {currentlyBuilding.map((project) => (
               <Box
                 key={project.title}
-                onClick={() => navigate("/portfolio/hobbies")}
+                onClick={() => navigate(`/portfolio/${project.categoryId}`)}
                 sx={{
                   p: 1.5,
                   borderRadius: 2,

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { Box, Typography, Card, CardContent, Chip, CircularProgress, Pagination } from "@mui/material";
+import { Box, Typography, Card, CardContent, Chip, CircularProgress, Pagination, IconButton } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 import { useTheme } from "../../contexts";
 import { tumblrService } from "../../services/tumblr";
 import RevealOnScroll from "../revealOnScroll";
@@ -184,6 +185,7 @@ const MobileBlog = () => {
           <Box
             onClick={(e) => e.stopPropagation()}
             sx={{
+              position: "relative",
               background: isDarkMode ? "#1e1e1e" : "#fff",
               color: isDarkMode ? "#fff" : "#213547",
               borderRadius: 3,
@@ -194,7 +196,18 @@ const MobileBlog = () => {
               p: 3,
             }}
           >
-            <Typography variant="h6" sx={{ fontWeight: 700, mb: 2 }}>
+            <IconButton
+              onClick={() => setSelectedPost(null)}
+              sx={{
+                position: "absolute",
+                top: 12,
+                right: 12,
+                color: isDarkMode ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.6)",
+              }}
+            >
+              <CloseIcon />
+            </IconButton>
+            <Typography variant="h6" sx={{ fontWeight: 700, mb: 2, pr: 5 }}>
               {selectedPost.title}
             </Typography>
             <Typography
@@ -202,17 +215,8 @@ const MobileBlog = () => {
               sx={{
                 opacity: 0.9,
                 lineHeight: 1.8,
-                mb: 3,
               }}
               dangerouslySetInnerHTML={{ __html: selectedPost.body }}
-            />
-            <Chip
-              label="Close"
-              onClick={() => setSelectedPost(null)}
-              sx={{
-                bgcolor: isDarkMode ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)",
-                cursor: "pointer",
-              }}
             />
           </Box>
         </Box>
