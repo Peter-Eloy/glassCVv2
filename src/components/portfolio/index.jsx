@@ -94,7 +94,7 @@ const Portfolio = () => {
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", height: "100%" }}>
-      <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center", py: 2, pt: 4 }}>
+      <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center", py: 2 }}>
         {filters.map((filter) => (
           <StyledButton
             key={filter.id}
