@@ -230,17 +230,17 @@ Inherited from a legacy system and completely refactored to improve site speed, 
   },
   {
     id: "hobbies",
-    title: "Products & Experiments",
-    description: "Indie products, automation projects, and creative ventures",
+    title: "AI Products",
+    description: "Indie AI products and multi-agent systems, built and shipped solo",
     image: "/peview-image.jpg",
     subcategories: [
       {
         id: "open-d",
         title: "Open-D",
         description:
-          "React Native AI companion app for Type 1 diabetes management, built solo and currently in private beta with real CGM users.",
+          "AI health companion for Type 1 diabetes, built solo end-to-end and in private beta with real CGM users today.",
         category: "Indie Product",
-        fullDescription: `Open-D is a mobile AI companion for people managing Type 1 diabetes, built as an indie developer end-to-end: product design, mobile app, backend, and CGM/pump hardware integrations.
+        fullDescription: `Open-D is a mobile AI companion for people managing Type 1 diabetes, built solo end-to-end: product design, mobile app, backend, and CGM/pump hardware integrations.
 
 The app connects to Dexcom and Abbott continuous glucose monitors to learn individual glucose patterns and surface proactive alerts before highs and lows occur, rather than passive after-the-fact tracking. It supports both MDI (multiple daily injections) and insulin pump therapy, including Medtronic MiniMed pump profiles, with a dosing calculator based on personal patterns, meal and workout planning with AI-driven coaching, and a night-time safety monitor with escalation alerts.
 
@@ -264,7 +264,7 @@ All health data is stored locally on-device rather than synced to the cloud, a d
         id: "medicina-open-d",
         title: "Nadie Sin Su Medicina",
         description:
-          "Open-source platform where diabetes patients denied medication gather signatures and auto-generate a formal complaint letter.",
+          "Open-source platform that turns a patient denied medication into a formal complaint letter, built and shipped solo in days.",
         category: "Open Source",
         fullDescription: `Built after seeing a patient online say she'd been refused her diabetes medication, this is a small open-source platform to help patients push back.
 
@@ -284,38 +284,16 @@ Built and shipped solo in a short burst as a direct, practical response to a rea
         status: "Live",
       },
       {
-        id: "openclaw",
-        title: "OpenClaw Automation",
-        description:
-          "Game automation project exploring computer vision and AI-driven bot development.",
-        category: "Automation",
-        fullDescription: `A personal hobby project exploring game automation through computer vision and AI. OpenClaw is a retro platformer game that serves as a testing ground for building intelligent automation bots.
-
-The project involves capturing game screen data, processing it with computer vision algorithms, and using AI to make gameplay decisions. Currently experimenting with different approaches including template matching, object detection, and reinforcement learning.
-
-While primarily a learning project, it demonstrates practical application of computer vision libraries and AI integration in real-time scenarios.`,
-        image: "/peview-image.jpg",
-        technologies: ["Python", "OpenCV", "NumPy", "PyAutoGUI", "Machine Learning"],
-        features: [
-          "Real-time screen capture and analysis",
-          "Computer vision-based object detection",
-          "AI-driven decision making",
-          "Automated input simulation",
-          "Performance metrics and logging",
-        ],
-        status: "In Development",
-      },
-      {
         id: "openclaw-ai-contrib",
-        title: "OpenClaw.ai (Open Source Contributor)",
+        title: "Multi-Agent AI Platform (Open Source Contributor)",
         description:
-          "Contributed core patches and custom skills to OpenClaw.ai, an open-source multi-agent AI orchestration platform.",
+          "Core contributor to OpenClaw.ai, an open-source multi-agent orchestration platform — agent memory architecture, context handling, and custom agent skills.",
         category: "Open Source",
-        fullDescription: `OpenClaw.ai is an open-source multi-agent AI platform built and maintained by a fellow developer. I contribute patches and build custom skills for it, unrelated to the OpenClaw Automation project above despite the shared name.
+        fullDescription: `OpenClaw.ai is an open-source multi-agent AI platform. I'm a core contributor, working directly on how the agents think and act rather than just building on top of them.
 
 Contributions include core patches to the agent memory system (a 3-layer memory architecture) and context-handling fixes, plus standalone skills that extend what the agents can do: controlling a local LLM server (Lemonade Server), monitoring a Raspberry Pi's status, and finding Amazon products for affiliate workflows.
 
-This work is hands-on experience with real multi-agent orchestration, agent memory design, and building tool integrations ("skills") that let LLM agents act on real systems.`,
+Hands-on experience with real multi-agent orchestration, agent memory design, and building tool integrations ("skills") that let LLM agents act on real systems — the same class of problem as production agent tooling.`,
         image: "/peview-image.jpg",
         technologies: ["TypeScript", "Multi-agent orchestration", "Local LLMs", "Lemonade Server"],
         features: [
@@ -327,28 +305,6 @@ This work is hands-on experience with real multi-agent orchestration, agent memo
         ],
         githubUrl: "https://github.com/noemi-paradise/openclaw-empire",
         status: "Open Source",
-      },
-      {
-        id: "audiobook",
-        title: "YouTube Audiobook Channel",
-        description:
-          "Curated audiobook content focusing on tech, business, and personal development.",
-        category: "Content Creation",
-        fullDescription: `A YouTube channel dedicated to bringing audiobook content to tech enthusiasts, entrepreneurs, and lifelong learners. Focusing on books about software development, business strategy, productivity, and personal growth.
-
-Content is produced using AI-assisted tools for voice synthesis and audio engineering, allowing for rapid content creation while maintaining high audio quality. Each video includes chapter timestamps and key takeaways for easy reference.
-
-The channel aims to make valuable knowledge accessible to busy professionals who prefer listening over reading.`,
-        image: "/peview-image.jpg",
-        technologies: ["YouTube API", "Audio Engineering", "AI Voice Synthesis", "Content Strategy"],
-        features: [
-          "Weekly audiobook releases",
-          "Tech and business focused content",
-          "AI-assisted production pipeline",
-          "Chapter timestamps and summaries",
-          "Curated book recommendations",
-        ],
-        status: "Launching Soon",
       },
     ],
   },
