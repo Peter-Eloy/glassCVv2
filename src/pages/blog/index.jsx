@@ -194,6 +194,7 @@ const BlogPage = () => {
           <Pagination
             count={Math.ceil(totalPosts / POSTS_PER_PAGE)}
             page={page}
+            onChange={(e, value) => setPage(value)}
             hidePrevButton
             hideNextButton
             size="large"
