@@ -14,7 +14,7 @@ const proSnapshot = [
             <strong>CMS:</strong> WordPress, GoogleSite
         </p>
         <p>
-            <strong>IDE:</strong> Zed (daily driver), VS Code
+            <strong>IDE:</strong> Zed, VS Code
         </p>
         <p>
             <strong>Server:</strong> Linux (CentOS) - WHC cPanel, Windows Server - Plesk
