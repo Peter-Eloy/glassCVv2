@@ -45,13 +45,13 @@ const MobileHome = () => {
       title: "Open-D",
       subtitle: "AI companion for Type 1 diabetes",
       status: "Private Beta",
-      categoryId: "automation",
+      categoryId: "hobbies",
     },
     {
       title: "Nadie Sin Su Medicina",
       subtitle: "Open-source patient advocacy platform",
       status: "Live",
-      categoryId: "automation",
+      categoryId: "hobbies",
     },
   ];
 

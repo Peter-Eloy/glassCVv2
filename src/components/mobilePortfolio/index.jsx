@@ -7,141 +7,14 @@ import CloseIcon from "@mui/icons-material/Close";
 import LaunchIcon from "@mui/icons-material/Launch";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import RevealOnScroll from "../revealOnScroll";
+import portfolioCategories from "../../data/portfolio/portfolioCategories";
 
 const GLOW = "0, 191, 255";
 
-const categories = [
-  {
-    id: "n00btrading",
-    title: "n00b Trading",
-    description: "AI-powered trading tools and analysis systems",
-    projects: [
-      {
-        id: "ai-news-bot",
-        title: "AI News Bot Analyst",
-        description: "Automated trading analysis using AI-powered news sentiment and market data processing.",
-        technologies: ["n8n", "Python", "JavaScript", "Ollama", "RSS"],
-        features: ["Real-time sentiment analysis", "Multi-source aggregation", "Telegram integration"],
-        liveUrl: "https://t.me/s/tradeTheCrypto",
-      },
-      {
-        id: "indicators-tools",
-        title: "Trading Indicators",
-        description: "Custom technical analysis indicators for TradingView with Fibonacci, Moving Averages, and Bollinger Bands.",
-        technologies: ["PineScript", "TradingView"],
-        features: ["20+ customizable MAs", "Dynamic Fibonacci", "ATR-based BBs"],
-        liveUrl: "https://www.tradingview.com/u/mr_uponly/#published-scripts",
-      },
-    ],
-  },
-  {
-    id: "wordpress",
-    title: "WordPress Development",
-    description: "Custom plugins and themes for real estate platforms",
-    projects: [
-      {
-        id: "user-management",
-        title: "User Management Plugin",
-        description: "Advanced RBAC system with custom user profiles for VisaVerde platform.",
-        technologies: ["PHP", "WordPress", "MySQL"],
-        githubUrl: "https://github.com/Peter-Eloy/UserManagment",
-        liveUrl: "https://www.visaverde.com",
-      },
-      {
-        id: "property-management",
-        title: "Property Management Plugin",
-        description: "Full-featured property listing system with search, maps, and lead generation.",
-        technologies: ["PHP", "WordPress", "Google Maps API"],
-        githubUrl: "https://github.com/Peter-Eloy/PropertyManagment",
-        liveUrl: "https://www.visaverde.com",
-      },
-      {
-        id: "visaverde-pwa",
-        title: "VisaVerde PWA Plugin",
-        description: "Progressive Web App functionality with offline access and push notifications.",
-        technologies: ["PHP", "JavaScript", "Service Workers"],
-        githubUrl: "https://github.com/Peter-Eloy/VisaVerde-PWA",
-        liveUrl: "https://www.visaverde.com",
-      },
-    ],
-  },
-  {
-    id: "api",
-    title: "API Central",
-    description: "API orchestration platforms and development tools",
-    projects: [
-      {
-        id: "backend-apis",
-        title: "Backend APIs Platform",
-        description: "Self-hosted API hub aggregating 9+ job board APIs with AI integration and cron jobs.",
-        technologies: ["Next.js", "PostgreSQL", "Prisma", "RapidAPI"],
-        features: ["9+ API integrations", "AI data processing", "Automated syncing"],
-        liveUrl: "https://api.petereloy.dev",
-        githubUrl: "https://github.com/Peter-Eloy/be-apis",
-      },
-      {
-        id: "mock-api-server",
-        title: "Mock API Server",
-        description: "Free, open-source desktop app for creating REST APIs without backend code.",
-        technologies: ["Python", "Flask", "PyInstaller"],
-        features: ["No-code interface", "Cross-platform", "System tray integration"],
-        liveUrl: "https://peter-eloy.github.io/Landing-py-server/",
-        githubUrl: "https://github.com/Peter-Eloy/py-server",
-      },
-    ],
-  },
-  {
-    id: "automation",
-    title: "Products & Experiments",
-    description: "Indie products, automation projects, and creative ventures",
-    projects: [
-      {
-        id: "open-d",
-        title: "Open-D",
-        description: "React Native AI companion app for Type 1 diabetes management, built solo and currently in private beta with real CGM users.",
-        technologies: ["React Native", "TypeScript", "CGM APIs (Dexcom, Abbott)", "Medtronic MiniMed"],
-        features: ["Dexcom & Abbott CGM integration", "MDI and insulin pump (MiniMed) support", "Personalized insulin dosing calculator", "Local-only, on-device data storage"],
-        liveUrl: "https://open-d.app",
-        status: "Private Beta",
-      },
-      {
-        id: "medicina-open-d",
-        title: "Nadie Sin Su Medicina",
-        description: "Open-source platform where diabetes patients denied medication gather signatures and auto-generate a formal complaint letter.",
-        technologies: ["Next.js 14", "PostgreSQL (Neon)", "Drizzle ORM", "pdf-lib"],
-        features: ["Signature-collection campaigns", "Automatic PDF letter generation", "Transactional email notifications"],
-        liveUrl: "https://medicina.open-d.app",
-        githubUrl: "https://github.com/noemi-paradise/medicina.open-d.app",
-        status: "Live",
-      },
-      {
-        id: "openclaw",
-        title: "OpenClaw Automation",
-        description: "Game automation project using computer vision and AI. Exploring automated gameplay mechanics and bot development.",
-        technologies: ["Python", "OpenCV", "AI/ML"],
-        features: ["Computer vision", "Automated gameplay", "AI decision making"],
-        status: "In Development",
-      },
-      {
-        id: "openclaw-ai-contrib",
-        title: "OpenClaw.ai (Open Source Contributor)",
-        description: "Contributed core patches and custom skills to OpenClaw.ai, an open-source multi-agent AI orchestration platform.",
-        technologies: ["TypeScript", "Multi-agent orchestration", "Local LLMs"],
-        features: ["3-layer agent memory patches", "Context-handling fixes", "Custom local-LLM & Pi-monitor skills"],
-        githubUrl: "https://github.com/noemi-paradise/openclaw-empire",
-        status: "Open Source",
-      },
-      {
-        id: "audiobook-channel",
-        title: "YouTube Audiobook Channel",
-        description: "Curated audiobook content channel focusing on tech, business, and personal development books.",
-        technologies: ["Content Creation", "Audio Engineering", "YouTube API"],
-        features: ["Weekly releases", "Tech-focused content", "AI-assisted production"],
-        status: "Launching Soon",
-      },
-    ],
-  },
-];
+const categories = portfolioCategories.map((category) => ({
+  ...category,
+  projects: category.subcategories,
+}));
 
 const MobilePortfolio = () => {
   const { isDarkMode } = useTheme();
