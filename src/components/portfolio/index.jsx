@@ -1,5 +1,5 @@
 import React from "react";
-import { Box } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import CategoryCard from "../portfolio/categoryCard";
 import { useTheme } from "../../contexts";
@@ -138,28 +138,18 @@ const Portfolio = () => {
   };
 
   return (
-    <Box
-      sx={{
-        display: "grid",
-        gridTemplateColumns: "repeat(2, minmax(0, 340px))",
-        gridAutoRows: "min-content",
-        gap: 3,
-        p: 2,
-        height: "100%",
-        width: "100%",
-        overflow: "auto",
-        alignContent: "center",
-        justifyContent: "center",
-      }}
-    >
-      {categories.map((category) => (
-        <CategoryCard
-          key={category.id}
-          {...category}
-          isExpanded={false}
-          onClick={() => handleCategoryClick(category.id)}
-        />
-      ))}
+    <Box sx={{ height: "100%", overflow: "auto", p: 2 }}>
+      <Grid container spacing={3}>
+        {categories.map((category) => (
+          <Grid item xs={12} sm={6} md={4} key={category.id}>
+            <CategoryCard
+              {...category}
+              isExpanded={false}
+              onClick={() => handleCategoryClick(category.id)}
+            />
+          </Grid>
+        ))}
+      </Grid>
     </Box>
   );
 };

@@ -14,31 +14,26 @@ const CategoryCard = ({ title, description, image, onClick, isExpanded }) => {
         cursor: "pointer",
         transition: "all 0.3s ease",
         transform: isExpanded ? "scale(0.98)" : "scale(1)",
-        aspectRatio: "1 / 1",
         margin: 0,
         overflow: "hidden",
+        "&:hover": {
+          transform: "translateY(-4px)",
+        },
       }}
     >
-      <Box
-        sx={{
-          position: "relative",
-          height: "100%",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          //   background: `linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.6)), url(${image})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          p: 3,
-        }}
-      >
+      <Box sx={{ p: 3, height: "180px" }}>
         <Typography
-          variant="h5"
+          variant="h6"
           sx={{
-            color: isDarkMode ? "#fff" : "#000",
             mb: 1,
-            textShadow: "0 2px 4px rgba(0,0,0,0.3)",
+            fontSize: "1.1rem",
             fontWeight: 600,
+            color: isDarkMode ? "#fff" : "#000",
+            height: "52px",
+            overflow: "hidden",
+            display: "-webkit-box",
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: "vertical",
           }}
         >
           {title}
@@ -47,11 +42,10 @@ const CategoryCard = ({ title, description, image, onClick, isExpanded }) => {
           variant="body2"
           sx={{
             color: isDarkMode ? "rgba(255, 255, 255, 0.8)" : "rgba(0, 0, 0, 0.8)",
-            textShadow: "0 1px 2px rgba(0,0,0,0.5)",
-            display: "-webkit-box",
-            WebkitLineClamp: 2,
-            WebkitBoxOrient: "vertical",
             overflow: "hidden",
+            display: "-webkit-box",
+            WebkitLineClamp: 4,
+            WebkitBoxOrient: "vertical",
           }}
         >
           {description}
