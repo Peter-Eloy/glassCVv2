@@ -5,10 +5,10 @@ const proSnapshot = [
     <div key='2'>
         <h2>Technologies & Skills</h2>
         <p>
-            <strong>Technologies:</strong> JS, CSS, HTML & Go
+            <strong>Technologies:</strong> JavaScript, TypeScript, CSS, HTML & Go
         </p>
         <p>
-            <strong>Frameworks:</strong> React.js, Next.js
+            <strong>Frameworks:</strong> React.js, React Native, Next.js
         </p>
         <p>
             <strong>CMS:</strong> WordPress, GoogleSite
@@ -17,13 +17,10 @@ const proSnapshot = [
             <strong>IDE:</strong> VS Code
         </p>
         <p>
-            <strong>Server:</strong> Linux (CentOS) - WHC cPanel, Windows 2016 - Plesk
+            <strong>Server:</strong> Linux (CentOS) - WHC cPanel, Windows Server - Plesk
         </p>
         <p>
-            <strong>CRM:</strong> SalesForce, Zoho, HubSpot
-        </p>
-        <p>
-            <strong>Programs:</strong> MS Visio, MS Project, MS Excel, MS Outlook, MS Word, MS PowerPoint, PSCS6
+            <strong>Database:</strong> MSSQL, PostgreSQL, MySQL, SQLite
         </p>
     </div>,
     <div key='3'>
@@ -32,16 +29,13 @@ const proSnapshot = [
             <strong>CI/CD:</strong> GitHub Actions
         </p>
         <p>
-            <strong>Monitoring:</strong> Prometheus, Grafana, Datadog
-        </p>
-        <p>
             <strong>Version Control:</strong> Git, GitHub, Bitbucket
         </p>
         <p>
-            <strong>Cloud Platforms:</strong> AWS, Google Cloud, Azure
+            <strong>API Tools:</strong> Postman, Swagger
         </p>
         <p>
-            <strong>API Tools:</strong> Postman, Swagger
+            <strong>Auth & Security:</strong> JWT, Role-Based Access Control (RBAC)
         </p>
     </div>,
     <div key='4'>
@@ -57,9 +51,6 @@ const proSnapshot = [
         </p>
         <p>
             <strong>Framework Exploration:</strong> Svelte, Solid.js, Astro
-        </p>
-        <p>
-            <strong>Database:</strong> MySQL, MsSQL
         </p>
         <p>
             <strong>Plugins:</strong> ESLint, Prettier, Tailwind CSS
