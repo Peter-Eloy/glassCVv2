@@ -14,9 +14,9 @@ const CategoryCard = ({ title, description, image, onClick, isExpanded }) => {
         cursor: "pointer",
         transition: "all 0.3s ease",
         transform: isExpanded ? "scale(0.98)" : "scale(1)",
-        height: "120px",
+        aspectRatio: "1 / 1",
+        margin: 0,
         overflow: "hidden",
-        mb: 2,
       }}
     >
       <Box
@@ -25,7 +25,7 @@ const CategoryCard = ({ title, description, image, onClick, isExpanded }) => {
           height: "100%",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "flex-end",
+          justifyContent: "center",
           //   background: `linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.6)), url(${image})`,
           backgroundSize: "cover",
           backgroundPosition: "center",

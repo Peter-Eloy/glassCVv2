@@ -141,12 +141,15 @@ const Portfolio = () => {
     <Box
       sx={{
         display: "grid",
-        gridTemplateColumns: "1fr 1fr",
-        gridTemplateRows: "1fr 1fr",
-        gap: 2,
+        gridTemplateColumns: "repeat(2, minmax(0, 340px))",
+        gridAutoRows: "min-content",
+        gap: 3,
         p: 2,
         height: "100%",
-        overflow: "hidden",
+        width: "100%",
+        overflow: "auto",
+        alignContent: "center",
+        justifyContent: "center",
       }}
     >
       {categories.map((category) => (
