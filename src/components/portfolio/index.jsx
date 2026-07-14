@@ -1,55 +1,89 @@
-import React from "react";
-import { Box, Grid } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useState, useMemo } from "react";
+import { Box, Grid, Chip } from "@mui/material";
+import { useParams, useNavigate } from "react-router-dom";
 import CategoryCard from "../portfolio/categoryCard";
+import ProjectDetailModal from "../portfolio/projectDetailModal";
 import { useTheme } from "../../contexts";
 import categories from "../../data/portfolio/portfolioCategories";
 
+const GLOW = "0, 191, 255";
+
+const allProjects = categories.flatMap((category) =>
+  category.subcategories.map((project) => ({
+    ...project,
+    categoryId: category.id,
+    categoryTitle: category.title,
+  }))
+);
+
 const Portfolio = () => {
+  const { categoryId } = useParams();
   const navigate = useNavigate();
   const { isDarkMode } = useTheme();
+  const [activeFilter, setActiveFilter] = useState(categoryId || "all");
+  const [selectedProject, setSelectedProject] = useState(null);
 
-  console.log(
-    "🎨 Welcome to the portfolio gallery! Showcasing",
-    categories.length,
-    "categories of awesome projects. Prepare to be amazed!"
+  const filters = useMemo(
+    () => [{ id: "all", title: "All Projects" }, ...categories],
+    []
   );
 
-  const handleCategoryClick = (categoryId) => {
-    console.log(
-      "🚀 User clicked on",
-      categoryId,
-      "category! Navigation engines are firing up..."
-    );
+  const visibleProjects =
+    activeFilter === "all"
+      ? allProjects
+      : allProjects.filter((project) => project.categoryId === activeFilter);
 
-    const category = categories.find((cat) => cat.id === categoryId);
-    if (category && category.isExternal) {
-      console.log("🌍 Opening external link:", category.link);
-      window.open(category.link, "_blank", "noopener,noreferrer");
-    } else if (category && category.subcategories) {
-      console.log(
-        "✨ Found category with",
-        category.subcategories.length,
-        "subcategories. Off we go to explore",
-        category.title + "!"
-      );
-      navigate(`/portfolio/${categoryId}`);
-    }
+  const handleFilterClick = (filterId) => {
+    setActiveFilter(filterId);
+    navigate(filterId === "all" ? "/portfolio" : `/portfolio/${filterId}`);
   };
 
   return (
-    <Box sx={{ height: "100%", overflow: "auto", p: 2 }}>
+    <Box sx={{ height: "100%", overflow: "auto", p: 2, pt: 4 }}>
+      <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap", justifyContent: "center", mb: 3 }}>
+        {filters.map((filter) => (
+          <Chip
+            key={filter.id}
+            label={filter.title}
+            onClick={() => handleFilterClick(filter.id)}
+            sx={{
+              bgcolor:
+                activeFilter === filter.id
+                  ? `rgba(${GLOW}, 0.18)`
+                  : isDarkMode
+                  ? "rgba(255,255,255,0.05)"
+                  : "rgba(0,0,0,0.03)",
+              border: `1px solid ${
+                activeFilter === filter.id ? `rgba(${GLOW}, 0.6)` : "transparent"
+              }`,
+              color: activeFilter === filter.id ? `rgb(${GLOW})` : "inherit",
+              fontWeight: activeFilter === filter.id ? 600 : 400,
+              transition: "all 0.2s ease",
+            }}
+          />
+        ))}
+      </Box>
+
       <Grid container spacing={3}>
-        {categories.map((category) => (
-          <Grid item xs={12} sm={6} md={4} key={category.id}>
+        {visibleProjects.map((project) => (
+          <Grid item xs={12} sm={6} md={4} key={project.id}>
             <CategoryCard
-              {...category}
+              title={project.title}
+              description={project.description}
+              categoryLabel={project.categoryTitle}
+              status={project.status}
               isExpanded={false}
-              onClick={() => handleCategoryClick(category.id)}
+              onClick={() => setSelectedProject(project)}
             />
           </Grid>
         ))}
       </Grid>
+
+      <ProjectDetailModal
+        open={!!selectedProject}
+        onClose={() => setSelectedProject(null)}
+        project={selectedProject}
+      />
     </Box>
   );
 };
