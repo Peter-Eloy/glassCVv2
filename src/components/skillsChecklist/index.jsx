@@ -162,7 +162,7 @@ const SkillsChecklist = () => {
   }, [searchTerms]);
 
   return (
-    <Box sx={{ height: "100%", padding: 2 }}>
+    <Box sx={{ height: "100%", padding: 2, pt: 4 }}>
       <Box sx={{ display: "flex", justifyContent: "center", mb: 3 }}>
         <SearchField
           placeholder="Type skill and press Enter to search..."
