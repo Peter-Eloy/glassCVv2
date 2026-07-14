@@ -47,10 +47,13 @@ const proSnapshot = [
     <div key='4'>
         <h2>Current Learning & Interests</h2>
         <p>
-            <strong>Learning:</strong> Machine Learning
+            <strong>AI Focus:</strong> AI Agents, Agent Orchestration, Prompt Engineering
         </p>
         <p>
-            <strong>Interests:</strong> Blockchain, Microservices, AI-driven Applications
+            <strong>Local LLMs:</strong> Ollama, vLLM, LM Studio
+        </p>
+        <p>
+            <strong>Interests:</strong> Multi-Agent Systems, Microservices
         </p>
         <p>
             <strong>Framework Exploration:</strong> Svelte, Solid.js, Astro
