@@ -107,12 +107,11 @@ const Portfolio = () => {
         ))}
       </Box>
 
-      <Box sx={{ position: "relative", flex: 1, mx: 6, overflow: "auto" }}>
+      <Box sx={{ position: "relative", flex: 1, mx: 6 }}>
         {page > 1 && (
           <NavigationArrow
             className="prev"
             onClick={() => setPage(page - 1)}
-            style={{ left: 280 }}
           />
         )}
 
@@ -160,7 +159,6 @@ const Portfolio = () => {
           <NavigationArrow
             className="next"
             onClick={() => setPage(page + 1)}
-            style={{ right: 280 }}
           />
         )}
       </Box>

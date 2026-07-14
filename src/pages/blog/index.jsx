@@ -109,7 +109,6 @@ const BlogPage = () => {
           <NavigationArrow
             className="prev"
             onClick={() => setPage(page - 1)}
-            style={{ left: 280 }}
           />
         )}
 
@@ -174,7 +173,6 @@ const BlogPage = () => {
           <NavigationArrow
             className="next"
             onClick={() => setPage(page + 1)}
-            style={{ right: 280 }}
           />
         )}
       </Box>

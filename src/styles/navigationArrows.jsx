@@ -6,10 +6,18 @@ export const NavigationArrow = styled.button`
   border: none;
   cursor: pointer;
   padding: 12px;
-  position: fixed;
+  position: absolute;
   top: 50%;
   transform: translateY(-50%);
   z-index: 100;
+
+  &.prev {
+    left: -40px;
+  }
+
+  &.next {
+    right: -40px;
+  }
 
   &:before {
     content: "";
