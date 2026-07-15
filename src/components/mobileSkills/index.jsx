@@ -35,7 +35,7 @@ const MobileSkills = () => {
         Skills & Expertise
       </Typography>
       <Typography variant="body2" sx={{ opacity: 0.7, mb: 3 }}>
-        7+ years of hands-on experience
+        8+ years of hands-on experience
       </Typography>
 
       {/* Summary Cards */}

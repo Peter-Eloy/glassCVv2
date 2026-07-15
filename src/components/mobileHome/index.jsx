@@ -27,7 +27,7 @@ const MobileHome = () => {
   const highlights = [
     {
       title: "Experience",
-      value: "7+ Years",
+      value: "8+ Years",
       subtext: "Web Development & PM"
     },
     {
@@ -222,7 +222,7 @@ const MobileHome = () => {
             About
           </Typography>
           <Typography variant="body2" sx={{ lineHeight: 1.6, opacity: 0.9 }}>
-            Full-stack developer with 7+ years of experience building scalable web and mobile applications.
+            Full-stack developer with 8+ years of experience building scalable web and mobile applications.
             Specialized in React, React Native, Node.js, and Go. Deep hands-on experience with AI agents and
             agent orchestration, prompt engineering, and self-hosted local LLMs (Ollama, vLLM, LM Studio) on
             dedicated GPU hardware. Currently working as a Full-Stack Developer at NARTEX SOFTWARE while
