@@ -10,6 +10,7 @@ import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import EmailIcon from "@mui/icons-material/Email";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import GitHubIcon from "@mui/icons-material/GitHub";
+import XIcon from "@mui/icons-material/X";
 
 const MobileHome = () => {
   const { isDarkMode } = useTheme();
@@ -79,6 +80,8 @@ const MobileHome = () => {
           }}
         >
           <Avatar
+            src="/profile-photo.jpg"
+            alt="Peter Eloy"
             sx={{
               width: 100,
               height: 100,
@@ -305,6 +308,15 @@ const MobileHome = () => {
           sx={{ color: "inherit", minWidth: 0 }}
         >
           GitHub
+        </Button>
+        <Button
+          startIcon={<XIcon />}
+          href="https://x.com/petereloy"
+          target="_blank"
+          rel="noopener noreferrer"
+          sx={{ color: "inherit", minWidth: 0 }}
+        >
+          X
         </Button>
       </Box>
       </RevealOnScroll>
