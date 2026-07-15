@@ -39,7 +39,7 @@ const MobileNavigation = () => {
     <Paper
       sx={{
         position: "fixed",
-        bottom: 16,
+        bottom: 28,
         left: 16,
         right: 16,
         zIndex: 1000,

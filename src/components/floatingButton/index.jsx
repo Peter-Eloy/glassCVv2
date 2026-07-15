@@ -184,7 +184,7 @@ check out the CV of Peter-Eloy, a full-stack dev:
         ariaLabel="SpeedDial menu"
         sx={{
           position: "fixed",
-          bottom: 80,
+          bottom: 108,
           right: 16,
           "& .MuiFab-primary": {
             backgroundColor: isDarkMode
