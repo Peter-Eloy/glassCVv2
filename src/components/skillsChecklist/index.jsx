@@ -162,30 +162,30 @@ const SkillsChecklist = () => {
   }, [searchTerms]);
 
   return (
-    <Box sx={{ height: "100%", padding: 2 }}>
-      <SearchField
-        fullWidth
-        placeholder="Type skill and press Enter to search..."
-        value={searchInput}
-        onChange={handleSearchChange}
-        onKeyPress={handleAddSearchTerm}
-        isdarkmode={isDarkMode.toString()}
-        InputProps={{
-          startAdornment: (
-            <SearchIcon
-              sx={{
-                color: isDarkMode ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.5)",
-                mr: 1,
-              }}
-            />
-          ),
-        }}
-        sx={{
-          width: "35%",
-          margin: "0 auto",
-          mb: 3,
-        }}
-      />
+    <Box sx={{ height: "100%", padding: 2, pt: 4 }}>
+      <Box sx={{ display: "flex", justifyContent: "center", mb: 3 }}>
+        <SearchField
+          placeholder="Type skill and press Enter to search..."
+          value={searchInput}
+          onChange={handleSearchChange}
+          onKeyPress={handleAddSearchTerm}
+          isdarkmode={isDarkMode.toString()}
+          InputProps={{
+            startAdornment: (
+              <SearchIcon
+                sx={{
+                  color: isDarkMode ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.5)",
+                  mr: 1,
+                }}
+              />
+            ),
+          }}
+          sx={{
+            width: "35%",
+            minWidth: 320,
+          }}
+        />
+      </Box>
 
       <Box
         sx={{

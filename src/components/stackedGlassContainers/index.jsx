@@ -157,7 +157,12 @@ GlassContainerStacked.propTypes = {
   height: PropTypes.number,
 };
 
-const StackedGlassContainers = ({ containers, showShine }) => {
+const StackedGlassContainers = ({
+  containers,
+  showShine,
+  minHeight,
+  onNaturalHeightChange,
+}) => {
   const [containerOrder, setContainerOrder] = useState(containers);
   const [maxHeight, setMaxHeight] = useState(0);
   const containerRefs = useRef([]);
@@ -191,7 +196,12 @@ const StackedGlassContainers = ({ containers, showShine }) => {
   };
 
   const stackingOffset = (containers.length - 1) * 5;
-  const totalHeight = maxHeight + stackingOffset;
+  const naturalHeight = maxHeight + stackingOffset;
+  const totalHeight = Math.max(naturalHeight, minHeight || 0);
+
+  useEffect(() => {
+    onNaturalHeightChange?.(naturalHeight);
+  }, [naturalHeight, onNaturalHeightChange]);
 
   return (
     <Box
@@ -228,7 +238,7 @@ const StackedGlassContainers = ({ containers, showShine }) => {
           index={index}
           isActive={index === 0}
           onClick={handleContainerClick}
-          height={maxHeight}
+          height={totalHeight - stackingOffset}
           showShine={showShine && index === 0} // Only show shine on active container
         >
           {content}
@@ -250,6 +260,8 @@ GlassContainerStacked.propTypes = {
 StackedGlassContainers.propTypes = {
   containers: PropTypes.arrayOf(PropTypes.node).isRequired,
   showShine: PropTypes.bool,
+  minHeight: PropTypes.number,
+  onNaturalHeightChange: PropTypes.func,
 };
 
 export default StackedGlassContainers;

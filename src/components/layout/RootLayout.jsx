@@ -22,7 +22,7 @@ const RootLayout = () => {
         sx={{
           flexGrow: 1,
           marginTop: "70px", // Height of the AppBar
-          marginBottom: "64px", // Height of the Footer
+          height: "calc(100vh - 70px - 64px)", // Remaining space above the Footer
           overflow: "hidden", // Changed from 'auto' to 'hidden'
         }}
       >

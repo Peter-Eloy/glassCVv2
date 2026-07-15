@@ -210,7 +210,11 @@ check out the CV of Peter - Eloy H., a full-stack dev:
           },
         }}
         icon={<SpeedDialIcon openIcon={<CloseIcon />} />}
-        onClose={() => {
+        onClose={(event, reason) => {
+          // Ignore mouseLeave while the download submenu is showing — the
+          // cursor naturally drifts during the action-list re-render right
+          // after clicking "Download CV", and MUI treats that as a close.
+          if (reason === "mouseLeave" && downloadMenuOpen) return;
           setOpen(false);
           setDownloadMenuOpen(false);
         }}
