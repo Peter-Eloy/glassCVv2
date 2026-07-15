@@ -1,8 +1,8 @@
 // src/DesktopApp.jsx
+import { useCallback, useState } from "react";
 import "./App.css";
 import Sidebar from "./components/sidebar";
 import { Box } from "@mui/material";
-import GlassContainer from "./components/glassContainer";
 import SkillsTicker from "./components/skillsTicker";
 import StackedGlassContainers from "./components/stackedGlassContainers";
 import careerData from "./data/carrerData/carrerData";
@@ -18,6 +18,18 @@ const SIDEBAR_WIDTH = 240;
 
 function DesktopApp() {
   const { welcomeStage, handleStageComplete } = useWelcome();
+  const [experienceHeight, setExperienceHeight] = useState(0);
+  const [snapshotHeight, setSnapshotHeight] = useState(0);
+  const columnHeight = Math.max(experienceHeight, snapshotHeight);
+
+  const handleExperienceHeight = useCallback(
+    (height) => setExperienceHeight(height),
+    []
+  );
+  const handleSnapshotHeight = useCallback(
+    (height) => setSnapshotHeight(height),
+    []
+  );
 
   return (
     <>
@@ -92,7 +104,8 @@ function DesktopApp() {
               position: "relative",
               p: 3,
               ml: `${SIDEBAR_WIDTH}px`,
-              width: `calc(100% - ${SIDEBAR_WIDTH}px)`,
+              mr: "35px",
+              width: `calc(100% - ${SIDEBAR_WIDTH}px - 35px)`,
             }}
           >
             <SkillsTicker />
@@ -111,24 +124,18 @@ function DesktopApp() {
               }}
             >
               <Box sx={{ overflow: "hidden" }}>
-                <GlassContainer>
-                  <div>
-                    <h2 style={{ marginBottom: "8px" }}>
-                      Dev @ NARTEX SOFTWARE, S.L.
-                    </h2>
-                    <p style={{ fontSize: "0.9rem", margin: "4px 0" }}>
-                      <strong>Duration:</strong> Feb 2024 - Present
-                    </p>
-                    <p style={{ fontSize: "0.9rem", margin: "4px 0" }}>
-                      <strong>Technologies:</strong> React.js, Vite.js, Node.js,
-                      Go
-                    </p>
-                  </div>
-                </GlassContainer>
-                <StackedGlassContainers containers={careerData} />
+                <StackedGlassContainers
+                  containers={careerData}
+                  minHeight={columnHeight}
+                  onNaturalHeightChange={handleExperienceHeight}
+                />
               </Box>
               <Box sx={{ overflow: "hidden" }}>
-                <StackedGlassContainers containers={proSnapshot} />
+                <StackedGlassContainers
+                  containers={proSnapshot}
+                  minHeight={columnHeight}
+                  onNaturalHeightChange={handleSnapshotHeight}
+                />
               </Box>
             </Box>
           </Box>

@@ -8,10 +8,15 @@ const careerData = [
             <strong>Duration:</strong> Jan 2024 - Present · Nartex Soft SL
         </p>
         <p>
-            Solo-built an enterprise accounting application for the Port of Tenerife, serving 2,000+ users across multiple
-            permission tiers. Integrated with a legally-protected 37-year legacy MSSQL database with complex stored
-            procedures, and implemented role-based access control for ~200 company accounts. Built with React.js, Redux
-            Toolkit, Go/Fiber, and JWT authentication. Live in production with ongoing feature development.
+            <strong>Client:</strong> Port of Tenerife · 2,000+ users, ~200 company accounts
+        </p>
+        <p>
+            <strong>Stack:</strong> React.js, Redux Toolkit (migrated from TanStack Query), Go/Fiber, JWT
+        </p>
+        <p>
+            Solo-built an enterprise accounting application integrated with a legally-protected 37-year
+            legacy MSSQL database, with role-based access control across multiple permission tiers. Live
+            in production with ongoing feature development.
         </p>
     </div>,
     <div key='2'>
