@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://petereloy.dev/sitemap.xml
