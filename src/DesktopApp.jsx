@@ -3,6 +3,7 @@ import "./App.css";
 import Sidebar from "./components/sidebar";
 import { Box } from "@mui/material";
 import GlassContainer from "./components/glassContainer";
+import SkillsTicker from "./components/skillsTicker";
 import StackedGlassContainers from "./components/stackedGlassContainers";
 import careerData from "./data/carrerData/carrerData";
 import proSnapshot from "./data/proSnapshot/proSnapshot";
@@ -94,11 +95,7 @@ function DesktopApp() {
               width: `calc(100% - ${SIDEBAR_WIDTH}px)`,
             }}
           >
-            <GlassContainer>
-              <p>
-                <strong>Dev |</strong> HTML, CSS, JS (JavaScript, ReactJS) & Go
-              </p>
-            </GlassContainer>
+            <SkillsTicker />
 
             <Box
               sx={{
