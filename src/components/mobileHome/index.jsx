@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, Typography, Chip, Button, Avatar } from "@mui/material";
+import { Box, Typography, Chip, Button, IconButton, Avatar } from "@mui/material";
 import { TypeAnimation } from "react-type-animation";
 import { useNavigate } from "react-router-dom";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -11,6 +11,7 @@ import EmailIcon from "@mui/icons-material/Email";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import XIcon from "@mui/icons-material/X";
+import InstagramIcon from "@mui/icons-material/Instagram";
 
 const MobileHome = () => {
   const { isDarkMode } = useTheme();
@@ -291,33 +292,42 @@ const MobileHome = () => {
 
       {/* Social Links */}
       <Box sx={{ display: "flex", justifyContent: "center", gap: 3 }}>
-        <Button
-          startIcon={<LinkedInIcon />}
+        <IconButton
           href="https://www.linkedin.com/in/petereloy/"
           target="_blank"
           rel="noopener noreferrer"
-          sx={{ color: "inherit", minWidth: 0 }}
+          aria-label="LinkedIn"
+          sx={{ color: "inherit" }}
         >
-          LinkedIn
-        </Button>
-        <Button
-          startIcon={<GitHubIcon />}
+          <LinkedInIcon />
+        </IconButton>
+        <IconButton
           href="https://github.com/Peter-Eloy"
           target="_blank"
           rel="noopener noreferrer"
-          sx={{ color: "inherit", minWidth: 0 }}
+          aria-label="GitHub"
+          sx={{ color: "inherit" }}
         >
-          GitHub
-        </Button>
-        <Button
-          startIcon={<XIcon />}
+          <GitHubIcon />
+        </IconButton>
+        <IconButton
           href="https://x.com/petereloy"
           target="_blank"
           rel="noopener noreferrer"
-          sx={{ color: "inherit", minWidth: 0 }}
+          aria-label="X"
+          sx={{ color: "inherit" }}
         >
-          X
-        </Button>
+          <XIcon />
+        </IconButton>
+        <IconButton
+          href="https://instagram.com/peter.eloy"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Instagram"
+          sx={{ color: "inherit" }}
+        >
+          <InstagramIcon />
+        </IconButton>
       </Box>
       </RevealOnScroll>
     </Box>
