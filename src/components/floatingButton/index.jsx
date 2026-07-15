@@ -56,7 +56,7 @@ const FloatingButton = () => {
   const phoneParts = ["+34", "678", "38", "1", "811"];
 
   const contentToCopy = `Hey there,
-check out the CV of Peter - Eloy H., a full-stack dev:
+check out the CV of Peter-Eloy, a full-stack dev:
   CV: https://peter-eloy.dev 
   Phone: ${phoneParts.join("")}
   Email: ${emailParts.join("")}`;
@@ -65,7 +65,7 @@ check out the CV of Peter - Eloy H., a full-stack dev:
     if (navigator.share && (isAndroid || isIOS)) {
       try {
         await navigator.share({
-          title: "Peter Eloy - Full Stack Developer",
+          title: "Peter-Eloy - Full Stack Developer",
           text: contentToCopy,
           url: "https://peter-eloy.dev",
         });

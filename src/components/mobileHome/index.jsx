@@ -72,31 +72,41 @@ const MobileHome = () => {
             height: 116,
             mx: "auto",
             mb: 2,
-            borderRadius: "50%",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            background: "linear-gradient(135deg, rgba(0,191,255,0.7), rgba(0,191,255,0.05))",
-            boxShadow: "0 0 20px rgba(0,191,255,0.5), 0 0 40px rgba(0,191,255,0.25)",
+            position: "relative",
+            "@keyframes avatarGlowPulse": {
+              "0%, 100%": {
+                boxShadow:
+                  "0 0 24px rgba(0,191,255,0.45), 0 0 48px rgba(0,191,255,0.2)",
+              },
+              "50%": {
+                boxShadow:
+                  "0 0 32px rgba(0,191,255,0.65), 0 0 64px rgba(0,191,255,0.3)",
+              },
+            },
           }}
         >
           <Avatar
             src="/profile-photo.jpg"
-            alt="Peter Eloy"
+            alt="Peter-Eloy"
             sx={{
-              width: 100,
-              height: 100,
+              width: 108,
+              height: 108,
+              border: "2px solid rgba(0,191,255,0.5)",
               bgcolor: isDarkMode ? "rgba(20,20,30,0.9)" : "rgba(255,255,255,0.9)",
               color: isDarkMode ? "#fff" : "#213547",
               fontSize: "2.5rem",
               fontWeight: 700,
+              animation: "avatarGlowPulse 3s ease-in-out infinite",
             }}
           >
             PE
           </Avatar>
         </Box>
         <Typography variant="h4" sx={{ fontWeight: 700, mb: 1 }}>
-          Peter Eloy
+          Peter-Eloy
         </Typography>
         <Typography
           variant="subtitle1"
