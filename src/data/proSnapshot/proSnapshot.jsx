@@ -5,13 +5,10 @@ const proSnapshot = [
     <div key='2'>
         <h2>Technologies & Skills</h2>
         <p>
-            <strong>Technologies:</strong> JavaScript, TypeScript, CSS, HTML & Go
+            <strong>Technologies:</strong> JavaScript, CSS, HTML & Go
         </p>
         <p>
             <strong>Frameworks:</strong> React.js, React Native, Next.js
-        </p>
-        <p>
-            <strong>CMS:</strong> WordPress, GoogleSite
         </p>
         <p>
             <strong>IDE:</strong> Zed, VS Code

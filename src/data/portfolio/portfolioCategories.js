@@ -84,7 +84,6 @@ Self-hosted on a Windows server with PostgreSQL database, NextAuth.js authentica
           "Node Cron",
           "Gmail API",
           "Qwen AI",
-          "TypeScript",
           "Tailwind CSS",
         ],
         features: [
@@ -135,8 +134,8 @@ Available as downloadable installers for both Windows (.exe) and macOS (.pkg) pl
   },
   {
     id: "wordpress",
-    title: "WordPress Development",
-    description: "Custom WordPress plugins and themes for real estate platforms",
+    title: "Real Estate Platform (VisaVerde)",
+    description: "Full-stack PHP/MySQL engineering for a production real estate platform",
     image: "/peview-image.jpg",
     subcategories: [
       {
@@ -246,7 +245,7 @@ The app connects to Dexcom and Abbott continuous glucose monitors to learn indiv
 
 All health data is stored locally on-device rather than synced to the cloud, a deliberate architecture decision for a sensitive health data product. Currently in a closed beta with real users, refining the product based on live feedback ahead of a wider release.`,
         image: "/peview-image.jpg",
-        technologies: ["React Native", "TypeScript", "CGM APIs (Dexcom, Abbott)", "Medtronic MiniMed", "On-device storage"],
+        technologies: ["React Native", "CGM APIs (Dexcom, Abbott)", "Medtronic MiniMed", "On-device storage"],
         features: [
           "Dexcom & Abbott CGM integration",
           "Predictive high/low alerts",
@@ -295,7 +294,7 @@ Contributions include core patches to the agent memory system (a 3-layer memory 
 
 Hands-on experience with real multi-agent orchestration, agent memory design, and building tool integrations ("skills") that let LLM agents act on real systems — the same class of problem as production agent tooling.`,
         image: "/peview-image.jpg",
-        technologies: ["TypeScript", "Multi-agent orchestration", "Local LLMs", "Lemonade Server"],
+        technologies: ["Multi-agent orchestration", "Local LLMs", "Lemonade Server"],
         features: [
           "3-layer agent memory system patches",
           "Context-handling fixes",

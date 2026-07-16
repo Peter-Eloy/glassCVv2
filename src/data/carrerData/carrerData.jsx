@@ -25,6 +25,9 @@ const careerData = [
             <strong>Duration:</strong> Aug 2019 - Feb 2024 · 4 yrs 7 mos
         </p>
         <p>
+            <strong>Stack:</strong> PHP, JavaScript, MySQL, WordPress, WooCommerce
+        </p>
+        <p>
             Led front-end and back-end development across multiple client projects. I have great expertise in creating web
             applications using a variety of modern technologies, including WordPress, WooCommerce, PHP, JavaScript, and
             HTML/CSS. I always focus on producing high quality and module-oriented SEO-friendly code.
@@ -34,6 +37,9 @@ const careerData = [
         <h2>Junior Developer</h2>
         <p>
             <strong>Duration:</strong> Nov 2017 - Aug 2019 · 1 yr 9 mos
+        </p>
+        <p>
+            <strong>Stack:</strong> JavaScript, CSS, WordPress
         </p>
         <p>
             Built foundational skills in web development, contributing to WordPress projects, JavaScript applications, and

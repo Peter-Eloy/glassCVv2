@@ -4,7 +4,7 @@ const aptitudes = [
     </div>,
     <div key='frontend-dev'>
         <h3>Frontend Dev</h3>
-        <p>ReactJS, MUI, Ant Design</p>
+        <p>ReactJS, Next.js, Redux Toolkit, MUI, Ant Design</p>
     </div>,
     <div key='frontend-tech'>
         <h3>Frontend Tech</h3>
@@ -12,15 +12,11 @@ const aptitudes = [
     </div>,
     <div key='backend-dev'>
         <h3>Backend Dev</h3>
-        <p>Go (Golang), MySQL</p>
+        <p>Go (Golang), PHP, MySQL</p>
     </div>,
     <div key='dev-tools'>
         <h3>Dev Tools</h3>
         <p>Postman, DBeaver, TomCat</p>
-    </div>,
-    <div key='web-hosting'>
-        <h3>Web Hosting</h3>
-        <p>WordPress, cPanel, Plesk</p>
     </div>,
 ]
 
